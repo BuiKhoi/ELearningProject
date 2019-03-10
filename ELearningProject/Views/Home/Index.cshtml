@@ -1,0 +1,328 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education</title>
+    <link rel="stylesheet" href="~/Content/all.css">
+    <link rel="stylesheet" href="~/Content/styleindex.css">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel|Roboto" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="wrapper">
+            <div class="header__logo"><a href=""><img src="http://initializetechnologies.com/Charity/Helping_hands/images/logo.png" alt=""></a></div>
+            <nav class="header__nav">
+                <a href="#" data='header'>Home</a>
+                <a href="#" data='infor'>About</a>
+                <a href="#" data='method'>Method</a>
+                <a href="#" data='teacher'>Teacher</a>
+                <a href="#" data='testimonials'>Testimonials</a>
+                <a href="#" data='contact'>Contact Us</a>
+            </nav>
+            <div class="header__form">
+                <a href='#' class='letgo'>Học miễn phí</a>
+            </div>
+        </div>
+    </header> <!-- End HEADER -->
+
+    <div class="formLog">
+
+        <div class="tab">
+            <span class='active' data-class='login'>Login</span>
+            <span data-class='register'>Register</span>
+            <div class="close__form"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="form">
+
+            <form action="~/Account/Login" class='login active'>
+                <div class="group-input">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" required>
+                    <label for="">Email</label>
+                </div>
+                <div class="group-input">
+                    <i class="fas fa-unlock-alt"></i>
+                    <input type="password" required>
+                    <label for="">Password</label>
+                </div>
+                <button class='btn' type='submit'>Login</button>
+                <a href="" class='forgot'>forgot password ?</a>
+                <div class="login-fb">
+                    <span class="fb"><i class="fab fa-facebook-f"></i> Facebook</span>
+                    <span class="gg"><i class="fab fa-google"></i> Google</span>
+                </div>
+            </form> <!-- END form đăng nhập -->
+            <form action="" class='register'>
+                <div class="group-input">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" required>
+                    <label for="">Email</label>
+                </div>
+                <div class="group-input">
+                    <i class="fas fa-unlock-alt"></i>
+                    <input type="password" required>
+                    <label for="">Password</label>
+                </div>
+                <div class="group-input">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" required>
+                    <label for="">Address</label>
+                </div>
+                <div class="group-input">
+                    <i class="fas fa-phone-volume"></i>
+                    <input type="text" required>
+                    <label for="">Phone</label>
+                </div>
+                <button class='btn' type='submit'>Register</button>
+                <a href="" class='forgot'>forgot password ?</a>
+                <div class="login-fb">
+                    <span class="fb"><i class="fab fa-facebook-f"></i> Facebook</span>
+                    <span class="gg"><i class="fab fa-google"></i> Google</span>
+                </div>
+            </form>  <!-- END form đăng ký -->
+        </div>
+    </div> <!-- END form -->
+
+    <section class="banner">
+        <div class="wrapper__banner">
+            <div class="banner__infor">
+                <h1>Học tiếng anh miễn phí cùng chúng tôi</h1>
+                <a href="#" class='start-video'><i class="fas fa-play"></i></a>
+            </div>
+            <div class="video-story">
+                <div class="video">
+                    <iframe width="650" height="350" src="https://www.youtube.com/embed/p4oR-rjsLpU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="close"><i class="fas fa-times"></i></div>
+                </div>
+
+            </div>
+        </div>
+    </section><!-- END form Banner -->
+
+    <section class="infor">
+        <div class="wrapper">
+            <div class="infor__about">
+                <div class="infor__leader-title">
+                    <h1 class="title">about <span>us</span></h1>
+                </div>
+                <img src="https://template78534.motopreview.com/mt-demo/78500/78534/mt-content/uploads/2019/03/mt-1767-img01.jpg" alt="">
+                <div class="text">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, beatae voluptatum modi totam iusto molestias quaerat, praesentium atque cum, eveniet quis optio reiciendis odio a facere! Laudantium possimus maiores sunt.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, beatae voluptatum modi totam iusto molestias quaerat, praesentium atque cum, eveniet quis optio reiciendis odio a facere! Laudantium possimus maiores sunt.</p>
+                </div>
+            </div>
+            <div class="infor__leader ">
+                <div class="infor__leader-title">
+                    <h1 class="title">Leader <span>board</span></h1>
+                </div>
+
+                <div class="bxh">
+                    <div class="bxh__list">
+                        <ul>
+                            <li>
+                                <div class="number">1</div>
+                                <div class="infor">
+                                    <div class="infor__name">Nguyen Name</div>
+                                    <div class="infor__scores">100 điểm</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">2</div>
+                                <div class="infor">
+                                    <div class="infor__name">Quốc Thắng</div>
+                                    <div class="infor__scores">100 điểm</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">3</div>
+                                <div class="infor">
+                                    <div class="infor__name">Bùi Quốc Khôi</div>
+                                    <div class="infor__scores">100 điểm</div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="number">4</div>
+                                <div class="infor">
+                                    <div class="infor__name">Trương Hạ Vũ</div>
+                                    <div class="infor__scores">100 điểm</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">4</div>
+                                <div class="infor">
+                                    <div class="infor__name">Phạm Tâm Anh</div>
+                                    <div class="infor__scores">100 điểm</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="number">4</div>
+                                <div class="infor">
+                                    <div class="infor__name">Trương Hạ Vũ</div>
+                                    <div class="infor__scores">100 điểm</div>
+                                </div>
+                            </li>
+
+                            <button type='submit' class='btn'>Xem tất cả</button>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> <!-- About --- leader -->
+
+    <section class="method">
+        <div class="method__title">
+            <h1 class="title">phương pháp học</h1>
+        </div>
+        <div class="wrapper">
+            <div class="method__box">
+                <img src="https://vi.puzzle-english.com/templates/svg/redesign/icons/landing/foreign/benefits/video.svg" alt="">
+                <div class="infor">
+                    <div class="infor__title">Học tiếng Anh với video xác thực</div>
+                    <div class="text"><p>Bao gồm các video âm nhạc, các bài phỏng vấn và các đoạn phim</p></div>
+                </div>
+            </div>
+            <div class="method__box">
+                <img src="https://vi.puzzle-english.com/templates/svg/redesign/icons/landing/foreign/benefits/tasks.svg" alt="">
+                <div class="infor">
+                    <div class="infor__title">Có rất nhiều nội dung thú vị</div>
+                    <div class="text"><p>Có 10 loại bài tập và các trò chơi để thực hành tiếng Anh</p></div>
+                </div>
+            </div>
+            <div class="method__box">
+                <img src="https://vi.puzzle-english.com/templates/svg/redesign/icons/landing/foreign/benefits/levels.svg" alt="">
+                <div class="infor">
+                    <div class="infor__title">Chọn mức độ khó</div>
+                    <div class="text"><p>3 cấp độ phù hợp với kiến thức của bạn</p></div>
+                </div>
+            </div>
+            <div class="method__box">
+                <img src="https://vi.puzzle-english.com/templates/svg/redesign/icons/landing/foreign/benefits/accent.svg" alt="">
+                <div class="infor">
+                    <div class="infor__title">Chọn kiểu phát âm</div>
+                    <div class="text"><p>Bạn thích kiểu phát âm nào, Anh, Mỹ hay Úc?/p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="teacher">
+        <div class="wrapper">
+            <div class="teacher__title">
+                <h1 class="title">our <span>teacher</span></h1>
+            </div>
+
+            <ul class="teacher__list">
+                <li>
+                    <img src="https://template65040.motopreview.com/mt-demo/65000/65040/mt-content/uploads/2018/01/mt-1315-home-teachers2.jpg" alt="">
+                    <h3>Maria Bailey</h3>
+                    <p>Là giảng viên tại đại học . Có 5 năm kinh nghiệm về giảng dạy .</p>
+                </li>
+                <li>
+                    <img src="https://template65040.motopreview.com/mt-demo/65000/65040/mt-content/uploads/2018/01/mt-1315-home-teachers1.jpg" alt="">
+                    <h3>Maria Bailey</h3>
+                    <p>Là giảng viên tại đại học . Có 5 năm kinh nghiệm về giảng dạy .</p>
+                </li>
+                <li>
+                    <img src="https://template65040.motopreview.com/mt-demo/65000/65040/mt-content/uploads/2018/01/mt-1315-home-teachers3.jpg" alt="">
+                    <h3>Maria Bailey</h3>
+                    <p>Là giảng viên tại đại học . Có 5 năm kinh nghiệm về giảng dạy .</p>
+                </li>
+                <li>
+                    <img src="https://template65040.motopreview.com/mt-demo/65000/65040/mt-content/uploads/2018/01/mt-1315-home-teachers4.jpg" alt="">
+                    <h3>Maria Bailey</h3>
+                    <p>Là giảng viên tại đại học . Có 5 năm kinh nghiệm về giảng dạy .</p>
+                </li>
+
+            </ul>
+        </div>
+    </section> <!-- End Teacher -->
+
+    <section class="testimonials">
+        <div class="wrapper">
+            <div class="testimonials__title">
+                <h1 class="title">testimonials</h1>
+            </div>
+            <div class="testimonials__content">
+                <div class="testimonials__content-box">
+                    <img src="https://template65040.motopreview.com/mt-demo/65000/65040/mt-content/uploads/2018/01/mt-1315-home-testimonials1.png" alt="">
+                    <h3 class="name">Full name</h3>
+                    <div class="star">
+                        <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <div class="text"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At commodi temporibus dolor, ea odit doloremque aut dicta iusto similique molestiae, illo! Voluptatem quasi, totam sequi iste minima qui at rem.</p></div>
+                </div>
+                <div class="testimonials__content-box">
+                    <img src="https://template65040.motopreview.com/mt-demo/65000/65040/mt-content/uploads/2018/01/mt-1315-home-testimonials2.png" alt="">
+                    <h3 class="name">Full name</h3>
+                    <div class="star">
+                        <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <div class="text"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At commodi temporibus dolor, ea odit doloremque aut dicta iusto similique molestiae, illo! Voluptatem quasi, totam sequi iste minima qui at rem.</p></div>
+                </div>
+                <div class="testimonials__content-box">
+                    <img src="https://template65040.motopreview.com/mt-demo/65000/65040/mt-content/uploads/2018/01/mt-1315-home-testimonials3.png" alt="">
+                    <h3 class="name">Full name</h3>
+                    <div class="star">
+                        <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <div class="text"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At commodi temporibus dolor, ea odit doloremque aut dicta iusto similique molestiae, illo! Voluptatem quasi, totam sequi iste minima qui at rem.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact">
+        <div class="wrapper">
+            <div class="contact__title">
+                <h1 class="title">contact <span>us</span></h1>
+            </div>
+
+            <div class="contact__content">
+                <div class="contact__content-left">
+                    <div class="box">
+                        <div class="icon"><i class="fas fa-phone-volume"></i></div>
+                        <div class="infor">
+                            <div class="infor-title">phone :</div>
+                            <div class="text">1-800-1234-567;1-800-1234-568</div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="infor">
+                            <div class="infor-title">Location:</div>
+                            <div class="text">4801 South University Drive, Suite 237, Ft. Lauderdale</div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="icon"><i class="far fa-envelope"></i></div>
+                        <div class="infor">
+                            <div class="infor-title">E-mail:</div>
+                            <div class="text">contacts@demolink.com;info@demolink.com</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact__content-form">
+                    <form action="">
+                        <input type="text" name='name' placeholder="Name :">
+                        <input type="email" name='email' placeholder="E-mail :">
+                        <input type="number" name='phone' placeholder="Phone :">
+                        <textarea name="mess" id="" cols="30" rows="10" placeholder="Message :"></textarea>
+                        <button type='submit' class='btn'>send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+<script src='~/Scripts/homeindex.js'></script>
