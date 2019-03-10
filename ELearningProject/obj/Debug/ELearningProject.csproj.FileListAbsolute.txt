@@ -1,6 +1,4 @@
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csprojAssemblyReference.cache
-C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\IdentityAuthentication.Migrations.InitialCreate.resources
-C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csproj.GenerateResource.cache
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csproj.CoreCompileInputs.cache
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\bin\ELearningProject.dll.config
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\bin\ELearningProject.dll
@@ -109,3 +107,9 @@ C:\Users\khoib\source\repos\ELearningProject\ELearningProject\bin\Microsoft.Code
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csproj.CopyComplete
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.dll
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.pdb
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.identity.resources
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csproj.GenerateResource.cache
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.add_users.resources
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.mod_users.resources
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.add_student.resources
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.add_student1.resources

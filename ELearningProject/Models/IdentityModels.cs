@@ -25,6 +25,9 @@ namespace ELearningProject.Models
         {
         }
 
+        public DbSet<Web_user> Web_Users { get; set; }
+        public DbSet<Student> Students { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

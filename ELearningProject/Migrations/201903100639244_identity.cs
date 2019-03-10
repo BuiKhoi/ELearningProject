@@ -1,9 +1,9 @@
-namespace IdentityAuthentication.Migrations
+namespace ELearningProject.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class identity : DbMigration
     {
         public override void Up()
         {

@@ -1,4 +1,4 @@
-namespace IdentityAuthentication.Migrations
+namespace ELearningProject.Migrations
 {
     using System;
     using System.Data.Entity;

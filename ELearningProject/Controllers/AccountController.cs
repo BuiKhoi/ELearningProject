@@ -58,7 +58,7 @@ namespace ELearningProject.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -66,17 +66,17 @@ namespace ELearningProject.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginRegisterViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(model);
+            //}
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            //var result = ;
+            switch (await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false))
             {
                 case SignInStatus.Success:
                     {
@@ -159,13 +159,18 @@ namespace ELearningProject.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(LoginRegisterViewModel model)
         {
-
-            if (ModelState.IsValid)
+            var temp = new RegisterViewModel()
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                Email = model.Email,
+                Password = model.Password,
+                ConfirmPassword = model.ConfirmPassword
+            };
+            if (true)
+            {
+                var user = new ApplicationUser { UserName = temp.Email, Email = temp.Email };
+                var result = await UserManager.CreateAsync(user, temp.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -175,6 +180,71 @@ namespace ELearningProject.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    using (var db = new ApplicationDbContext())
+                    {
+                        var u = new Web_user()
+                        {
+                            Name = model.Name,
+                            Birthday = model.Birthday,
+                        };
+                        var s = new Student()
+                        {
+                            web_User = u
+                        };
+                        db.Web_Users.Add(u);
+                        db.Students.Add(s);
+                        db.SaveChanges();
+                    }
+
+                    UserManager.AddToRole(user.Id, "Student");
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+
+            }
+
+            return RedirectToAction("About", "Home");
+        }
+
+        
+        public async Task<ActionResult> Register1(LoginRegisterViewModel model)
+        {
+            var temp = new RegisterViewModel()
+            {
+                Email = model.Email,
+                Password = model.Password,
+                ConfirmPassword = model.ConfirmPassword
+            };
+            if (true)
+            {
+                var user = new ApplicationUser { UserName = temp.Email, Email = temp.Email };
+                var result = await UserManager.CreateAsync(user, temp.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    using (var db = new ApplicationDbContext())
+                    {
+                        var u = new Web_user()
+                        {
+                            Name = model.Name,
+                            Birthday = model.Birthday,
+                        };
+                        var s = new Student()
+                        {
+                            web_User = u
+                        };
+                        db.Web_Users.Add(u);
+                        db.Students.Add(s);
+                        db.SaveChanges();
+                    }
 
                     UserManager.AddToRole(user.Id, "Student");
                     return RedirectToAction("Index", "Home");
