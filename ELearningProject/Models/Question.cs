@@ -17,4 +17,23 @@ namespace ELearningProject.Models
 
         public ICollection<TestQuestionDeploy> TestQuestionDeploys { get; set; }
     }
+
+    public class PuzzelQuestionViewModel
+    {
+        public int id { get; set; }
+        public string Content { get; set; }
+        public string Answer { get; set; }
+
+        public PuzzelQuestionViewModel()
+        {
+
+        }
+
+        public PuzzelQuestionViewModel(Question question)
+        {
+            this.id = question.id;
+            this.Content = question.Content.Content;
+            this.Answer = question.Answer.Content;
+        }
+    }
 }
