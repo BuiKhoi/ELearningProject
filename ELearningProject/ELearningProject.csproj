@@ -546,6 +546,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_shared_admin.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\PuzzelEnglishTest.cshtml" />
     <Content Include="Views\Student\PuzzelEnglish.cshtml" />
   </ItemGroup>
   <ItemGroup>

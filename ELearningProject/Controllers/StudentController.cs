@@ -16,8 +16,13 @@ namespace IdentityAuthentication.Controllers
         }
 
         [HttpGet]
-        public ActionResult PuzzelEnglish(int TestId = 1)
+        public ActionResult PuzzelEnglish(int? TestId)
         {
+            if (TestId == null)
+            {
+                return View();
+            }
+
             List<PuzzelQuestionViewModel> pquests = new List<PuzzelQuestionViewModel>();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
@@ -30,7 +35,7 @@ namespace IdentityAuthentication.Controllers
                               select new PuzzelQuestionViewModel() {id = q.id, Content = qc.Content, Answer = a.Content})
                               .ToList<PuzzelQuestionViewModel>();
             }
-            return View(pquests);
+            return View("PuzzelEnglishTest", pquests);
         }
     }
 }
