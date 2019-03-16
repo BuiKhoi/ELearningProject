@@ -201,11 +201,30 @@
     <Compile Include="Migrations\201903100718565_add_student1.Designer.cs">
       <DependentUpon>201903100718565_add_student1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903160913526_Clean_DB.cs" />
+    <Compile Include="Migrations\201903160913526_Clean_DB.Designer.cs">
+      <DependentUpon>201903160913526_Clean_DB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903160915285_Add_Q_Test_Teacher1.cs" />
+    <Compile Include="Migrations\201903160915285_Add_Q_Test_Teacher1.Designer.cs">
+      <DependentUpon>201903160915285_Add_Q_Test_Teacher1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903160918472_Add_Test_Tag.cs" />
+    <Compile Include="Migrations\201903160918472_Add_Test_Tag.Designer.cs">
+      <DependentUpon>201903160918472_Add_Test_Tag.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\QContent.cs" />
+    <Compile Include="Models\QType.cs" />
+    <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\TestQuestionDeploy.cs" />
     <Compile Include="Models\Web_user.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -559,6 +578,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903100718565_add_student1.resx">
       <DependentUpon>201903100718565_add_student1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903160913526_Clean_DB.resx">
+      <DependentUpon>201903160913526_Clean_DB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903160915285_Add_Q_Test_Teacher1.resx">
+      <DependentUpon>201903160915285_Add_Q_Test_Teacher1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903160918472_Add_Test_Tag.resx">
+      <DependentUpon>201903160918472_Add_Test_Tag.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

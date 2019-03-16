@@ -5,11 +5,10 @@ using System.Web;
 
 namespace ELearningProject.Models
 {
-    public class Web_user
+    public class QType
     {
         public int id { get; set; }
         public string Name { get; set; }
-        public DateTime Birthday { get; set; }
-        public string CreditId { get; set; }
+        public string Desc { get; set; }
     }
 }

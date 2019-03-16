@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
+using System.Collections.Generic;
 
 [assembly: OwinStartupAttribute(typeof(ELearningProject.Startup))]
 namespace ELearningProject

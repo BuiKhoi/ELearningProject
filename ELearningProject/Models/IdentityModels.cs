@@ -27,6 +27,13 @@ namespace ELearningProject.Models
 
         public DbSet<Web_user> Web_Users { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<QContent> QContents { get; set; }
+        public DbSet<QType> QTypes { get; set; }
+        public DbSet<Test> Tests { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<TestQuestionDeploy> TestQuestionDeploys { get; set; }
 
         public static ApplicationDbContext Create()
         {
