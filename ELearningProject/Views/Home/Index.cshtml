@@ -1,6 +1,4 @@
-﻿@using ELearningProject.Models
-@model LoginRegisterViewModel
-@{
+﻿@{
     ViewBag.Title = "Home Page";
     Layout = "";
 }
@@ -30,7 +28,7 @@
                 <a href="#" data='contact'>Contact Us</a>
             </nav>
             <div class="header__form">
-                <a href='#' class='letgo'>Học miễn phí</a>
+                <a href='~/Account/Login' class='letgo'>Học miễn phí</a>
             </div>
         </div>
     </header> <!-- End HEADER -->
@@ -44,7 +42,7 @@
         </div>
         <div class="form">
 
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login active", role = "form" }))
+            @*@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login active", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -80,7 +78,7 @@
                 <p>
                     <a href="~/Account/ForgotPassword" class='forgot'>forgot password ?</a>
                 </p>
-            }
+            }*@
             <!--
     <form action="~/Account/Login" class='login active'>
         <div class="group-input">
@@ -101,7 +99,7 @@
         </div>
     </form> -->
             <!-- END form đăng nhập -->
-            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "register", role = "form" }))
+            @*@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "register", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 <h4>Create a new account.</h4>
@@ -145,7 +143,7 @@
                         <input type="submit" class="btn btn-default" value="Register" />
                     </div>
                 </div>
-            }
+            }*@
             <!--
     <form action="" class='register'>
         <div class="group-input">

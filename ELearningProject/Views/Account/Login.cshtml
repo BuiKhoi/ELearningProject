@@ -1,63 +1,55 @@
 ﻿@using ELearningProject.Models
-@model LoginRegisterViewModel
+@model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    Layout = null;
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/Content/loginstyle.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="login">
+            <img src="~/Content/Images/logo2.svg" alt="" class="login__logo mb-5">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login__form", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email" } })
+                @Html.PasswordFor(m => m.Password, new { htmlAttributes = new { @class = "login__input", @placeholder = "Password" } })
+                <a href="#" class="login__link">Forgot your passwork?</a>
+                <a onclick=submit class="login__submit" value="Sign in">Sign in</a>
             }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+            <div class="login__options">
+                <p>Or sign in with</p>
+                <a href="#">
+                    <svg class="login__icon login__icon--1">
+                        <use xlink:href="~/Content/Images/sprite.svg#icon-facebook2"></use>
+                    </svg>
+                </a>
+                <a href="#">
+                    <svg class="login__icon login__icon--2">
+                        <use xlink:href="~/Content/Images/sprite.svg#icon-google2"></use>
+                    </svg>
+                </a>
+            </div>
+            <div class="login__break">&nbsp;</div>
+            <p class="login__signup">Don't have an account - <a href="@Url.Action("Register", "Account")" class="login__link">Sign up</a></p>
+        </div>
+    </div>
+
+</body>
+
+</html>

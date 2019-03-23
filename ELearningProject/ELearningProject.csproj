@@ -344,6 +344,7 @@
     <Content Include="Assets\Admin\vendor\wow\animate.css" />
     <Content Include="Assets\Admin\vendor\wow\wow.min.js" />
     <Content Include="Content\all.css" />
+    <Content Include="Content\AnswerPuzzelVideo.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -351,6 +352,8 @@
     <Content Include="Content\Images\22576a9b0b81671.jpg" />
     <Content Include="Content\Images\agenda.svg" />
     <Content Include="Content\Images\avatar.jpg" />
+    <Content Include="Content\Images\bg-puzzle-sprite.png" />
+    <Content Include="Content\Images\bg-puzzle.png" />
     <Content Include="Content\Images\calendar.svg" />
     <Content Include="Content\Images\calendar1.svg" />
     <Content Include="Content\Images\color.jpg" />
@@ -361,14 +364,20 @@
     <Content Include="Content\Images\history.svg" />
     <Content Include="Content\Images\jigsaw.svg" />
     <Content Include="Content\Images\list.svg" />
+    <Content Include="Content\Images\loginImage.jpg" />
     <Content Include="Content\Images\Logo.svg" />
+    <Content Include="Content\Images\logo2.svg" />
     <Content Include="Content\Images\lp.png" />
     <Content Include="Content\Images\neonbrand-426918-unsplash.jpg" />
+    <Content Include="Content\Images\New Tab.html" />
     <Content Include="Content\Images\organize.svg" />
     <Content Include="Content\Images\podcasts.png" />
     <Content Include="Content\Images\podcasts.svg" />
+    <Content Include="Content\Images\puzzle-yellow-light.png" />
+    <Content Include="Content\Images\redesign-logo_header.svg" />
     <Content Include="Content\Images\search.svg" />
     <Content Include="Content\Images\settings.svg" />
+    <Content Include="Content\Images\sprite.svg" />
     <Content Include="Content\Images\tasks.png" />
     <Content Include="Content\Images\unitedkingdom.png" />
     <Content Include="Content\Images\usa.png" />
@@ -383,6 +392,8 @@
     <Content Include="Content\Images\video8.jpg" />
     <Content Include="Content\Images\vocabulary.svg" />
     <Content Include="Content\Images\words.png" />
+    <Content Include="Content\Images\yellow-after-real.png" />
+    <Content Include="Content\loginstyle.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\styleindex.css" />
     <Content Include="Content\stylestudent.css" />
@@ -496,6 +507,7 @@
     <Content Include="Assets\Admin\vendor\slick\slick-theme.scss" />
     <Content Include="Assets\Admin\vendor\slick\slick.less" />
     <Content Include="Assets\Admin\vendor\slick\slick.scss" />
+    <Content Include="Content\Images\logo2.zip" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\home.js" />
     <Content Include="Scripts\homeindex.js" />

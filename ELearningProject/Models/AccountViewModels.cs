@@ -66,12 +66,11 @@ namespace ELearningProject.Models
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
         [Display(Name = "Email")]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -80,6 +79,13 @@ namespace ELearningProject.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Birthday")]
+        public DateTime Birthday { get; set; }
+
+        [Display(Name = "Name")]
+        public string Name { get; set; }
     }
 
     public class ResetPasswordViewModel
@@ -111,33 +117,28 @@ namespace ELearningProject.Models
         public string Email { get; set; }
     }
 
-    public class LoginRegisterViewModel
-    {
-        [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+    //public class LoginRegisterViewModel
+    //{
+    //    [Required]
+    //    [Display(Name = "Email")]
+    //    [EmailAddress]
+    //    public string Email { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+    //    [Required]
+    //    [DataType(DataType.Password)]
+    //    [Display(Name = "Password")]
+    //    public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
+    //    [DataType(DataType.Password)]
+    //    [Display(Name = "Confirm password")]
+    //    [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+    //    public string ConfirmPassword { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+    //    [DataType(DataType.Date)]
+    //    [Display(Name = "Birthday")]
+    //    public DateTime Birthday { get; set; }
 
-        [DataType(DataType.Date)]
-        [Display(Name = "Birthday")]
-        public DateTime Birthday { get; set; }
-
-        [Display(Name = "Name")]
-        public string Name { get; set; }
-
-        
-    }
+    //    [Display(Name = "Name")]
+    //    public string Name { get; set; }
+    //}
 }

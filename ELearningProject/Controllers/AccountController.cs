@@ -58,7 +58,7 @@ namespace ELearningProject.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return RedirectToAction("Index", "Home");
+            return View();
         }
 
         //
@@ -66,7 +66,7 @@ namespace ELearningProject.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginRegisterViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             //if (!ModelState.IsValid)
             //{
@@ -159,7 +159,7 @@ namespace ELearningProject.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(LoginRegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             var temp = new RegisterViewModel()
             {
@@ -208,7 +208,7 @@ namespace ELearningProject.Controllers
         }
 
         
-        public async Task<ActionResult> Register1(LoginRegisterViewModel model)
+        public async Task<ActionResult> Register1(RegisterViewModel model)
         {
             var temp = new RegisterViewModel()
             {
