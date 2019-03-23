@@ -25,9 +25,7 @@ namespace ELearningProject.Models
         public string Answer { get; set; }
 
         public PuzzelQuestionViewModel()
-        {
-
-        }
+        {}
 
         public PuzzelQuestionViewModel(Question question)
         {
