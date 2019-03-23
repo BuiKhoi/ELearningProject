@@ -86,6 +86,9 @@ namespace ELearningProject.Models
 
         [Display(Name = "Name")]
         public string Name { get; set; }
+
+        [Display(Name = "As Teacher")]
+        public bool AsTeacher { get; set; }
     }
 
     public class ResetPasswordViewModel
