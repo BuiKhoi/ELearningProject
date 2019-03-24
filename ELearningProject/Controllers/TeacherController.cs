@@ -23,16 +23,18 @@ namespace ELearningProject.Controllers
                 //Submit the test to the database
 
                 //Add the chosen questions to the quests list
-                List<Question> quests = new List<Question>();
-                foreach (var quest in AddingQuestions[AddingTeachers.IndexOf(model.TeacherId)])
-                {
-                    using (var db = new ApplicationDbContext())
-                    {
-                        quests.Add((from q in db.Questions
-                                    where q.id == quest
-                                    select q).First());
-                    }
-                }
+                //List<Question> quests = new List<Question>();
+                //foreach (var quest in AddingQuestions[AddingTeachers.IndexOf(model.TeacherId)])
+                //{
+                //    using (var db = new ApplicationDbContext())
+                //    {
+                //        var temp = (from q in db.Questions
+                //                    join qc in db.QContents on q.Content.id equals qc.id
+                //                    join a in db.Answers on q.Answer.id equals a.id
+                //                    select q).ToList<Question>();
+                //        quests.AddRange(temp);
+                //    }
+                //}
 
                 using (var db = new ApplicationDbContext())
                 {
@@ -46,19 +48,27 @@ namespace ELearningProject.Controllers
                     db.Tests.Add(t);
 
                     //Shift throug all questions to be added and add them to TestQuestionDeploy
-                    foreach (var q in quests)
+                    int count = 0;
+                    foreach (var quest in AddingQuestions[AddingTeachers.IndexOf(model.TeacherId)])
                     {
+                        Question question = (from q in db.Questions
+                                 where q.id == quest
+                                 select q).FirstOrDefault();
                         TestQuestionDeploy tqd = new TestQuestionDeploy()
                         {
-                            Question = q,
+                            Question = question,
                             Test = t,
-                            Order = quests.IndexOf(q),
+                            Order = count++,
                         };
                         db.TestQuestionDeploys.Add(tqd);
                     }
 
                     //And save the changes
                     db.SaveChanges();
+
+                    //And remove informations of this text
+                    AddingQuestions.Remove(AddingQuestions[AddingTeachers.IndexOf(model.TeacherId)]);
+                    AddingTeachers.Remove(model.TeacherId);
                 }
 
                 return Json("SucSub");
@@ -98,7 +108,7 @@ namespace ELearningProject.Controllers
                 questions = (from q in db.Questions
                              join qc in db.QContents on q.Content.id equals qc.id
                              join a in db.Answers on q.Answer.id equals a.id
-                             select new PuzzelQuestionViewModel() {id = q.id,  Content = qc.Content, Answer = a.Content})
+                             select new PuzzelQuestionViewModel() {id = q.id,  Content = qc.Content, Answer = a.Content}).Take(25)
                              .ToList<PuzzelQuestionViewModel>();
             }
             return View(new CreateTestViewModel(questions, 1));

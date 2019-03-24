@@ -20,7 +20,8 @@
             <h3>@quest.Answer</h3>
         </div>
         <div>
-            <input type="button" name="btnAdd+@quest.id" value="Add" class="btn btn-success" onclick="ClickEv(@quest.id.ToString())" />
+            <input type="button" name="btnAdd" id="btnAdd+@quest.id" value="Add" class="btn btn-success" onclick="ClickEv(@quest.id.ToString())" />
+            <!--input type="button" name="btnDel" id="btnDel+@quest.id" value="Delete" class="btn btn-success" onclick="" disabled /-->
         </div>
     </div>
 }
@@ -28,11 +29,12 @@
 <input type="button" name="btnSave" value="Save" class="btn btn-toolbar" onclick="SaveFunc(@Model.TeacherId)" />
 
 <script>
-    function SingleQuestionAddViewModel(teacherId, questionId, submit, TestName) {
+    function SingleQuestionAddViewModel(teacherId, questionId, submit, TestName, order) {
         this.teacherId = parseInt(teacherId);
         this.questionId = parseFloat(questionId);
         this.submit = Boolean(submit);
         this.TestName = TestName;
+        this.order = order;
     }
 
     function ClickEv(e) {
@@ -42,11 +44,13 @@
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(new SingleQuestionAddViewModel(@Model.TeacherId, e,
-                false, "")),
+                false, "", 0)),
             success: function () {
                 console.log("Add successful");
             }
         })
+        document.getElementById("btnAdd+".concat(e)).disabled = true;
+        //document.getElementById("btnDel+".concat(e)).disabled = false;
     }
 
     function SaveFunc(e) {
@@ -55,7 +59,7 @@
             type: "POST",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(new SingleQuestionAddViewModel(e, 0, true, document.getElementById("txtTestname").value)),
+            data: JSON.stringify(new SingleQuestionAddViewModel(e, 0, true, document.getElementById("txtTestname").value, 0)),
             success: function () {
                 console.log("Submit successful");
             }

@@ -64,5 +64,6 @@ namespace ELearningProject.Models
         public int QuestionId { get; set; }
         public bool Submit { get; set; }
         public string TestName { get; set; }
+        public int Order { get; set; }
     }
 }
