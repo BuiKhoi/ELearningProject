@@ -214,6 +214,10 @@
     <Compile Include="Migrations\201903160918472_Add_Test_Tag.Designer.cs">
       <DependentUpon>201903160918472_Add_Test_Tag.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903241959090_AddTestImage.cs" />
+    <Compile Include="Migrations\201903241959090_AddTestImage.Designer.cs">
+      <DependentUpon>201903241959090_AddTestImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -604,6 +608,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903160918472_Add_Test_Tag.resx">
       <DependentUpon>201903160918472_Add_Test_Tag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903241959090_AddTestImage.resx">
+      <DependentUpon>201903241959090_AddTestImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

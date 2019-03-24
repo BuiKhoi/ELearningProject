@@ -12,6 +12,14 @@ namespace IdentityAuthentication.Controllers
         // GET: Student
         public ActionResult Index()
         {
+            //Get a list of tests and add it to viewbag since we use many object here
+            List<Test> tests = new List<Test>();
+            using (var db = new ApplicationDbContext())
+            {
+                tests = (from t in db.Tests
+                         select t).ToList<Test>();
+            }
+            ViewBag.Newtests = tests;
             return View();
         }
 

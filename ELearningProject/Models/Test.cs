@@ -12,6 +12,7 @@ namespace ELearningProject.Models
         public float Rating { get; set; }
         public string Desc { get; set; }
         public string Tags { get; set; }
+        public string Image { get; set; }
 
         public ICollection<TestQuestionDeploy> TestQuestionDeploys { get; set; }
     }
