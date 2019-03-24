@@ -38,4 +38,31 @@ namespace ELearningProject.Models
             }
         }
     }
+
+    public class CreateTestViewModel
+    {
+        public int TeacherId { get; set; }
+        public List<PuzzelQuestionViewModel> Questions { get; set; }
+        public List<int> ChosenQuestions { get; set; }
+
+        public CreateTestViewModel()
+        {
+            ChosenQuestions = new List<int>();
+        }
+
+        public CreateTestViewModel(List<PuzzelQuestionViewModel> puzzelQuestions, int TeacherId)
+        {
+            this.Questions = puzzelQuestions;
+            ChosenQuestions = new List<int>();
+            this.TeacherId = TeacherId;
+        }
+    }
+
+    public class SingleQuestionAddViewModel
+    {
+        public int TeacherId { get; set; }
+        public int QuestionId { get; set; }
+        public bool Submit { get; set; }
+        public string TestName { get; set; }
+    }
 }

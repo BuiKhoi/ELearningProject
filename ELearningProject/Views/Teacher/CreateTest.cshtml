@@ -1,0 +1,67 @@
+﻿@using ELearningProject.Models
+@model CreateTestViewModel
+
+@{
+    Layout = null;
+}
+<head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+</head>
+<input type="text" id="txtTestname" />
+@foreach (var quest in Model.Questions)
+{
+    <div>
+        <span>
+            <video width="640" height="360" controls>
+                <source src="@quest.Content" type="video/mp4" />
+            </video>
+        </span>
+        <div>
+            <h3>@quest.Answer</h3>
+        </div>
+        <div>
+            <input type="button" name="btnAdd+@quest.id" value="Add" class="btn btn-success" onclick="ClickEv(@quest.id.ToString())" />
+        </div>
+    </div>
+}
+
+<input type="button" name="btnSave" value="Save" class="btn btn-toolbar" onclick="SaveFunc(@Model.TeacherId)" />
+
+<script>
+    function SingleQuestionAddViewModel(teacherId, questionId, submit, TestName) {
+        this.teacherId = parseInt(teacherId);
+        this.questionId = parseFloat(questionId);
+        this.submit = Boolean(submit);
+        this.TestName = TestName;
+    }
+
+    function ClickEv(e) {
+        $.ajax({
+            url: '@Url.Action("SubmitTest", "Teacher")',
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(new SingleQuestionAddViewModel(@Model.TeacherId, e,
+                false, "")),
+            success: function () {
+                console.log("Add successful");
+            }
+        })
+    }
+
+    function SaveFunc(e) {
+        $.ajax({
+            url: '@Url.Action("SubmitTest", "Teacher")',
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(new SingleQuestionAddViewModel(e, 0, true, document.getElementById("txtTestname").value)),
+            success: function () {
+                console.log("Submit successful");
+            }
+        })
+        window.location.href = "@Url.Action("Index", "Teacher")";
+    }
+</script>
+
+
