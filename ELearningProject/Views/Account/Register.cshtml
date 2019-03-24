@@ -23,14 +23,18 @@
 
         <div class="login">
             <img src="~/Content/Images/logo2.svg" alt="" class="login__logo mb-5">
-            <form action="" class="login__form" id="form">
-                @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email" } })
-                @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "login__input", @placeholder = "Password" } })
+            @using (Html.BeginForm("actionName", "controllerName", FormMethod.Post, new { id = "frmId", @class = "login__form" }))
+            {
+                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email" } })
+                @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "login__input", @placeholder = "Password" } })
+                @Html.EditorFor(m => m.ConfirmPassword, new { htmlAttributes = new { @class = "login__input", @placeholder = "Confirm Password" } })
                 @Html.EditorFor(m => m.Birthday, new { htmlAttributes = new { @class = "login__input", @placeholder = "Birthday" } })
-                @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "login__input", @placeholder = "CreditID" } })
-                <a onclick="this.form.submit()" class="login__submit" value="Sign in">Sign up</a>
-            </form>
-
+                @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "login__input", @placeholder = "Your Name" } })
+                @Html.EditorFor(m => m.AsTeacher, new { htmlAttributes = new { @class = "mycheckbox" } })
+                <label class="real_chbox" for="AsTeacher">Login as Teacher</label>
+                <button type="submit" value="Create" class="login__submit">Sign up</button>
+                @*<a onclick="this.form.submit()" class="login__submit" value="Sign in">Sign up</a>*@
+            }
             <div class="login__options">
                 <p>Or sign in with</p>
                 <a href="#">

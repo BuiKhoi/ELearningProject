@@ -2,7 +2,6 @@
     ViewBag.Title = "Home Page";
     Layout = "";
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,155 +27,151 @@
                 <a href="#" data='contact'>Contact Us</a>
             </nav>
             <div class="header__form">
-                <a href='~/Account/Login' class='letgo'>Học miễn phí</a>
+                @Html.ActionLink("Login", "Login", "Account")
             </div>
         </div>
     </header> <!-- End HEADER -->
-
     <div class="formLog">
-
         <div class="tab">
             <span class='active' data-class='login'>Login</span>
             <span data-class='register'>Register</span>
             <div class="close__form"><i class="fas fa-times"></i></div>
         </div>
         <div class="form">
-
             @*@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login active", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    <i class="fas fa-envelope"></i>
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <i class="fas fa-unlock-alt"></i>
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
+                    <div class="form-group">
+                        <i class="fas fa-unlock-alt"></i>
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-                <p>
-                    <a href="~/Account/ForgotPassword" class='forgot'>forgot password ?</a>
-                </p>
-            }*@
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Log in" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <p>
+                        <a href="~/Account/ForgotPassword" class='forgot'>forgot password ?</a>
+                    </p>
+                }*@
             <!--
-    <form action="~/Account/Login" class='login active'>
-        <div class="group-input">
-            <i class="fas fa-envelope"></i>
-            <input type="email" required>
-            <label for="">Email</label>
-        </div>
-        <div class="group-input">
-            <i class="fas fa-unlock-alt"></i>
-            <input type="password" required>
-            <label for="">Password</label>
-        </div>
-        <button class='btn' type='submit'>Login</button>
-        <a href="" class='forgot'>forgot password ?</a>
-        <div class="login-fb">
-            <span class="fb"><i class="fab fa-facebook-f"></i> Facebook</span>
-            <span class="gg"><i class="fab fa-google"></i> Google</span>
-        </div>
-    </form> -->
+            <form action="~/Account/Login" class='login active'>
+                <div class="group-input">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" required>
+                    <label for="">Email</label>
+                </div>
+                <div class="group-input">
+                    <i class="fas fa-unlock-alt"></i>
+                    <input type="password" required>
+                    <label for="">Password</label>
+                </div>
+                <button class='btn' type='submit'>Login</button>
+                <a href="" class='forgot'>forgot password ?</a>
+                <div class="login-fb">
+                    <span class="fb"><i class="fab fa-facebook-f"></i> Facebook</span>
+                    <span class="gg"><i class="fab fa-google"></i> Google</span>
+                </div>
+            </form> -->
             <!-- END form đăng nhập -->
             @*@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "register", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Create a new account.</h4>
-                <hr />
-                @Html.ValidationSummary("", new { @class = "text-danger" })
-                <div class="form-group">
-                    <i class="fas fa-envelope"></i>
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                {
+                    @Html.AntiForgeryToken()
+                    <h4>Create a new account.</h4>
+                    <hr />
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <i class="fas fa-unlock-alt"></i>
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    <div class="form-group">
+                        <i class="fas fa-unlock-alt"></i>
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <i class="fas fa-unlock-alt"></i>
-                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    <div class="form-group">
+                        <i class="fas fa-unlock-alt"></i>
+                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Birthday, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Birthday, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control" })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" class="btn btn-default" value="Register" />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" class="btn btn-default" value="Register" />
+                        </div>
                     </div>
-                </div>
-            }*@
+                }*@
             <!--
-    <form action="" class='register'>
-        <div class="group-input">
-            <i class="fas fa-envelope"></i>
-            <input type="email" required>
-            <label for="">Email</label>
-        </div>
-        <div class="group-input">
-            <i class="fas fa-unlock-alt"></i>
-            <input type="password" required>
-            <label for="">Password</label>
-        </div>
-        <div class="group-input">
-            <i class="fas fa-map-marker-alt"></i>
-            <input type="text" required>
-            <label for="">Address</label>
-        </div>
-        <div class="group-input">
-            <i class="fas fa-phone-volume"></i>
-            <input type="text" required>
-            <label for="">Phone</label>
-        </div>
-        <button class='btn' type='submit'>Register</button>
-        <a href="" class='forgot'>forgot password ?</a>
-        <div class="login-fb">
-            <span class="fb"><i class="fab fa-facebook-f"></i> Facebook</span>
-            <span class="gg"><i class="fab fa-google"></i> Google</span>
-        </div>
-    </form>  <!-- END form đăng ký -->
+            <form action="" class='register'>
+                <div class="group-input">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" required>
+                    <label for="">Email</label>
+                </div>
+                <div class="group-input">
+                    <i class="fas fa-unlock-alt"></i>
+                    <input type="password" required>
+                    <label for="">Password</label>
+                </div>
+                <div class="group-input">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" required>
+                    <label for="">Address</label>
+                </div>
+                <div class="group-input">
+                    <i class="fas fa-phone-volume"></i>
+                    <input type="text" required>
+                    <label for="">Phone</label>
+                </div>
+                <button class='btn' type='submit'>Register</button>
+                <a href="" class='forgot'>forgot password ?</a>
+                <div class="login-fb">
+                    <span class="fb"><i class="fab fa-facebook-f"></i> Facebook</span>
+                    <span class="gg"><i class="fab fa-google"></i> Google</span>
+                </div>
+            </form>  <!-- END form đăng ký -->
             -->
         </div>
     </div> <!-- END form -->
-
     <section class="banner">
         <div class="wrapper__banner">
             <div class="banner__infor">
@@ -188,11 +183,9 @@
                     <iframe width="650" height="350" src="https://www.youtube.com/embed/p4oR-rjsLpU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <div class="close"><i class="fas fa-times"></i></div>
                 </div>
-
             </div>
         </div>
     </section><!-- END form Banner -->
-
     <section class="infor">
         <div class="wrapper">
             <div class="infor__about">
@@ -209,7 +202,6 @@
                 <div class="infor__leader-title">
                     <h1 class="title">Leader <span>board</span></h1>
                 </div>
-
                 <div class="bxh">
                     <div class="bxh__list">
                         <ul>
@@ -234,7 +226,6 @@
                                     <div class="infor__scores">100 điểm</div>
                                 </div>
                             </li>
-
                             <li>
                                 <div class="number">4</div>
                                 <div class="infor">
@@ -256,7 +247,6 @@
                                     <div class="infor__scores">100 điểm</div>
                                 </div>
                             </li>
-
                             <button type='submit' class='btn'>Xem tất cả</button>
                         </ul>
                     </div>
@@ -264,7 +254,6 @@
             </div>
         </div>
     </section> <!-- About --- leader -->
-
     <section class="method">
         <div class="method__title">
             <h1 class="title">phương pháp học</h1>
@@ -300,13 +289,11 @@
             </div>
         </div>
     </section>
-
     <section class="teacher">
         <div class="wrapper">
             <div class="teacher__title">
                 <h1 class="title">our <span>teacher</span></h1>
             </div>
-
             <ul class="teacher__list">
                 <li>
                     <img src="https://template65040.motopreview.com/mt-demo/65000/65040/mt-content/uploads/2018/01/mt-1315-home-teachers2.jpg" alt="">
@@ -328,11 +315,9 @@
                     <h3>Maria Bailey</h3>
                     <p>Là giảng viên tại đại học . Có 5 năm kinh nghiệm về giảng dạy .</p>
                 </li>
-
             </ul>
         </div>
     </section> <!-- End Teacher -->
-
     <section class="testimonials">
         <div class="wrapper">
             <div class="testimonials__title">
@@ -366,13 +351,11 @@
             </div>
         </div>
     </section>
-
     <section class="contact">
         <div class="wrapper">
             <div class="contact__title">
                 <h1 class="title">contact <span>us</span></h1>
             </div>
-
             <div class="contact__content">
                 <div class="contact__content-left">
                     <div class="box">
