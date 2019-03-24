@@ -25,6 +25,7 @@
                 @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email" } })
                 @Html.PasswordFor(m => m.Password, new { @class = "login__input", @placeholder = "Password" })
                 <a href="#" class="login__link">Forgot your passwork?</a>
+                <input type="submit" value="Sign in"/>
                 <a onclick=submit class="login__submit" value="Sign in">Sign in</a>
             }
             <div class="login__options">
@@ -44,8 +45,5 @@
             <p class="login__signup">Don't have an account - <a href="@Url.Action("Register", "Account")" class="login__link">Sign up</a></p>
         </div>
     </div>
-    <script>
-
-    </script>
 </body>
 </html>

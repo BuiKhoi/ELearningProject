@@ -89,6 +89,9 @@ namespace ELearningProject.Controllers
                         else if (roles == "Student")
                         {
                             return RedirectToAction("Index", "Student");
+                        } else if (roles == "Teacher")
+                        {
+                            return RedirectToAction("Index", "Teacher");
                         }
                         return RedirectToLocal(returnUrl);
                     }
