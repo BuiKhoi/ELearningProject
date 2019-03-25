@@ -23,8 +23,9 @@
 
         <div class="login">
             <img src="~/Content/Images/logo2.svg" alt="" class="login__logo mb-5">
-            @using (Html.BeginForm("actionName", "controllerName", FormMethod.Post, new { id = "frmId", @class = "login__form" }))
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "frmId", @class = "login__form" }))
             {
+                @Html.AntiForgeryToken()
                 @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email" } })
                 @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "login__input", @placeholder = "Password" } })
                 @Html.EditorFor(m => m.ConfirmPassword, new { htmlAttributes = new { @class = "login__input", @placeholder = "Confirm Password" } })

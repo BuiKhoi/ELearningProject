@@ -24,9 +24,7 @@
                 @Html.AntiForgeryToken()
                 @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email" } })
                 @Html.PasswordFor(m => m.Password, new { @class = "login__input", @placeholder = "Password" })
-                <a href="#" class="login__link">Forgot your passwork?</a>
-                <input type="submit" value="Sign in"/>
-                <a onclick=submit class="login__submit" value="Sign in">Sign in</a>
+                <button type="submit" class="login__submit" value="Sign in">Sign in</button>
             }
             <div class="login__options">
                 <p>Or sign in with</p>

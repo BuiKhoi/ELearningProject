@@ -108,7 +108,7 @@ namespace ELearningProject.Controllers
                 questions = (from q in db.Questions
                              join qc in db.QContents on q.Content.id equals qc.id
                              join a in db.Answers on q.Answer.id equals a.id
-                             select new PuzzelQuestionViewModel() {id = q.id,  Content = qc.Content, Answer = a.Content}).Take(25)
+                             select new PuzzelQuestionViewModel() {id = q.id,  Content = qc.Content, Answer = a.Content})
                              .ToList<PuzzelQuestionViewModel>();
             }
             return View(new CreateTestViewModel(questions, 1));

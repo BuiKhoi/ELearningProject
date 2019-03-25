@@ -402,6 +402,8 @@
     <Content Include="Content\style.css" />
     <Content Include="Content\styleindex.css" />
     <Content Include="Content\stylestudent.css" />
+    <Content Include="Content\StyleTeacher.css" />
+    <Content Include="Content\Teacher.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -565,8 +567,12 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\PuzzelEnglishTest.cshtml" />
     <Content Include="Views\Student\PuzzelEnglish.cshtml" />
-    <Content Include="Views\Teacher\CreateTest.cshtml" />
+    <Content Include="Views\Teacher\CreateTest_1.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\CreateTest.cshtml" />
+    <Content Include="Views\Shared\_StudentLayout.cshtml" />
+    <Content Include="Views\Shared\_TeacherLayout.cshtml" />
+    <Content Include="Views\Shared\_CreateTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

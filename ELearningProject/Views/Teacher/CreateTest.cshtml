@@ -2,31 +2,65 @@
 @model CreateTestViewModel
 
 @{
-    Layout = null;
+    ViewBag.Title = "CreateTest";
+    Layout = "~/Views/Shared/_CreateTest.cshtml"; ;
 }
 <head>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <link href="~/Content/StyleTeacher.css" rel="stylesheet" />
 </head>
-<input type="text" id="txtTestname" />
+<div class="txtcontainer">
+    <form>
+        <div class="group">
+            <input type="text" id="txtTestname">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Test Name: </label>
+        </div>
+    </form>
+</div>
 @foreach (var quest in Model.Questions)
 {
-    <div>
-        <span>
-            <video width="640" height="360" controls>
-                <source src="@quest.Content" type="video/mp4" />
-            </video>
-        </span>
-        <div>
-            <h3>@quest.Answer</h3>
+    <div class="container-fluid" style="clear:both">
+        <div class="col-md-5" style="clear">
+            <br />
+            <span>
+                <video width="340" height="260" controls>
+                    <source src="@quest.Content" type="video/mp4" />
+                </video>
+            </span>
+            <hr />
         </div>
-        <div>
-            <input type="button" name="btnAdd" id="btnAdd+@quest.id" value="Add" class="btn btn-success" onclick="ClickEv(@quest.id.ToString())" />
-            <!--input type="button" name="btnDel" id="btnDel+@quest.id" value="Delete" class="btn btn-success" onclick="" disabled /-->
+        <div class="col-md-7" style="clear">
+            <br />
+            <br />
+            <h3 style="font-size:21px">@quest.Answer</h3>
+            <br />
+            <br />
+            <div>
+                <input type="button" name="btnAdd" id="btnAdd+@quest.id" value="Add" class="button-three" onclick="ClickEv(@quest.id.ToString())" />
+                <!--input type="button" name="btnDel" id="btnDel+@quest.id" value="Delete" class="btn btn-success" onclick="" disabled /-->
+            </div>
         </div>
     </div>
 }
+    <div>
+        <b></b>
+        
+        <div class="content">
+            <div class="button_container">
+                <div class="button_su">
+                    <span class="su_button_circle">
+                    </span>
+                    <a href="#" class="button_su_inner" onclick="SaveFunc(@Model.TeacherId)">
+                        <input class="button_text_container"  style="bottom: 29px; right: 35px; color:white;"  onclick="SaveFunc(@Model.TeacherId)">Save</input>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<input type="button" name="btnSave" value="Save" class="btn btn-toolbar" onclick="SaveFunc(@Model.TeacherId)" />
+
 
 <script>
     function SingleQuestionAddViewModel(teacherId, questionId, submit, TestName, order) {
@@ -66,6 +100,29 @@
         })
         window.location.href = "@Url.Action("Index", "Teacher")";
     }
+
+    $( ".button_su_inner" ).mouseenter(function(e) {
+   var parentOffset = $(this).offset(); 
+  
+   var relX = e.pageX - parentOffset.left;
+   var relY = e.pageY - parentOffset.top;
+   $(this).prev(".su_button_circle").css({"left": relX, "top": relY });
+   $(this).prev(".su_button_circle").removeClass("desplode-circle");
+   $(this).prev(".su_button_circle").addClass("explode-circle");
+
+});
+
+$( ".button_su_inner" ).mouseleave(function(e) {
+
+     var parentOffset = $(this).offset(); 
+
+     var relX = e.pageX - parentOffset.left;
+     var relY = e.pageY - parentOffset.top;
+     $(this).prev(".su_button_circle").css({"left": relX, "top": relY });
+     $(this).prev(".su_button_circle").removeClass("explode-circle");
+     $(this).prev(".su_button_circle").addClass("desplode-circle");
+
+});
 </script>
 
 

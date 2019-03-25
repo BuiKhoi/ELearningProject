@@ -184,23 +184,42 @@ namespace ELearningProject.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    using (var db = new ApplicationDbContext())
+                    var u = new Web_user()
                     {
-                        var u = new Web_user()
+                        Name = model.Name,
+                        Birthday = model.Birthday,
+                    };
+
+                    if (model.AsTeacher)
+                    {
+                        using (var db = new ApplicationDbContext())
                         {
-                            Name = model.Name,
-                            Birthday = model.Birthday,
-                        };
-                        var s = new Student()
+                            var t = new Teacher()
+                            {
+                                User = u
+                            };
+                            db.Web_Users.Add(u);
+                            db.Teachers.Add(t);
+                            db.SaveChanges();
+                        }
+
+                        UserManager.AddToRole(user.Id, "Teacher");
+                    } else
+                    {
+                        using (var db = new ApplicationDbContext())
                         {
-                            web_User = u
-                        };
-                        db.Web_Users.Add(u);
-                        db.Students.Add(s);
-                        db.SaveChanges();
+                            var s = new Student()
+                            {
+                                web_User = u
+                            };
+                            db.Web_Users.Add(u);
+                            db.Students.Add(s);
+                            db.SaveChanges();
+                        }
+
+                        UserManager.AddToRole(user.Id, "Student");
                     }
 
-                    UserManager.AddToRole(user.Id, "Student");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

@@ -17,10 +17,9 @@ namespace IdentityAuthentication.Controllers
             using (var db = new ApplicationDbContext())
             {
                 tests = (from t in db.Tests
-                         select t).ToList<Test>();
+                         select t).ToList();
             }
-            ViewBag.Newtests = tests;
-            return View();
+            return View(tests);
         }
 
         [HttpGet]

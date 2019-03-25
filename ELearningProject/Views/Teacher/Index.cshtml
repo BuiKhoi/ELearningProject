@@ -1,7 +1,173 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-}
+    Layout = "~/Views/Shared/_TeacherLayout.cshtml";
 
-<h2>Index</h2>
+}
+<header class="header">
+    <div class="header__details mb-5">
+        <h2 class="heading-2">
+            Your Tests
+        </h2>
+
+    </div>
+    <div class="header__products">
+        <div class="teacher_product">
+            <div class="img__testbox">
+                <img src="~/Content/Images/tasks.png" alt="" class="img__test">
+            </div>
+            <div class="test__description">
+                <h3 class="test__title">Test title here</h3>
+                <p class="description__text">
+                    Test Descrasdfasdfasdf asdfaf safasdf asdfsafd
+                </p>
+                <div class="test__edit__section">
+                    <a href="" title="Button push blue/green" class="test__button btnPush edit__test">Edit</a>
+                    <a href="" title="Button push orange" class="test__button btnPush delete__test">Delete</a>
+                </div>
+            </div>
+        </div>
+        <div class="teacher_product">
+            <div class="img__testbox">
+                <img src="~/Content/Images/tasks.png" alt="" class="img__test">
+            </div>
+            <div class="test__description">
+                <h3 class="test__title">Test title here</h3>
+                <p class="description__text">
+                    Test Descr
+                </p>
+                <div class="test__edit__section">
+                    <a href="" title="Button push blue/green" class="test__button btnPush edit__test">Edit</a>
+                    <a href="" title="Button push orange" class="test__button btnPush delete__test">Delete</a>
+                </div>
+            </div>
+        </div>
+        <div class="teacher_product">
+            <div class="img__testbox">
+                <img src="~/Content/Images/tasks.png" alt="" class="img__test">
+            </div>
+            <div class="test__description">
+                <h3 class="test__title">Test title here</h3>
+                <p class="description__text">
+                    Test Descr
+                </p>
+                <div class="test__edit__section">
+                    <a href="" title="Button push blue/green" class="test__button btnPush edit__test">Edit</a>
+                    <a href="" title="Button push orange" class="test__button btnPush delete__test">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="videos">
+    <h2 class="heading-2 videos__heading">New on ABC English</h2>
+    <div class="video">
+        <h4 class="heading-4 heading-4--yellow">videopuzzle</h4>
+        <div class="video__img-box">
+            <img src="~/Content/Images//video.jpg" alt="" class="video__img">
+            <div class="video__layer"></div>
+            <a href="#" class="btn video__btn">play</a>
+        </div>
+        <div class="video__title">What happens when we sleep?</div>
+        <div class="video__info">
+            <div class="video__difficulty video__difficulty--1">
+                <span class="video__difficutly-point"></span>
+                <span class="video__difficutly-point"></span>
+                <span class="video__difficutly-point"></span>
+            </div>
+            <img src="~/Content/Images/unitedkingdom.png" alt="" class="video__accent">
+            <p class="video__phrases">25 phrase</p>
+        </div>
+    </div>
+    <div class="video">
+        <h4 class="heading-4 heading-4--blue">synchronous podcast</h4>
+        <div class="video__img-box">
+            <img src="~/Content/Images//video1.jpg" alt="" class="video__img">
+            <div class="video__layer"></div>
+            <a href="#" class="btn video__btn">play</a>
+        </div>
+        <div class="video__title">How to treat a broken heart?</div>
+        <div class="video__info">
+            <div class="video__difficulty video__difficulty--2">
+                <span class="video__difficutly-point"></span>
+                <span class="video__difficutly-point"></span>
+                <span class="video__difficutly-point"></span>
+            </div>
+            <img src="~/Content/Images/usa.png" alt="" class="video__accent">
+            <p class="video__phrases">15 phrase</p>
+        </div>
+    </div>
+    <div class="video">
+        <h4 class="heading-4 heading-4--yellow">videopuzzle</h4>
+        <div class="video__img-box">
+            <img src="~/Content/Images//video2.jpg" alt="" class="video__img">
+            <div class="video__layer"></div>
+            <a href="#" class="btn video__btn">play</a>
+        </div>
+        <div class="video__title">Captain Marvel (Trailer)</div>
+        <div class="video__info">
+            <div class="video__difficulty video__difficulty--3">
+                <span class="video__difficutly-point"></span>
+                <span class="video__difficutly-point"></span>
+                <span class="video__difficutly-point"></span>
+            </div>
+            <img src="~/Content/Images/unitedkingdom.png" alt="" class="video__accent">
+            <p class="video__phrases">20 phrase</p>
+        </div>
+    </div>
+    <div class="video">
+        <h4 class="heading-4 heading-4--blue">videopuzzle</h4>
+        <div class="video__img-box">
+            <img src="~/Content/Images//video6.jpg" alt="" class="video__img">
+            <div class="video__layer"></div>
+            <a href="#" class="btn video__btn">play</a>
+        </div>
+        <div class="video__title">How car works?</div>
+        <div class="video__info">
+            <div class="video__difficulty video__difficulty--1">
+                <span class="video__difficutly-point"></span>
+                <span class="video__difficutly-point"></span>
+                <span class="video__difficutly-point"></span>
+            </div>
+            <img src="~/Content/Images/unitedkingdom.png" alt="" class="video__accent">
+            <p class="video__phrases">25 phrase</p>
+        </div>
+    </div>
+    <div class="video">
+        <h4 class="heading-4 heading-4--yellow">videopuzzle</h4>
+        <div class="video__img-box">
+            <img src="~/Content/Images//video7.jpg" alt="" class="video__img">
+            <div class="video__layer"></div>
+            <a href="#" class="btn video__btn">play</a>
+        </div>
+        <div class="video__title">How good is your English?</div>
+        <div class="video__info">
+            <div class="video__difficulty video__difficulty--3">
+                <span class="video__difficutly-point"></span>
+                <span class="video__difficutly-point"></span>
+                <span class="video__difficutly-point"></span>
+            </div>
+            <img src="~/Content/Images/unitedkingdom.png" alt="" class="video__accent">
+            <p class="video__phrases">25 phrase</p>
+        </div>
+    </div>
+    <div class="video">
+        <h4 class="heading-4 heading-4--blue">videopuzzle</h4>
+        <div class="video__img-box">
+            <img src="~/Content/Images//video8.jpg" alt="" class="video__img">
+            <div class="video__layer"></div>
+            <a href="#" class="btn video__btn">play</a>
+        </div>
+        <div class="video__title">Law and Crime?</div>
+        <div class="video__info">
+            <div class="video__difficulty video__difficulty--2">
+                <span class="video__difficutly-point"></span>
+                <span class="video__difficutly-point"></span>
+                <span class="video__difficutly-point"></span>
+            </div>
+            <img src="~/Content/Images/unitedkingdom.png" alt="" class="video__accent">
+            <p class="video__phrases">25 phrase</p>
+        </div>
+    </div>
+</section>
 

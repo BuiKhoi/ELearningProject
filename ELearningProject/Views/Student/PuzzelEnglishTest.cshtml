@@ -1,18 +1,176 @@
 ﻿@using ELearningProject.Models
 @model IEnumerable<ELearningProject.Models.PuzzelQuestionViewModel>
 @{
-    ViewBag.Title = "Puzzel English";
+                /**/
+
+                ViewBag.Title = "Puzzel English";
+                Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
+<div class="answerpage__body">
 
-<h2>Day la mot bai test cu the</h2>
+    <div class="small__banner yellowbanner">
+        <div class="stucontent__wrapper">
+            <div class="linkback">
+                <a href="#">Back to profile page</a>
+            </div>
+            <div class="header__containeritem">
+                <div class="progress__container">
+                    <p class="complete__percent">asodfijojsadf</p>
+                </div>
+                <h2 class="answer__videoname">Name of the fucking video</h2>
+            </div>
+        </div>
+    </div>
 
-<div>
-    @foreach (var q in Model)
-    {
-        <p>@q.Content</p>
-        <br />
-        <p>@q.Answer</p>
-        <br>
-    }
+    <div class="answer__sectionwrapper">
+        @*<ul class="answer__sectioncollection">
+                <li class="puzzels__section">
+                    <div class="video_and_answer__section">
+                        <div class="video_wrapper">
+                            <video class="phrase_video" src="https://images.puzzle-english.com/video_pieces/mp4/95022/2.mp4" controls width="600" height="327">
+
+                            </video>
+                        </div>
+                        <div class="answer_area">
+                            <div class="word__block">
+                                <span class="word__puzzle">a</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="puzzles">
+                        <div class="word__block">
+                            <span class="word__puzzle">
+                                basdfoasidjf
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>*@
+        @foreach (var q in Model)
+        {
+            <div class="infor video_and_answer__section">
+                <div class="video video_wrapper">
+                    <video autoplay src="@q.Content" class='vd'></video>
+                    <div class="control">
+                        <button id='play'>Play</button>
+                        <div id='speed'>
+                            <span><img src="https://img.icons8.com/doodle/48/000000/man-in-headphones.png"></span>
+                            <div class="bar">
+                                <div class="tr" data-type='sl'></div>
+                                <div class="tr active" data-type='nm'></div>
+                                <div class="tr" data-type='f'></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="boxB answer_area">
+                    <div class="answer"></div>
+                </div>
+            </div>
+            <div class="question puzzles">
+                <div class="item">@q.Answer</div>
+
+            </div>
+        }
+
+    </div>
 </div>
 
+<script>
+     function fields_List()  {
+
+         var myjson = @Html.Raw(Json.Encode(Model));
+         console.log(myjson);
+         return myjson;
+    }
+
+
+    var kq = ''; var listItem = document.querySelectorAll('.item');
+    var td = document.querySelectorAll('.tr');
+    var img = document.querySelector('#speed img');
+    const vd = document.querySelector('.vd');
+    const control = document.querySelector('.control');
+    const play = document.getElementById('play');
+    var answer = document.querySelector('.answer');
+    var check = 0;
+    var text = 'trả lời 1 trả lời 2 trả lời 3 trả lời 4';
+    var kq = '';
+
+    play.addEventListener('click', e => {
+        vd.play();
+        control.style.display = 'none';
+    });
+    td.forEach((item) => {
+        item.onclick = function () {
+            if (item.getAttribute('data-type') == 'sl') {
+                img.setAttribute('src', 'https://img.icons8.com/color/48/000000/snail.png');
+                vd.playbackRate = 0.75;
+                vd.play();
+            }
+            else if (item.getAttribute('data-type') == 'f') {
+                img.setAttribute('src', 'https://img.icons8.com/color/48/000000/running-rabbit.png');
+                vd.playbackRate = 1.5;
+                vd.play();
+            } else {
+                img.setAttribute('src', 'https://img.icons8.com/doodle/48/000000/man-in-headphones.png');
+                vd.playbackRate = 1;
+                vd.play();
+            }
+            td.forEach((it) => {
+                it.classList.remove('active');
+            });
+            this.classList.add('active');
+        }
+    });
+    function reset() {
+        console.log(listItem);
+        var word = document.querySelectorAll('.word');
+        listItem.forEach((e) => {
+            e.classList.remove('rm');
+        });
+        word.forEach((e) => {
+            answer.removeChild(e);
+        });
+    }
+    listItem.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            check++;
+            let div = document.createElement('div');
+            div.classList.add('word');
+            div.textContent = this.textContent;
+            answer.appendChild(div);
+            this.classList.add('rm');
+            if (check == listItem.length) {
+                var word = document.querySelectorAll('.word');
+                word.forEach(function (item) {
+                    kq += item.textContent + ' ';
+                });
+                if (kq.trim() == text) {
+                    console.log('Giỏi vcl');
+                    check = 0;
+                    kq = '';
+                }
+                else {
+                    console.log('Sai Rồi');
+                    check = 0;
+                    kq = '';
+                    reset();
+                }
+            }
+        });
+    });
+
+    answer.addEventListener('click', function (e) {
+        if (e.target.className == 'word') {
+            check--;
+            listItem.forEach(function (item) {
+                if (item.textContent == e.target.textContent) {
+                    item.classList.remove('rm');
+                }
+            });
+            answer.removeChild(e.target);
+        }
+        console.log(kq);
+    });
+</script>
