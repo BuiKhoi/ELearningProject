@@ -399,6 +399,7 @@
     <Content Include="Content\Images\words.png" />
     <Content Include="Content\Images\yellow-after-real.png" />
     <Content Include="Content\loginstyle.css" />
+    <Content Include="Content\PuzzleGame.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\styleindex.css" />
     <Content Include="Content\stylestudent.css" />

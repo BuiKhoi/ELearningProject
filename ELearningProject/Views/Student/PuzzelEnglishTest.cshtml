@@ -3,54 +3,18 @@
 @{
                 /**/
 
+                /**/
+
                 ViewBag.Title = "Puzzel English";
                 Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
-<div class="answerpage__body">
 
-    <div class="small__banner yellowbanner">
-        <div class="stucontent__wrapper">
-            <div class="linkback">
-                <a href="#">Back to profile page</a>
-            </div>
-            <div class="header__containeritem">
-                <div class="progress__container">
-                    <p class="complete__percent">asodfijojsadf</p>
-                </div>
-                <h2 class="answer__videoname">Name of the fucking video</h2>
-            </div>
-        </div>
-    </div>
-
-    <div class="answer__sectionwrapper">
-        @*<ul class="answer__sectioncollection">
-                <li class="puzzels__section">
-                    <div class="video_and_answer__section">
-                        <div class="video_wrapper">
-                            <video class="phrase_video" src="https://images.puzzle-english.com/video_pieces/mp4/95022/2.mp4" controls width="600" height="327">
-
-                            </video>
-                        </div>
-                        <div class="answer_area">
-                            <div class="word__block">
-                                <span class="word__puzzle">a</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="puzzles">
-                        <div class="word__block">
-                            <span class="word__puzzle">
-                                basdfoasidjf
-                            </span>
-                        </div>
-                    </div>
-                </li>
-            </ul>*@
-        @foreach (var q in Model)
-        {
-            <div class="infor video_and_answer__section">
-                <div class="video video_wrapper">
-                    <video autoplay src="@q.Content" class='vd'></video>
+<div class="containerPuzzlegame">
+    <div class="wrapper">
+        <div class="content">
+            <div class="infor">
+                <div class="video">
+                    <video src="" class='vd ' onended="rV()" autoplay="autoplay"></video>
                     <div class="control">
                         <button id='play'>Play</button>
                         <div id='speed'>
@@ -63,114 +27,228 @@
                         </div>
                     </div>
                 </div>
-                <div class="boxB answer_area">
+                <div class="boxB">
                     <div class="answer"></div>
                 </div>
             </div>
-            <div class="question puzzles">
-                <div class="item">@q.Answer</div>
+        </div>
+        <div class="question">
 
-            </div>
-        }
+        </div>
+    </div>
+    <div class="result">
 
+    </div>
+    <div class="tb">
+        <h1>Bạn đã hoàn thành bài test</h1>
+        <button class='btn kq btn_inform_finishtest test__button btnPush edit__test'>Xem kết quả .</button>
     </div>
 </div>
 
+
 <script>
-     function fields_List()  {
+    var listText = @Html.Raw(Json.Encode(Model));
+console.log(listText);
+const vd = document.querySelector('.vd');
+const vdr = document.querySelector('.vdr');
+const result = document.querySelector('.result');
+const questionBox = document.querySelector('.question');
+const img = document.querySelector('#speed img');
 
-         var myjson = @Html.Raw(Json.Encode(Model));
-         console.log(myjson);
-         return myjson;
-    }
-
-
-    var kq = ''; var listItem = document.querySelectorAll('.item');
-    var td = document.querySelectorAll('.tr');
-    var img = document.querySelector('#speed img');
-    const vd = document.querySelector('.vd');
-    const control = document.querySelector('.control');
-    const play = document.getElementById('play');
-    var answer = document.querySelector('.answer');
-    var check = 0;
-    var text = 'trả lời 1 trả lời 2 trả lời 3 trả lời 4';
-    var kq = '';
-
-    play.addEventListener('click', e => {
-        vd.play();
-        control.style.display = 'none';
-    });
-    td.forEach((item) => {
-        item.onclick = function () {
-            if (item.getAttribute('data-type') == 'sl') {
-                img.setAttribute('src', 'https://img.icons8.com/color/48/000000/snail.png');
-                vd.playbackRate = 0.75;
-                vd.play();
-            }
-            else if (item.getAttribute('data-type') == 'f') {
-                img.setAttribute('src', 'https://img.icons8.com/color/48/000000/running-rabbit.png');
-                vd.playbackRate = 1.5;
-                vd.play();
+class UIController {
+    addItemResult(arr) {
+        console.log(arr);
+        let it = `<ul>`;
+        arr.forEach((item) => {
+            if (item.ans.trim() == item.ansy.trim()) {
+                console.log(item.ans, item.ansy);
+                it += `<li>
+                <video src="${item.video}" class="vdr"></video>
+                <div class="result__inf">
+                    <div class="an">${item.ans}</div>
+                    <div class="result__inf-ans"><span>${item.ansy}</span> <img src="https://img.icons8.com/color/48/000000/checked-checkbox.png"></div>
+               </div>
+             </li>`;
             } else {
-                img.setAttribute('src', 'https://img.icons8.com/doodle/48/000000/man-in-headphones.png');
-                vd.playbackRate = 1;
-                vd.play();
+                it += `<li>
+                <video src="${item.video}" class="vdr"></video>
+                <div class="result__inf">
+                    <div class="an">${item.ans}</div>
+                    <div class="result__inf-y"><span>${item.ansy}</span><img src="https://img.icons8.com/color/48/000000/close-window.png"></div>
+               </div>
+             </li>`;
             }
-            td.forEach((it) => {
-                it.classList.remove('active');
-            });
-            this.classList.add('active');
-        }
-    });
-    function reset() {
-        console.log(listItem);
-        var word = document.querySelectorAll('.word');
-        listItem.forEach((e) => {
-            e.classList.remove('rm');
+
         });
-        word.forEach((e) => {
-            answer.removeChild(e);
-        });
+        it += `</ul>`;
+        result.innerHTML = it;
+        document.querySelector('.tb').classList.remove('ht');
+        result.style.display = 'block';
     }
-    listItem.forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
-            e.preventDefault();
-            check++;
-            let div = document.createElement('div');
-            div.classList.add('word');
-            div.textContent = this.textContent;
-            answer.appendChild(div);
-            this.classList.add('rm');
-            if (check == listItem.length) {
-                var word = document.querySelectorAll('.word');
-                word.forEach(function (item) {
-                    kq += item.textContent + ' ';
-                });
-                if (kq.trim() == text) {
-                    console.log('Giỏi vcl');
-                    check = 0;
-                    kq = '';
-                }
-                else {
-                    console.log('Sai Rồi');
-                    check = 0;
-                    kq = '';
-                    reset();
-                }
-            }
-        });
+    displayTB() {
+        document.querySelector('.tb').classList.add('ht');
+    }
+}
+const ui = new UIController();
+const yourResult = [];
+var random = 0;
+var newA = '';
+function rQuestion() {
+    if (random >= listText.length) {
+        localStorage.setItem('ds', JSON.stringify(yourResult));
+        let ind = result.offsetTop;
+        window.scrollTo({ top: ind });
+        ui.displayTB();
+        return false;
+    }
+    var question = listText[random];
+    newA = question.Answer.split(" ");
+    newA = newA.sort();
+    var ans = '';
+    vd.setAttribute('src', question.Content);
+    newA.forEach(item => {
+        ans += `<div class="item">${item}</div>`;
     });
 
-    answer.addEventListener('click', function (e) {
-        if (e.target.className == 'word') {
-            check--;
-            listItem.forEach(function (item) {
-                if (item.textContent == e.target.textContent) {
-                    item.classList.remove('rm');
-                }
-            });
-            answer.removeChild(e.target);
+    questionBox.innerHTML = ans;
+}
+rQuestion();
+var td = document.querySelectorAll('.tr');
+const control = document.querySelector('.control');
+const play = document.getElementById('play');
+var answer = document.querySelector('.answer');
+var check = 0;
+var kq = '';
+play.addEventListener('click', e => {
+    playVideo();
+});
+function playVideo() {
+    vd.play();
+    control.style.display = 'none';
+}
+td.forEach((item) => {
+    item.onclick = function () {
+        if (item.getAttribute('data-type') == 'sl') {
+            img.setAttribute('src', 'https://img.icons8.com/color/48/000000/snail.png');
+            vd.playbackRate = 0.75;
+            playVideo();
         }
-        console.log(kq);
+        else if (item.getAttribute('data-type') == 'f') {
+            img.setAttribute('src', 'https://img.icons8.com/color/48/000000/running-rabbit.png');
+            vd.playbackRate = 1.5;
+            playVideo();
+        } else {
+            img.setAttribute('src', 'https://img.icons8.com/doodle/48/000000/man-in-headphones.png');
+            vd.playbackRate = 1;
+            vd.play();
+        }
+        td.forEach((it) => {
+            it.classList.remove('active');
+        });
+        this.classList.add('active');
+    }
+});
+function reset() {
+    var word = document.querySelectorAll('.word');
+    var listItem = document.querySelectorAll('.item');
+    listItem.forEach((e) => {
+        e.classList.remove('rm');
     });
+    console.log(listItem);
+    word.forEach((e) => {
+        answer.removeChild(e);
+    });
+}
+function displayResult(word) {
+    let checkAns = listText[random].Answer.split(' ');
+    console.log(checkAns);
+    console.log('hello');
+    console.log(word, 'check word');
+    for (var i = 0; i < word.length; i++) {
+        if (checkAns[i] != word[i].textContent) {
+            word[i].classList.add('er');
+        }
+    }
+}
+function saveResult(video, ans, ansy) {
+    let exac = {
+        'video': video,
+        'ans': ans,
+        'ansy': ansy
+    }
+    yourResult.push(exac);
+}
+function displayResultAll(video, ans, any) {
+    let resultAll = `<li>
+            <video src="${video}" class='vdr'></video>
+            <div class="result__inf">
+                <div class="result__inf-ans">${ans}</div>
+                <div class="result__inf-y">${any}</div>
+           </div>
+         </li>`;
+    result.appendChild(resultAll);
+}
+
+questionBox.addEventListener('click', function (e) {
+    if (e.target.className == 'item') {
+        check++;
+        let div = document.createElement('div');
+        div.classList.add('word');
+        div.textContent = e.target.textContent;
+        answer.appendChild(div);
+        e.target.classList.add('rm');
+        if (check == newA.length) {
+            var word = document.querySelectorAll('.word');
+            word.forEach(function (item) {
+                kq += item.textContent + ' ';
+            });
+            if (kq.trim() == listText[random].Answer) {
+                console.log('Giỏi vcl');
+                saveResult(listText[random].Content, listText[random].Answer, kq);
+                check = 0;
+                kq = '';
+                random++;
+                reset();
+                rQuestion();
+            }
+            else {
+                console.log('Sai Rồi');
+                saveResult(listText[random].Content, listText[random].Answer, kq);
+                console.log(yourResult);
+                displayResult(word);
+                setTimeout(function () {
+                    check = 0;
+                    kq = '';
+                    random++;
+                    reset();
+                    rQuestion();
+                }, 1000);
+
+            }
+        }
+    }
+});
+
+answer.addEventListener('click', function (e) {
+    if (e.target.className == 'word') {
+        let listItem = document.querySelectorAll('.item');
+        check--;
+        listItem.forEach(function (item) {
+            if (item.textContent == e.target.textContent) {
+                item.classList.remove('rm');
+            }
+        });
+        answer.removeChild(e.target);
+    }
+    console.log(kq);
+});
+
+const xkq = document.querySelector('.kq');
+xkq.onclick = () => {
+    const lkq = JSON.parse(localStorage.getItem('ds'));
+    ui.addItemResult(lkq);
+}
+function rV() {
+    control.style.display = 'flex';
+}
 </script>
