@@ -13,6 +13,7 @@ namespace ELearningProject.Models
         public string Desc { get; set; }
         public string Tags { get; set; }
         public string Image { get; set; }
+        public TType Type { get; set; }
 
         public ICollection<TestQuestionDeploy> TestQuestionDeploys { get; set; }
     }

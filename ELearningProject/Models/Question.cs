@@ -14,6 +14,7 @@ namespace ELearningProject.Models
         public QType Type { get; set; }
         public QContent Content { get; set; }
         public Answer Answer { get; set; }
+        public Teacher Creator { get; set; }
 
         public ICollection<TestQuestionDeploy> TestQuestionDeploys { get; set; }
     }

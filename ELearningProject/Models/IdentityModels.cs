@@ -34,6 +34,8 @@ namespace ELearningProject.Models
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<TestQuestionDeploy> TestQuestionDeploys { get; set; }
+        public DbSet<TType> TTypes { get; set; }
+        public DbSet<StudentTestResult> StudentTestResults { get; set; }
 
         public static ApplicationDbContext Create()
         {
