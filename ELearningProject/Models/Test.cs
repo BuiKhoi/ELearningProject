@@ -34,6 +34,20 @@ namespace ELearningProject.Models
         public TType type { get; set; }
     }
 
+    public class TestTagViewModel
+    {
+        public List<string> Tags { get; set; }
+        public List<List<int>> TestIds { get; set; }
+        public List<TestViewModel> Tests { get; set; }
+
+        public TestTagViewModel()
+        {
+            Tags = new List<string>();
+            TestIds = new List<List<int>>();
+            Tests = new List<TestViewModel>();
+        }
+    }
+
     public class StudentTestViewModel
     {
         public List<string> TestTypes { get; set; }

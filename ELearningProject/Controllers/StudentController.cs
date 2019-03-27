@@ -13,23 +13,29 @@ namespace IdentityAuthentication.Controllers
         // GET: Student
         public ActionResult Index()
         {
+            
+            return View(GetStvm());
+        }
+
+        private StudentTestViewModel GetStvm()
+        {
             //Get a list of tests and add it to viewbag since we use many object here
             List<TestTypeView> ttests = new List<TestTypeView>();
             using (var db = new ApplicationDbContext())
             {
                 ttests = (from t in db.Tests
-                         join tt in db.TTypes on t.Type.id equals tt.id
-                         select new TestTypeView() { test = t, type = tt}).ToList<TestTypeView>();
+                          join tt in db.TTypes on t.Type.id equals tt.id
+                          select new TestTypeView() { test = t, type = tt }).ToList<TestTypeView>();
             }
 
             //Create new list with our tests
             List<Test> tests = new List<Test>();
-            foreach(var ttest in ttests)
+            foreach (var ttest in ttests)
             {
                 var test = new Test()
                 {
                     id = ttest.test.id,
-                    Desc= ttest.test.Desc,
+                    Desc = ttest.test.Desc,
                     Image = ttest.test.Image,
                     Rating = ttest.test.Rating,
                     Tags = ttest.test.Tags,
@@ -62,15 +68,43 @@ namespace IdentityAuthentication.Controllers
 
                 stvm.Tests[stvm.TestTypes.IndexOf(test.Type.name)].Add(t);
             }
-            return View(stvm);
+            return stvm;
         }
 
         [HttpGet]
         public ActionResult PuzzelEnglish(int? TestId)
         {
+            //If the student intent to see all the tests, not a particular one
             if (TestId == null)
             {
-                return View();
+                //Create an instance of TestTagViewModel and stvm
+                var ttvm = new TestTagViewModel();
+                var stvm = GetStvm();
+
+                //Get desired tests and add them to the ttvm (this will be edited later for better performance)
+                var tests = stvm.Tests[stvm.TestTypes.IndexOf("Puzzel Game")];
+                foreach (var test in tests)
+                {
+                    ttvm.Tests.Add(test);
+                    //Get the tags and add to the tags list, and add the testid to the testids list
+                    List<string> tags = test.Tags;
+                    foreach (var tag in tags)
+                    {
+                        //Check if the tag is already saved or not
+                        if (ttvm.Tags.IndexOf(tag) == -1)
+                        {
+                            ttvm.Tags.Add(tag);
+                            ttvm.TestIds.Add(new List<int>());
+                        }
+
+                        //Add the testid to the testids list, the reason i dont add the whole text because thay will duplicate,
+                        //since one test have a lot of tags,
+                        //which draw a lot of unnecessary memory
+                        ttvm.TestIds[ttvm.Tags.IndexOf(tag)].Add(test.id);
+                    }
+                }
+
+                return View(ttvm);
             }
 
             List<PuzzelQuestionViewModel> pquests = new List<PuzzelQuestionViewModel>();
