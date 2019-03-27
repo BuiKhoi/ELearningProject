@@ -43,11 +43,7 @@ namespace IdentityAuthentication.Controllers
             foreach (var test in tests)
             {
                 //Create a list of tags for each test
-                List<string> tags = JsonConvert.DeserializeObject<List<string>>("[\"Children\",\"Cartoon\"]");
-                //List<string> tags = new List<string>();
-                //tags.Add("Children");
-                //tags.Add("Cartoon");
-                //string json = JsonConvert.SerializeObject(tags);
+                List<string> tags = JsonConvert.DeserializeObject<List<string>>(test.Tags);
                 var t = new TestViewModel()
                 {
                     id = test.id,
