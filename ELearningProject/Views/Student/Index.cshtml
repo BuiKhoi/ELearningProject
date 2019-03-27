@@ -1,5 +1,5 @@
 ﻿@using ELearningProject.Models
-@model IEnumerable<ELearningProject.Models.Test>
+@model ELearningProject.Models.StudentTestViewModel
 @{
     ViewBag.Title = "Student";
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
@@ -123,28 +123,31 @@
     </div>
 </header>
 <section class="videos">
-    <h2 class="heading-2 videos__heading">New on ABC English</h2>
-    @foreach (var t in Model)
+    @foreach (var type in Model.TestTypes)
     {
-        var url = "/Tests/test" + "-" + t.id;
-        <div class="video">
-            <h4 class="heading-4 heading-4--yellow">videopuzzle</h4>
-            <div class="video__img-box">
-                <img src="@t.Image" alt="" class="video__img">
-                <div class="video__layer"></div>
-                <a href="~/Student/PuzzelEnglish?TestId=@t.id" class="btn video__btn">play</a>
-            </div>
-            <div class="video__title">@t.Desc</div>
-            <div class="video__info">
-                <div class="video__difficulty video__difficulty--1">
-                    <span class="video__difficutly-point"></span>
-                    <span class="video__difficutly-point"></span>
-                    <span class="video__difficutly-point"></span>
+        <h2 class="heading-2 videos__heading">@type</h2>
+        foreach (var t in Model.Tests[Model.TestTypes.IndexOf(type)])
+        {
+            var url = "/Tests/test" + "-" + t.id;
+            <div class="video">
+                <h4 class="heading-4 heading-4--yellow">videopuzzle</h4>
+                <div class="video__img-box">
+                    <img src="@t.Image" alt="" class="video__img">
+                    <div class="video__layer"></div>
+                    <a href="~/Student/PuzzelEnglish?TestId=@t.id" class="btn video__btn">play</a>
                 </div>
-                <img src="~/Content/Images/unitedkingdom.png" alt="" class="video__accent">
-                <p class="video__phrases">25 phrase</p>
+                <div class="video__title">@t.Desc</div>
+                <div class="video__info">
+                    <div class="video__difficulty video__difficulty--1">
+                        <span class="video__difficutly-point"></span>
+                        <span class="video__difficutly-point"></span>
+                        <span class="video__difficutly-point"></span>
+                    </div>
+                    <img src="~/Content/Images/unitedkingdom.png" alt="" class="video__accent">
+                    <p class="video__phrases">25 phrase</p>
+                </div>
             </div>
-        </div>
+        }
     }
 </section>
 
