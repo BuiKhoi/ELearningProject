@@ -33,15 +33,15 @@ namespace IdentityAuthentication.Controllers
             {
                 case 1:
                     {
-                        return RedirectToAction("PuzzelEnglish", TestId);
+                        return PuzzelEnglish(TestId);
                     }
                 case 2:
                     {
-                        return RedirectToAction("MultipieChoice", TestId);
+                        return MultipieChoice(TestId);
                     }
                 case 3:
                     {
-                        return RedirectToAction("Translating", TestId);
+                        return Translating(TestId);
                     }
                 default:
                     {
