@@ -130,13 +130,12 @@
         <h2 class="heading-2 videos__heading">@type</h2>
         foreach (var t in Model.Tests[Model.TestTypes.IndexOf(type)])
         {
-            var url = "/Tests/test" + "-" + t.id;
             <div class="video">
                 <h4 class="heading-4 heading-4--yellow">videopuzzle</h4>
                 <div class="video__img-box">
                     <img src="@t.Image" alt="" class="video__img">
                     <div class="video__layer"></div>
-                    <a href="~/Student/PuzzelEnglish?TestId=@t.id" class="btn video__btn">play</a>
+                    <a href="~/Student/TestRouting?TestId=@t.id" class="btn video__btn">play</a>
                 </div>
                 <div class="video__title">@t.Desc</div>
                 <div class="video__info">

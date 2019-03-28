@@ -585,6 +585,10 @@
     <Content Include="Views\Shared\_StudentLayout.cshtml" />
     <Content Include="Views\Shared\_TeacherLayout.cshtml" />
     <Content Include="Views\Shared\_CreateTest.cshtml" />
+    <Content Include="Views\Student\MultipieChoice.cshtml" />
+    <Content Include="Views\Student\MultipieChoiceTest.cshtml" />
+    <Content Include="Views\Student\Translating.cshtml" />
+    <Content Include="Views\Student\TranslatingQuestTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

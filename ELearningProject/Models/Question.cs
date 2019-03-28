@@ -35,4 +35,22 @@ namespace ELearningProject.Models
             this.Answer = question.Answer.Content;
         }
     }
+
+    public class MultipieChoiceViewModel
+    {
+        public int id { get; set; }
+        public string Content { get; set; }
+        public List<string> Answer { get; set; }
+
+        public MultipieChoiceViewModel() { }
+    }
+
+    public class TranslateQuestViewModel
+    {
+        public int id { get; set; }
+        public string Content { get; set; }
+        public List<string> Answer { get; set; }
+
+        public TranslateQuestViewModel() { }
+    }
 }

@@ -17,6 +17,126 @@ namespace IdentityAuthentication.Controllers
             return View(GetStvm());
         }
 
+        [HttpGet]
+        public ActionResult TestRouting(int TestId)
+        {
+            int route = 0;
+            using(var db = new ApplicationDbContext())
+            {
+                route = (from t in db.Tests
+                         join tt in db.TTypes on t.Type.id equals tt.id
+                         where t.id == TestId
+                         select tt.id).First();
+            }
+
+            switch(route)
+            {
+                case 1:
+                    {
+                        return RedirectToAction("PuzzelEnglish", TestId);
+                    }
+                case 2:
+                    {
+                        return RedirectToAction("MultipieChoice", TestId);
+                    }
+                case 3:
+                    {
+                        return RedirectToAction("Translating", TestId);
+                    }
+                default:
+                    {
+                        return RedirectToAction("TestRouting");
+                    }
+            }
+        }
+
+        [HttpGet]
+        public ActionResult PuzzelEnglish(int? TestId)
+        {
+            //If the student intent to see all the tests, not a particular one
+            if (TestId == null)
+            {
+                return View(GetTTVM("Puzzel Game"));
+            }
+
+            //Create pquests list which contains all the question that is in the test, since the test is divided by type
+            //so we dont have to check the QType right now
+            List<PuzzelQuestionViewModel> pquests = new List<PuzzelQuestionViewModel>();
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                pquests = (from q in db.Questions
+                              join qt in db.TestQuestionDeploys on q.id equals qt.Question.id
+                              join t in db.Tests on qt.Test.id equals t.id
+                              join qc in db.QContents on q.Content.id equals qc.id
+                              join a in db.Answers on q.Answer.id equals a.id
+                              where t.id == TestId
+                              select new PuzzelQuestionViewModel() {id = q.id, Content = qc.Content, Answer = a.Content})
+                              .ToList<PuzzelQuestionViewModel>();
+            }
+            //And return them to the list
+            return View("PuzzelEnglishTest", pquests);
+        }
+
+        [HttpGet]
+        public ActionResult MultipieChoice(int? TestId)
+        {
+            if (TestId == null)
+            {
+                return View(GetTTVM("Multipie Choice"));
+            } else
+            {
+                //Create the mcquests list that contains all the questions in this test
+                List<MultipieChoiceViewModel> mcquests = new List<MultipieChoiceViewModel>();
+                using (var db = new ApplicationDbContext())
+                {
+                    mcquests = (from q in db.Questions
+                                join qt in db.TestQuestionDeploys on q.id equals qt.Question.id
+                                join t in db.Tests on qt.Test.id equals t.id
+                                join qc in db.QContents on q.Content.id equals qc.id
+                                join a in db.Answers on q.Answer.id equals a.id
+                                where t.id == TestId
+                                select new MultipieChoiceViewModel()
+                                {
+                                    id = t.id,
+                                    Content = qc.Content,
+                                    Answer = JsonConvert.DeserializeObject<List<string>>(a.Content)
+                                }).ToList<MultipieChoiceViewModel>();
+                }
+                //And return them to the controller as usual
+                return View("MultipieChoiceTest", mcquests);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Translating(int? TestId)
+        {
+            if (TestId == null)
+            {
+                return View(GetTTVM("Translating"));
+            } else
+            {
+                //Create a trsQuest list, you should have known what i ment by thi
+                List<TranslateQuestViewModel> trsQuests = new List<TranslateQuestViewModel>();
+                using (var db = new ApplicationDbContext())
+                {
+                    trsQuests = (from q in db.Questions
+                                join qt in db.TestQuestionDeploys on q.id equals qt.Question.id
+                                join t in db.Tests on qt.Test.id equals t.id
+                                join qc in db.QContents on q.Content.id equals qc.id
+                                join a in db.Answers on q.Answer.id equals a.id
+                                where t.id == TestId
+                                select new TranslateQuestViewModel()
+                                {
+                                    id = t.id,
+                                    Content = qc.Content,
+                                    Answer = JsonConvert.DeserializeObject<List<string>>(a.Content)
+                                }).ToList<TranslateQuestViewModel>();
+                }
+                return View("TranslatingQuestTest", trsQuests);
+            }
+        }
+
+        //Get the Student Test View contains all the test with types
         private StudentTestViewModel GetStvm()
         {
             //Get a list of tests and add it to viewbag since we use many object here
@@ -71,55 +191,35 @@ namespace IdentityAuthentication.Controllers
             return stvm;
         }
 
-        [HttpGet]
-        public ActionResult PuzzelEnglish(int? TestId)
+        private TestTagViewModel GetTTVM(string name)
         {
-            //If the student intent to see all the tests, not a particular one
-            if (TestId == null)
-            {
-                //Create an instance of TestTagViewModel and stvm
-                var ttvm = new TestTagViewModel();
-                var stvm = GetStvm();
+            //Create an instance of TestTagViewModel and stvm
+            var ttvm = new TestTagViewModel();
+            var stvm = GetStvm();
 
-                //Get desired tests and add them to the ttvm (this will be edited later for better performance)
-                var tests = stvm.Tests[stvm.TestTypes.IndexOf("Puzzel Game")];
-                foreach (var test in tests)
+            //Get desired tests and add them to the ttvm (this will be edited later for better performance)
+            var tests = stvm.Tests[stvm.TestTypes.IndexOf(name)];
+            foreach (var test in tests)
+            {
+                ttvm.Tests.Add(test);
+                //Get the tags and add to the tags list, and add the testid to the testids list
+                List<string> tags = test.Tags;
+                foreach (var tag in tags)
                 {
-                    ttvm.Tests.Add(test);
-                    //Get the tags and add to the tags list, and add the testid to the testids list
-                    List<string> tags = test.Tags;
-                    foreach (var tag in tags)
+                    //Check if the tag is already saved or not
+                    if (ttvm.Tags.IndexOf(tag) == -1)
                     {
-                        //Check if the tag is already saved or not
-                        if (ttvm.Tags.IndexOf(tag) == -1)
-                        {
-                            ttvm.Tags.Add(tag);
-                            ttvm.TestIds.Add(new List<int>());
-                        }
-
-                        //Add the testid to the testids list, the reason i dont add the whole text because thay will duplicate,
-                        //since one test have a lot of tags,
-                        //which draw a lot of unnecessary memory
-                        ttvm.TestIds[ttvm.Tags.IndexOf(tag)].Add(test.id);
+                        ttvm.Tags.Add(tag);
+                        ttvm.TestIds.Add(new List<int>());
                     }
+
+                    //Add the testid to the testids list, the reason i dont add the whole text because thay will duplicate,
+                    //since one test have a lot of tags,
+                    //which draw a lot of unnecessary memory
+                    ttvm.TestIds[ttvm.Tags.IndexOf(tag)].Add(test.id);
                 }
-
-                return View(ttvm);
             }
-
-            List<PuzzelQuestionViewModel> pquests = new List<PuzzelQuestionViewModel>();
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                pquests = (from q in db.Questions
-                              join qt in db.TestQuestionDeploys on q.id equals qt.Question.id
-                              join t in db.Tests on qt.Test.id equals t.id
-                              join qc in db.QContents on q.Content.id equals qc.id
-                              join a in db.Answers on q.Answer.id equals a.id
-                              where t.id == TestId
-                              select new PuzzelQuestionViewModel() {id = q.id, Content = qc.Content, Answer = a.Content})
-                              .ToList<PuzzelQuestionViewModel>();
-            }
-            return View("PuzzelEnglishTest", pquests);
+            return ttvm;
         }
     }
 }
