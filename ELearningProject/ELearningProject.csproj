@@ -410,6 +410,7 @@
     <Content Include="Content\Images\words.png" />
     <Content Include="Content\Images\yellow-after-real.png" />
     <Content Include="Content\loginstyle.css" />
+    <Content Include="Content\MultiChoice.css" />
     <Content Include="Content\PuzzleGame.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\styleindex.css" />
@@ -535,6 +536,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

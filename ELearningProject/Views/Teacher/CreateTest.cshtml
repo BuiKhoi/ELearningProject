@@ -18,6 +18,36 @@
             <label>Test Name: </label>
         </div>
     </form>
+    <form>
+        <div class="group">
+            <input type="file" name="filename" accept="image/gif, image/jpeg, image/png">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Image: </label>
+        </div>
+    </form>
+    @*<div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                Type:
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li role="presentation"><a role="menuitem" data-value="puzzlegame" class="ttype">Puzzel Game</a></li>
+                <li role="presentation"><a role="menuitem" data-value="multiplechoice" class="ttype">Multipie Choice</a></li>
+                <li role="presentation"><a role="menuitem" data-value="translating" class="ttype">Translating</a></li>
+            </ul>
+        </div>*@
+    <form>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <select id="tType">
+            <option value="type" class="ttype">Type:</option>
+            <option value="pg" class="ttype">Puzzel Game</option>
+            <option value="mc" class="ttype">Multipie Choice</option>
+            <option value="tr" class="ttype">Translating</option>
+        </select>
+        <button onclick="TypeTest()">Submit</button>
+    </form>
 </div>
 @foreach (var quest in Model.Questions)
 {

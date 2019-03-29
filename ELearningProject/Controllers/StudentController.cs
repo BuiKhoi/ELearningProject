@@ -99,8 +99,13 @@ namespace IdentityAuthentication.Controllers
                                 {
                                     id = t.id,
                                     Content = qc.Content,
-                                    Answer = JsonConvert.DeserializeObject<List<string>>(a.Content)
+                                    Quiz = new QuizMultichoice(),
+                                    fuckingdata = a.Content
                                 }).ToList<MultipieChoiceViewModel>();
+                    foreach (var t in mcquests)
+                    {
+                        t.Quiz = JsonConvert.DeserializeObject<QuizMultichoice>(t.fuckingdata);
+                    }
                 }
                 //And return them to the controller as usual
                 return View("MultipieChoiceTest", mcquests);

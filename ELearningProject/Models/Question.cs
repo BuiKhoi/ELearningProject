@@ -40,9 +40,22 @@ namespace ELearningProject.Models
     {
         public int id { get; set; }
         public string Content { get; set; }
-        public List<string> Answer { get; set; }
+        public QuizMultichoice Quiz { get; set; }
+        public string fuckingdata { get; set; }
 
         public MultipieChoiceViewModel() { }
+    }
+    public class QuizMultichoice
+    {
+        public string Quiz1 { get; set; }
+        public string Quiz2 { get; set; }
+        public string Quiz3 { get; set; }
+        public string Quiz4 { get; set; }
+        public int Answer { get; set; }
+        public QuizMultichoice()
+        {
+
+        }
     }
 
     public class TranslateQuestViewModel
