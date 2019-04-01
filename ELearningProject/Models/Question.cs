@@ -19,7 +19,9 @@ namespace ELearningProject.Models
         public ICollection<TestQuestionDeploy> TestQuestionDeploys { get; set; }
     }
 
-    public class PuzzelQuestionViewModel
+    public interface QuestionViewModel { }
+
+    public class PuzzelQuestionViewModel : QuestionViewModel
     {
         public int id { get; set; }
         public string Content { get; set; }
@@ -36,7 +38,7 @@ namespace ELearningProject.Models
         }
     }
 
-    public class MultipieChoiceViewModel
+    public class MultipieChoiceViewModel : QuestionViewModel
     {
         public int id { get; set; }
         public string Content { get; set; }
@@ -58,7 +60,7 @@ namespace ELearningProject.Models
         }
     }
 
-    public class TranslateQuestViewModel
+    public class TranslateQuestViewModel : QuestionViewModel
     {
         public int id { get; set; }
         public string Content { get; set; }

@@ -10,22 +10,37 @@
     <link href="~/Content/StyleTeacher.css" rel="stylesheet" />
 </head>
 <div class="txtcontainer">
-    <form>
+    <div>
         <div class="group">
             <input type="text" id="txtTestname">
             <span class="highlight"></span>
             <span class="bar"></span>
             <label>Test Name: </label>
         </div>
-    </form>
-    <form>
-        <div class="group">
+    </div>
+    <div>
+        @*<div class="group">
             <input type="file" name="filename" accept="image/gif, image/jpeg, image/png">
             <span class="highlight"></span>
             <span class="bar"></span>
             <label>Image: </label>
+        </div>*@
+        <div class="group">
+            <input type="text" id="txtImage">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Image Link: </label>
         </div>
-    </form>
+    </div>
+    <div>
+        <div class="group">
+            <input type="text" id="txtTags">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Tags: </label>
+        </div>
+        @*<input type="button" onclick="CheckJson()" value="Check" />*@
+    </div>
     @*<div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
                 Type:
@@ -37,69 +52,91 @@
                 <li role="presentation"><a role="menuitem" data-value="translating" class="ttype">Translating</a></li>
             </ul>
         </div>*@
-    <form>
+    <div>
         <span class="highlight"></span>
         <span class="bar"></span>
         <select id="tType">
-            <option value="type" class="ttype">Type:</option>
-            <option value="pg" class="ttype">Puzzel Game</option>
-            <option value="mc" class="ttype">Multipie Choice</option>
-            <option value="tr" class="ttype">Translating</option>
+            <option value="0" class="ttype">Type:</option>
+            @foreach (var type in Model.Types)
+            {
+                <option value="@type.id" class="ttype">@type.Name</option>
+            }
         </select>
-        <button onclick="TypeTest()">Submit</button>
-    </form>
-</div>
-@foreach (var quest in Model.Questions)
-{
-    <div class="container-fluid" style="clear:both">
-        <div class="col-md-5" style="clear">
-            <br />
-            <span>
-                <video width="340" height="260" controls>
-                    <source src="@quest.Content" type="video/mp4" />
-                </video>
-            </span>
-            <hr />
-        </div>
-        <div class="col-md-7" style="clear">
-            <br />
-            <br />
-            <h3 style="font-size:21px">@quest.Answer</h3>
-            <br />
-            <br />
-            <div>
-                <input type="button" name="btnAdd" id="btnAdd+@quest.id" value="Add" class="button-three" onclick="ClickEv(@quest.id.ToString())" />
-                <!--input type="button" name="btnDel" id="btnDel+@quest.id" value="Delete" class="btn btn-success" onclick="" disabled /-->
-            </div>
-        </div>
+        <button onclick="TypeTest()">Find</button>
     </div>
-}
-    <div>
-        <b></b>
-        
-        <div class="content">
-            <div class="button_container">
-                <div class="button_su">
-                    <span class="su_button_circle">
-                    </span>
-                    <a href="#" class="button_su_inner" onclick="SaveFunc(@Model.TeacherId)">
-                        <input class="button_text_container"  style="bottom: 29px; right: 35px; color:white;"  onclick="SaveFunc(@Model.TeacherId)">Save</input>
-                    </a>
+</div>
+<div id="Questions">
+    @foreach (var quest in Model.Questions)
+    {
+        <div class="container-fluid" style="clear:both">
+            <div class="col-md-5" style="clear">
+                <br />
+                <span>
+                    <video width="340" height="260" controls>
+                        <source src="@quest.Content" type="video/mp4" />
+                    </video>
+                </span>
+                <hr />
+            </div>
+            <div class="col-md-7" style="clear">
+                <br />
+                <br />
+                <h3 style="font-size:21px">@quest.Answer</h3>
+                <br />
+                <br />
+                <div>
+                    <input type="button" name="btnAdd" id="btnAdd+@quest.id" value="Add" class="button-three" onclick="ClickEv(@quest.id.ToString())" />
+                    <!--input type="button" name="btnDel" id="btnDel+@quest.id" value="Delete" class="btn btn-success" onclick="" disabled /-->
                 </div>
             </div>
         </div>
+    }
+</div>
+<div>
+    <b></b>
+
+    <div class="content">
+        <div class="button_container">
+            <div class="button_su">
+                <span class="su_button_circle">
+                </span>
+                <a href="#" class="button_su_inner" onclick="SaveFunc(@Model.TeacherId)">
+                    <input class="button_text_container" style="bottom: 29px; right: 35px; color:white;" onclick="SaveFunc(@Model.TeacherId)">Save</input>
+                </a>
+            </div>
+        </div>
     </div>
+</div>
 
 
 
 <script>
-    function SingleQuestionAddViewModel(teacherId, questionId, submit, TestName, order) {
+    function SingleQuestionAddViewModel(teacherId, questionId, submit, TestName, order, TestType, Image, Tags) {
         this.teacherId = parseInt(teacherId);
         this.questionId = parseFloat(questionId);
         this.submit = Boolean(submit);
         this.TestName = TestName;
         this.order = order;
+        this.TestType = parseInt(TestType);
+        this.Image = Image;
+        this.Tags = GetJsonTag(Tags);
     }
+
+    function GetJsonTag(TagStr) {
+        TagStr = TagStr.toString();
+        TagStr = TagStr.split("#");
+        var rtrstr = [];
+        for (let i = 0; i < TagStr.length; i++) {
+            var temp = TagStr[i].trim();
+            if (temp.length != 0)
+                rtrstr.push(temp);
+        }
+        return JSON.stringify(rtrstr);
+    }
+
+    //function CheckJson() {
+    //    console.log(GetJsonTag(document.getElementById("txtTags").value))
+    //}
 
     function ClickEv(e) {
         $.ajax({
@@ -107,8 +144,7 @@
             type: "POST",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(new SingleQuestionAddViewModel(@Model.TeacherId, e,
-                false, "", 0)),
+            data: JSON.stringify(new SingleQuestionAddViewModel(@Model.TeacherId, e, false, "", 0, 0, "", "")),
             success: function () {
                 console.log("Add successful");
             }
@@ -123,7 +159,9 @@
             type: "POST",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(new SingleQuestionAddViewModel(e, 0, true, document.getElementById("txtTestname").value, 0)),
+            data: JSON.stringify(new SingleQuestionAddViewModel(e, 0, true, document.getElementById("txtTestname").value, 0,
+                document.getElementById("tType").value, document.getElementById("txtImage").value,
+                document.getElementById("txtTags").value)),
             success: function () {
                 console.log("Submit successful");
             }
@@ -131,9 +169,49 @@
         window.location.href = "@Url.Action("Index", "Teacher")";
     }
 
+    function TypeTest() {
+        //console.log(typeof (document.getElementById("tType").value));
+        $.ajax({
+            url: '@Url.Action("FilterQuestions", "Teacher")',
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: "{\"TestType\": \"" + document.getElementById("tType").value +"\"}",
+            success: function (e) {
+                //console.log(e);
+                var str = '<div>';
+                for (let i = 0; i < e.length; i++) {
+                    str += '<div class="container-fluid" style="clear:both">' +
+                        '<div class="col-md-5" style="clear">' +
+                        '<br />' +
+                        '<span>' +
+                        '<video width="340" height="260" controls>' +
+                        '<source src="' + e[i].Content + '" type="video/mp4" />' +
+                        '</video >' +
+                        '</span >' +
+                        '<hr />' +
+                        '</div >' +
+                        '<div class="col-md-7" style="clear">' +
+                        '<br />' +
+                        '<br />' +
+                        '<h3 style="font-size:21px">' + e[i].Answer + '</h3>' +
+                        '<br />' +
+                        '<br />' +
+                        '<div>' +
+                        '<input type="button" name="btnAdd" id="btnAdd+'+ e[i].id +'" value="Add" class="button-three" onclick="ClickEv('+ e[i].id.toString() +')" />'
+                        + '</div>' +
+                        '</div>' +
+                        '</div>';
+                }
+                str += '</div>';
+                document.getElementById("Questions").innerHTML = str;
+            }
+        })
+    }
+
     $( ".button_su_inner" ).mouseenter(function(e) {
-   var parentOffset = $(this).offset(); 
-  
+   var parentOffset = $(this).offset();
+
    var relX = e.pageX - parentOffset.left;
    var relY = e.pageY - parentOffset.top;
    $(this).prev(".su_button_circle").css({"left": relX, "top": relY });
@@ -144,7 +222,7 @@
 
 $( ".button_su_inner" ).mouseleave(function(e) {
 
-     var parentOffset = $(this).offset(); 
+     var parentOffset = $(this).offset();
 
      var relX = e.pageX - parentOffset.left;
      var relY = e.pageY - parentOffset.top;

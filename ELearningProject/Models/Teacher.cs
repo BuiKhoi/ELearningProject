@@ -39,21 +39,25 @@ namespace ELearningProject.Models
         }
     }
 
+    public class TeacherIndexViewModel
+    {
+        public List<TType> types { get; set; }
+    }
+
     public class CreateTestViewModel
     {
         public int TeacherId { get; set; }
+        public List<QType> Types { get; set; }
         public List<PuzzelQuestionViewModel> Questions { get; set; }
-        public List<int> ChosenQuestions { get; set; }
 
         public CreateTestViewModel()
         {
-            ChosenQuestions = new List<int>();
         }
 
-        public CreateTestViewModel(List<PuzzelQuestionViewModel> puzzelQuestions, int TeacherId)
+        public CreateTestViewModel(List<PuzzelQuestionViewModel> puzzelQuestions, List<QType> Types, int TeacherId)
         {
             this.Questions = puzzelQuestions;
-            ChosenQuestions = new List<int>();
+            this.Types = Types;
             this.TeacherId = TeacherId;
         }
     }
@@ -65,5 +69,8 @@ namespace ELearningProject.Models
         public bool Submit { get; set; }
         public string TestName { get; set; }
         public int Order { get; set; }
+        public int TestType { get; set; }
+        public string Image { get; set; }
+        public string Tags { get; set; }
     }
 }

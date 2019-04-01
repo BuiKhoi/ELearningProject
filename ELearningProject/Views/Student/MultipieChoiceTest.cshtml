@@ -1,7 +1,78 @@
-﻿
+﻿@using ELearningProject.Models
+@model IEnumerable<ELearningProject.Models.MultipieChoiceViewModel>
 @{
     ViewBag.Title = "MultipieChoiceTest";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+
 }
 
-<h2>MultipieChoiceTest</h2>
+<div class="body__MultiChoice">
+    <div class="Content__MultiChoice__section">
+        <div class="goback__MultiChoic__section">
 
+        </div>
+        @foreach (var t in Model)
+        {
+            <div class="data__Content__MultiChoice">
+                <div class="Answer__form__MultiChoice">
+                    <h1 class="quest__title__MultiChoice">Choose the fucking right answer </h1>
+                    <div class="Question__content__MultiChoice">@t.Content</div>
+                    <ul class="Potential__Answer__MultiChoice">
+                        <li class="MultiChoice__Answer__cover multianswer1">
+                            <div class="Answerbox__MultipleChoice">
+                                <div class="Answerindex__MultipleChoice">A.</div>
+                                <div class="radiodiv__MultipleChoice">
+                                    <input id="Answer1" type="radio" value="1" name="MultiAnswer" />
+                                    <label for="Answer1" class="Option__MultipleChoice">
+                                        @t.Quiz.Quiz1
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="MultiChoice__Answer__cover multianswer2">
+                            <div class="Answerbox__MultipleChoice">
+                                <div class="Answerindex__MultipleChoice">B.</div>
+                                <div class="radiodiv__MultipleChoice">
+                                    <input id="Answer2" type="radio" value="2" name="MultiAnswer" />
+                                    <label for="Answer2" class="Option__MultipleChoice">
+                                        @t.Quiz.Quiz2
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="MultiChoice__Answer__cover multianswer3">
+                            <div class="Answerbox__MultipleChoice">
+                                <div class="Answerindex__MultipleChoice">C.</div>
+                                <div class="radiodiv__MultipleChoice">
+                                    <input id="Answer3" type="radio" value="3" name="MultiAnswer" />
+                                    <label for="Answer3" class="Option__MultipleChoice">
+                                        @t.Quiz.Quiz3
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="MultiChoice__Answer__cover multianswer4">
+                            <div class="Answerbox__MultipleChoice">
+                                <div class="Answerindex__MultipleChoice">D.</div>
+                                <div class="radiodiv__MultipleChoice">
+                                    <input id="Answer4" type="radio" value="4" name="MultiAnswer" />
+                                    <label for="Answer4" class="Option__MultipleChoice">
+                                        @t.Quiz.Quiz4
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="Post__Section">
+                    <div class="skip__button__div">
+                        <button class="skip__button">skip</button>
+                    </div>
+                    <div class="checkAnswer__button__div">
+                        <button class="checkAnswer__button">check</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

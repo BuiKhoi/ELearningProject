@@ -13,7 +13,6 @@ namespace IdentityAuthentication.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            
             return View(GetStvm());
         }
 
