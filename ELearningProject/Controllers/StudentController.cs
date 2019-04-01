@@ -149,16 +149,20 @@ namespace IdentityAuthentication.Controllers
         {
             using (var db = new ApplicationDbContext())
             {
+                //First get the test we are taking
                 var test = (from t in db.Tests
                             where t.id == result.TestId
                             select t).FirstOrDefault();
+                //Then get the student taking the test
                 var student = (from s in db.Students
                                where s.id == result.StudentId
                                select s).FirstOrDefault();
+                //Get the question count of this particular test
                 var count = (from t in db.Tests
                              join tqd in db.TestQuestionDeploys on t.id equals tqd.Test.id
                              where t.id == result.TestId
                              select tqd).Count();
+                //Then create the StudentTestResult object with these value, and save it
                 var TestResult = new StudentTestResult()
                 {
                     Test = test,
@@ -169,6 +173,7 @@ namespace IdentityAuthentication.Controllers
                 db.StudentTestResults.Add(TestResult);
                 db.SaveChanges();
 
+                //Then we will calculate the mean score for this particular test, to see how the students doing
                 List<float> scores = (from str in db.StudentTestResults
                                       where str.Test.id == result.TestId
                                       select str.Score).ToList<float>();
