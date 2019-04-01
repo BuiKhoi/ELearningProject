@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201903261753584_UpdateStudentResultDatabase.Designer.cs">
       <DependentUpon>201903261753584_UpdateStudentResultDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904010736338_AddWebUserUserId.cs" />
+    <Compile Include="Migrations\201904010736338_AddWebUserUserId.Designer.cs">
+      <DependentUpon>201904010736338_AddWebUserUserId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -643,6 +647,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903261753584_UpdateStudentResultDatabase.resx">
       <DependentUpon>201903261753584_UpdateStudentResultDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904010736338_AddWebUserUserId.resx">
+      <DependentUpon>201904010736338_AddWebUserUserId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

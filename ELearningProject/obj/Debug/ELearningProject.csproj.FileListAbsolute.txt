@@ -119,3 +119,4 @@ C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearnin
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.AddTestImage.resources
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.AddStudentTestResult.resources
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.UpdateStudentResultDatabase.resources
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.AddWebUserUserId.resources

@@ -61,6 +61,9 @@ namespace IdentityAuthentication.Controllers
             //Create pquests list which contains all the question that is in the test, since the test is divided by type
             //so we dont have to check the QType right now
             List<PuzzelQuestionViewModel> pquests = new List<PuzzelQuestionViewModel>();
+            var ptvm = new PuzzelTestViewModel();
+            ptvm.StudentId = int.Parse(Request.Cookies["StudentID"].Value);
+            ptvm.TestId = TestId.GetValueOrDefault();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 pquests = (from q in db.Questions
@@ -72,8 +75,9 @@ namespace IdentityAuthentication.Controllers
                               select new PuzzelQuestionViewModel() {id = q.id, Content = qc.Content, Answer = a.Content})
                               .ToList<PuzzelQuestionViewModel>();
             }
+            ptvm.Questions = pquests;
             //And return them to the list
-            return View("PuzzelEnglishTest", pquests);
+            return View("PuzzelEnglishTest", ptvm);
         }
 
         [HttpGet]
@@ -138,6 +142,41 @@ namespace IdentityAuthentication.Controllers
                 }
                 return View("TranslatingQuestTest", trsQuests);
             }
+        }
+
+        //Action for adding the score
+        public JsonResult SubmitScore(StudentScore result)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var test = (from t in db.Tests
+                            where t.id == result.TestId
+                            select t).FirstOrDefault();
+                var student = (from s in db.Students
+                               where s.id == result.StudentId
+                               select s).FirstOrDefault();
+                var count = (from t in db.Tests
+                             join tqd in db.TestQuestionDeploys on t.id equals tqd.Test.id
+                             where t.id == result.TestId
+                             select tqd).Count();
+                var TestResult = new StudentTestResult()
+                {
+                    Test = test,
+                    Student = student,
+                    Score = result.Score / count * 100
+                };
+
+                db.StudentTestResults.Add(TestResult);
+                db.SaveChanges();
+
+                List<float> scores = (from str in db.StudentTestResults
+                                      where str.Test.id == result.TestId
+                                      select str.Score).ToList<float>();
+                float avg = scores.Average();
+                test.Rating = avg;
+                db.SaveChanges();
+            }
+            return Json("Score submitted");
         }
 
         //Get the Student Test View contains all the test with types

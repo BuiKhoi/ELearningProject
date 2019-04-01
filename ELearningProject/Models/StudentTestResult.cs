@@ -16,19 +16,12 @@ namespace ELearningProject.Models
         {
 
         }
-
-        public StudentTestResult(ScoreStudent score)
-        {
-            this.Test = score.Test;
-            this.Student = score.Student;
-            this.Score = score.Score;
-        }
     }
 
-    public class ScoreStudent
+    public class StudentScore
     {
-        public Test Test { get; set; }
-        public Student Student { get; set; }
+        public int TestId { get; set; }
+        public int StudentId { get; set; }
         public float Score { get; set; }
     }
 }

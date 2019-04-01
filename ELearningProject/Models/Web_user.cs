@@ -11,5 +11,6 @@ namespace ELearningProject.Models
         public string Name { get; set; }
         public DateTime Birthday { get; set; }
         public string CreditId { get; set; }
+        public string UserID { get; set; }
     }
 }

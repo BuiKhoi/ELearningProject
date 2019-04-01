@@ -88,9 +88,30 @@ namespace ELearningProject.Controllers
                         }
                         else if (roles == "Student")
                         {
+                            using (var db = new ApplicationDbContext())
+                            {
+                                int StudentID = (from wu in db.Web_Users
+                                                 join student in db.Students on wu.id equals student.web_User.id
+                                                 where wu.UserID == user.Id
+                                                 select student.id).FirstOrDefault();
+                                var cookie = new HttpCookie("StudentID");
+                                Response.Cookies.Remove("StudentID");
+                                cookie.Value = StudentID.ToString();
+                                Response.Cookies.Add(cookie);
+                            }
                             return RedirectToAction("Index", "Student");
                         } else if (roles == "Teacher")
                         {
+                            using (var db = new ApplicationDbContext())
+                            {
+                                int TeacherId = (from wu in db.Web_Users
+                                                 join teacher in db.Teachers on wu.id equals teacher.User.id
+                                                 where wu.UserID == user.Id
+                                                 select teacher.id).FirstOrDefault();
+                                Request.Cookies.Add(new HttpCookie("TeacherId"));
+                                Request.Cookies["TeacherId"].Value = TeacherId.ToString();
+                                Request.Cookies["TeacherId"].Expires = DateTime.Now.AddHours(1);
+                            }
                             return RedirectToAction("Index", "Teacher");
                         }
                         return RedirectToLocal(returnUrl);

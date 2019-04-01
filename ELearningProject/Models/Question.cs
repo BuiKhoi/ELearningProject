@@ -38,6 +38,13 @@ namespace ELearningProject.Models
         }
     }
 
+    public class PuzzelTestViewModel
+    {
+        public int StudentId { get; set; }
+        public int TestId { get; set; }
+        public List<PuzzelQuestionViewModel> Questions { get; set; }
+    }
+
     public class MultipieChoiceViewModel : QuestionViewModel
     {
         public int id { get; set; }
