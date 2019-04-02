@@ -45,7 +45,7 @@ namespace ELearningProject.Models
         public List<PuzzelQuestionViewModel> Questions { get; set; }
     }
 
-    public class MultipieChoiceViewModel
+    public class MultipieChoiceViewModel : QuestionViewModel
     {
         public int id { get; set; }
         public string Content { get; set; }
