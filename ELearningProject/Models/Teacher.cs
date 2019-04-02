@@ -48,15 +48,18 @@ namespace ELearningProject.Models
     {
         public int TeacherId { get; set; }
         public List<QType> Types { get; set; }
-        public List<PuzzelQuestionViewModel> Questions { get; set; }
+        public List<PuzzelQuestionViewModel> PuzzQuestions { get; set; }
+        public List<MultipieChoiceViewModel> MultQuestions { get; set; }
 
         public CreateTestViewModel()
         {
         }
 
-        public CreateTestViewModel(List<PuzzelQuestionViewModel> puzzelQuestions, List<QType> Types, int TeacherId)
+        public CreateTestViewModel(List<PuzzelQuestionViewModel> puzzelQuestions, 
+            List<MultipieChoiceViewModel> multipieChoices, List<QType> Types, int TeacherId)
         {
-            this.Questions = puzzelQuestions;
+            this.PuzzQuestions = puzzelQuestions;
+            this.MultQuestions = multipieChoices;
             this.Types = Types;
             this.TeacherId = TeacherId;
         }

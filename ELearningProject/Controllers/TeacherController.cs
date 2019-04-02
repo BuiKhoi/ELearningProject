@@ -110,22 +110,43 @@ namespace ELearningProject.Controllers
         public ActionResult CreateTest()
         {
             //int TeacherId = int.Parse(HttpContext.Response.Cookies["UserID"].Value);
-            List<PuzzelQuestionViewModel> questions = new List<PuzzelQuestionViewModel>();
+            List<PuzzelQuestionViewModel> PuzzQuestions = new List<PuzzelQuestionViewModel>();
+            List<MultipieChoiceViewModel> MultQuestions = new List<MultipieChoiceViewModel>();
             List<QType> Types = new List<QType>();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                questions = (from q in db.Questions
-                             join qc in db.QContents on q.Content.id equals qc.id
-                             join a in db.Answers on q.Answer.id equals a.id
-                             select new PuzzelQuestionViewModel() { id = q.id, Content = qc.Content, Answer = a.Content })
+                PuzzQuestions = (from q in db.Questions
+                                 join qc in db.QContents on q.Content.id equals qc.id
+                                 join a in db.Answers on q.Answer.id equals a.id
+                                 join qt in db.QTypes on q.Type.id equals qt.id
+                                 where q.Type.Name == "Puzzel Game"
+                                 select new PuzzelQuestionViewModel() { id = q.id, Content = qc.Content, Answer = a.Content })
                              .ToList<PuzzelQuestionViewModel>();
+
+                MultQuestions = (from q in db.Questions
+                                 join qc in db.QContents on q.Content.id equals qc.id
+                                 join a in db.Answers on q.Answer.id equals a.id
+                                 join qt in db.QTypes on q.Type.id equals qt.id
+                                 where q.Type.Name == "Multipie Choice"
+                                 select new MultipieChoiceViewModel()
+                                 {
+                                     id = q.id,
+                                     Content = qc.Content,
+                                     Quiz = new QuizMultichoice(),
+                                     fuckingdata = a.Content,
+                                     QuestionId = q.id
+                                 }).ToList<MultipieChoiceViewModel>();
+                foreach (var t in MultQuestions)
+                {
+                    t.Quiz = JsonConvert.DeserializeObject<QuizMultichoice>(t.fuckingdata);
+                }
 
                 Types = (from tt in db.QTypes
                          select tt).ToList<QType>();
             }
-            return View(new CreateTestViewModel(questions, Types, 1));
+            return View(new CreateTestViewModel(PuzzQuestions, MultQuestions, Types, 1));
         }
-        
+
         public JsonResult FilterQuestions(int? TestType)
         {
             List<QuestionViewModel> questions = new List<QuestionViewModel>();
