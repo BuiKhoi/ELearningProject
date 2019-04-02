@@ -379,7 +379,9 @@
     <Content Include="Content\Images\color.jpg" />
     <Content Include="Content\Images\creative.svg" />
     <Content Include="Content\Images\documents-button.svg" />
+    <Content Include="Content\Images\FaillureIcon.svg" />
     <Content Include="Content\Images\games.png" />
+    <Content Include="Content\Images\header_bg.png" />
     <Content Include="Content\Images\heart.svg" />
     <Content Include="Content\Images\history.svg" />
     <Content Include="Content\Images\jigsaw.svg" />
@@ -398,6 +400,7 @@
     <Content Include="Content\Images\search.svg" />
     <Content Include="Content\Images\settings.svg" />
     <Content Include="Content\Images\sprite.svg" />
+    <Content Include="Content\Images\SuccessIcon.svg" />
     <Content Include="Content\Images\tasks.png" />
     <Content Include="Content\Images\unitedkingdom.png" />
     <Content Include="Content\Images\usa.png" />
@@ -533,6 +536,7 @@
     <Content Include="Assets\Admin\vendor\slick\slick.scss" />
     <Content Include="Content\Images\logo2.zip" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\Changedivcolor.js" />
     <Content Include="Scripts\home.js" />
     <Content Include="Scripts\homeindex.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

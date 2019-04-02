@@ -86,7 +86,8 @@ namespace IdentityAuthentication.Controllers
             if (TestId == null)
             {
                 return View(GetTTVM("Multipie Choice"));
-            } else
+            }
+            else
             {
                 //Create the mcquests list that contains all the questions in this test
                 List<MultipieChoiceViewModel> mcquests = new List<MultipieChoiceViewModel>();
@@ -103,7 +104,8 @@ namespace IdentityAuthentication.Controllers
                                     id = t.id,
                                     Content = qc.Content,
                                     Quiz = new QuizMultichoice(),
-                                    fuckingdata = a.Content
+                                    fuckingdata = a.Content,
+                                    QuestionId = q.id
                                 }).ToList<MultipieChoiceViewModel>();
                     foreach (var t in mcquests)
                     {
