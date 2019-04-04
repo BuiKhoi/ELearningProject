@@ -209,6 +209,7 @@ namespace ELearningProject.Controllers
                     {
                         Name = model.Name,
                         Birthday = model.Birthday,
+                        UserID = user.Id
                     };
 
                     if (model.AsTeacher)
