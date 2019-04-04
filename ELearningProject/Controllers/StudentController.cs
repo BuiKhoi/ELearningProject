@@ -271,5 +271,25 @@ namespace IdentityAuthentication.Controllers
             }
             return ttvm;
         }
+
+        [HttpPost]
+        public JsonResult ShowStuTest(int StuId)
+        {
+            List<StudentScoreViewModel> ResultList = new List<StudentScoreViewModel>();
+            using (var db = new ApplicationDbContext())
+            {
+                ResultList = (from s in db.Students
+                              join tr in db.StudentTestResults on s.id equals tr.Student.id
+                              join t in db.Tests on tr.Test.id equals t.id
+                              where s.id == StuId
+                              select new StudentScoreViewModel()
+                              {
+                                  student = s,
+                                  test = t,
+                                  Score = tr.Score
+                              }).ToList<StudentScoreViewModel>();
+            }
+            return Json(ResultList, JsonRequestBehavior.AllowGet);
+        }
     }
 }

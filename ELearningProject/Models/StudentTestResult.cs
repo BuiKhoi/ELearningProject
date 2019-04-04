@@ -24,4 +24,11 @@ namespace ELearningProject.Models
         public int StudentId { get; set; }
         public float Score { get; set; }
     }
+
+    public class StudentScoreViewModel
+    {
+        public Student student { get; set; }
+        public Test test { get; set; }
+        public float Score { get; set; }
+    }
 }

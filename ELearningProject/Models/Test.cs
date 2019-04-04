@@ -59,4 +59,14 @@ namespace ELearningProject.Models
             Tests = new List<List<TestViewModel>>();
         }
     }
+
+    public class StudentTestResultViewModel
+    {
+        public Test Test  { get; set; }
+        public float Score { get; set; }
+        public StudentTestResultViewModel()
+        {
+
+        }
+    }
 }

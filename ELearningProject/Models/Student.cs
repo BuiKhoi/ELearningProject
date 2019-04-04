@@ -14,7 +14,7 @@ namespace ELearningProject.Models
         public int Skill_reading { get; set; }
         public int Skill_writing { get; set; }
         public int Mean_skills { get; set; }
-        
+
         public Web_user web_User { get; set; }
     }
 }
