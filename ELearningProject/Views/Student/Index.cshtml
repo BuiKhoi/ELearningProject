@@ -13,12 +13,15 @@
                 <button id="showResult">Show Result</button>
                 <script>
                     $(function () {
-                        var cookie = "";
-                        try {
-                            cookie = @Request.Cookies["StudentID"].Value;
-                        } catch (NullReferenceException) {
-                        window.location.href = "@Url.Action("Index", "Home")";
-                    }
+                        var cookie = @try
+                        {
+                            @Request.Cookies["StudentID"].Value;
+                        } catch (NullReferenceException)
+                        {
+                            <text>
+                                window.location.href = "@Url.Action("Index", "Home")";
+                            </text>
+                        };
                         $("#showResult").click(function (){
                             $.ajax({
                                 url: '@Url.Action("ShowStuTest","Student")',
