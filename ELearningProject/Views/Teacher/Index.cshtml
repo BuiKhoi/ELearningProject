@@ -207,7 +207,11 @@
                     $(function () {
                         var cookie = @try
                         {
-                            @Request.Cookies["StudentID"].Value;
+                            @Request.Cookies["TeacherId"].Value;
+                            if (1==2)
+                            {
+
+                            }
                         } catch (NullReferenceException)
                         {
                             <text>

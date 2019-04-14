@@ -259,25 +259,15 @@ body {
     box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.25);
     overflow: hidden;
     background: #f7f7f7;
+    transform: scale(0);
     transition: .4s;
     transform-origin: 100% 0;
-    opacity: 0;
-    visibility: hidden;
 }
 
 .nav__profile:hover .nav__popup {
     display: block;
+    transform: scale(1);
     top: 5rem;
-    opacity: 1;
-    visibility: visible;
-}
-
-..nav__profile:hover {
-    cursor: pointer;
-}
-
-.nav__avatar:hover {
-    cursor: pointer;
 }
 
 .nav__popup-box-1 {
@@ -641,167 +631,6 @@ body {
         .btn:hover:before {
             height: 250%;
         }
-/*nav bar edit*/
-.nav__direction__subitemCover {
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.4s;
-}
-
-.nav__direciotn__ul {
-    display: inline-block;
-    width: 100%;
-    height: 70%;
-}
-
-.nav_direction__item {
-    text-align: center;
-    display: inline-block;
-    position: relative;
-    width: 23%;
-    height: 106%;
-}
-
-.nav__direction {
-    position: absolute;
-    left: 35%;
-    padding: 0px;
-    height: 59px;
-    box-sizing: border-box;
-    vertical-align: middle;
-    text-align: center;
-    padding-top: 22px;
-    width: 23%;
-}
-
-.nav_div_bigitem {
-    position: absolute;
-    font-size: 15px;
-    font-weight: 500;
-    left: -4%;
-    letter-spacing: .2px;
-    color: #333 !important;
-    border-radius: 33px;
-    width: 100%;
-    height: 100%;
-}
-
-.nav_direction__item:hover .nav_div_bigitem {
-    background-color: #f0f0f0;
-}
-
-.nav_direction__item:hover .nav__direction__subitemCover {
-    visibility: visible;
-    opacity: 1;
-    top: 32px;
-}
-
-.nav_direction__item:hover {
-    cursor: pointer;
-}
-
-.nav__direction__subitemCover {
-    position: absolute;
-    top: 84px;
-    min-width: 203px;
-    left: -70%;
-    text-align: center;
-    font-size: 19px;
-    font-weight: 600;
-    list-style: none;
-    background-color: white;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-}
-
-.subitem_name {
-    display: inline-block;
-    position: absolute;
-    width: 65%;
-    right: 4%;
-    top: 31%;
-    line-height: 22px;
-}
-
-.subitem_name_2line {
-    top: 14%;
-}
-
-.subitem_icon {
-    display: inline-block;
-    float: left;
-    text-align: center;
-    vertical-align: middle;
-    width: 35%;
-    position: absolute;
-    left: 5%;
-    top: 27%;
-}
-
-    .subitem_icon img {
-        width: 50%;
-    }
-
-.sub_item_puzzle_icon {
-    left: 6%;
-    top: 17%;
-}
-
-.pudcast_icon {
-    left: 0%;
-    top: 5%;
-}
-
-    .pudcast_icon svg {
-        width: 73%;
-    }
-
-.sub_item_puzzle_icon svg {
-    font-weight: 600;
-}
-
-.nav_direction__subitem {
-    min-height: 58px;
-    border: 1px solid #d6dce4;
-    border-top: 0;
-}
-
-    .nav_direction__subitem:hover {
-        background-color: #efefef;
-    }
-
-.nav_dir_subitem_link {
-    display: block;
-    width: 100%;
-    min-height: 58px;
-    vertical-align: middle;
-    position: relative;
-    color: #545151;
-}
-
-.subitem__desc__text {
-    padding: 15px;
-    font-size: 15px;
-    text-align: left;
-    line-height: 22px;
-    color: whitesmoke;
-}
-
-.desc__Task {
-    background-color: #57b9bb;
-}
-
-.desc__Words {
-    background-color: #ffc80a;
-}
-
-.desc__Games {
-    background-color: #79c257;
-}
-
-.desc__PodCast {
-    background-color: #89adae;
-}
-/*nav bar edit*/
 
 /*TESTS SHOW*/
 .overlay {
@@ -822,6 +651,12 @@ body {
     }
 
 .popup {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.5);
     margin: 90px auto;
     padding: 20px;
     background: #fff;
@@ -854,7 +689,7 @@ body {
         }
 
     .popup .content {
-        max-height: 30%;
+        max-height: 100%;
         overflow: auto;
     }
 
@@ -867,4 +702,3 @@ body {
         width: 70%;
     }
 }
-/*TESTS SHOW*/

@@ -87,6 +87,7 @@ namespace ELearningProject.Controllers
                         {
                             Response.Cookies.Remove("UserName");
                         }
+
                         ckname = new HttpCookie("UserName");
                         using (var db = new ApplicationDbContext())
                         {
@@ -123,9 +124,10 @@ namespace ELearningProject.Controllers
                                                  join teacher in db.Teachers on wu.id equals teacher.User.id
                                                  where wu.UserID == user.Id
                                                  select teacher.id).FirstOrDefault();
-                                Request.Cookies.Add(new HttpCookie("TeacherId"));
-                                Request.Cookies["TeacherId"].Value = TeacherId.ToString();
-                                Request.Cookies["TeacherId"].Expires = DateTime.Now.AddHours(1);
+                                var cookie = new HttpCookie("TeacherId");
+                                Response.Cookies.Remove("TeacherId");
+                                cookie.Value = TeacherId.ToString();
+                                Response.Cookies.Add(cookie);
                             }
                             return RedirectToAction("Index", "Teacher");
                         }

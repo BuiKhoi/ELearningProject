@@ -9,60 +9,60 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <link href="~/Content/StyleTeacher.css" rel="stylesheet" />
 </head>
+<div id="popup1" class="overlay">
+    <div class="popup">
+        <h2>Add Test!</h2>
+        <a class="close" href="#">&times;</a>
+        <br />
+        <br />
+        <div class="content">
+            <form>
+                <input name="name" type="text" class="feedback-input" placeholder="Test Name" />
+                <input name="tags" type="text" class="feedback-input" placeholder="Tags" />
+                <textarea name="text" class="feedback-input" placeholder="Comment"></textarea>
+                <div>
+                    <div class="group">
+                        <input type="text" id="txtImage">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Image Link: </label>
+                    </div>
+                </div>
+                @*<div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                            Type:
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                            <li role="presentation"><a role="menuitem" data-value="puzzlegame" class="ttype">Puzzel Game</a></li>
+                            <li role="presentation"><a role="menuitem" data-value="multiplechoice" class="ttype">Multipie Choice</a></li>
+                            <li role="presentation"><a role="menuitem" data-value="translating" class="ttype">Translating</a></li>
+                        </ul>
+                    </div>*@
+                <div>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <select id="tType">
+                        <option value="0" class="ttype">Type:</option>
+                        @foreach (var type in Model.Types)
+                        {
+                            <option value="@type.id" class="ttype">@type.Name</option>
+                        }
+                    </select>
+                    <button onclick="TypeTest()" style="height:2px">Find</button>
+                </div>
+                <br />
+                <br />
+                <input type="submit" value="SUBMIT" />
+            </form>
+        </div>
+    </div>
+</div>
 <div class="txtcontainer">
-    <div>
-        <div class="group">
-            <input type="text" id="txtTestname">
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label>Test Name: </label>
+    <div class="addQcontent">
+        <div class="addQwrapper">
+            <a href="#popup1" class="addbtn buttonpopup">Add New Question</a>
         </div>
-    </div>
-    <div>
-        @*<div class="group">
-                <input type="file" name="filename" accept="image/gif, image/jpeg, image/png">
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label>Image: </label>
-            </div>*@
-        <div class="group">
-            <input type="text" id="txtImage">
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label>Image Link: </label>
-        </div>
-    </div>
-    <div>
-        <div class="group">
-            <input type="text" id="txtTags">
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label>Tags: </label>
-        </div>
-        @*<input type="button" onclick="CheckJson()" value="Check" />*@
-    </div>
-    @*<div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-                Type:
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                <li role="presentation"><a role="menuitem" data-value="puzzlegame" class="ttype">Puzzel Game</a></li>
-                <li role="presentation"><a role="menuitem" data-value="multiplechoice" class="ttype">Multipie Choice</a></li>
-                <li role="presentation"><a role="menuitem" data-value="translating" class="ttype">Translating</a></li>
-            </ul>
-        </div>*@
-    <div>
-        <span class="highlight"></span>
-        <span class="bar"></span>
-        <select id="tType">
-            <option value="0" class="ttype">Type:</option>
-            @foreach (var type in Model.Types)
-            {
-                <option value="@type.id" class="ttype">@type.Name</option>
-            }
-        </select>
-        <button onclick="TypeTest()">Find</button>
     </div>
 </div>
 <div id="Questions">
