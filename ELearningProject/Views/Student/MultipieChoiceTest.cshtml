@@ -1,16 +1,14 @@
 ﻿@using ELearningProject.Models
 @model IEnumerable<ELearningProject.Models.MultipieChoiceViewModel>
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "MultipieChoiceTest";
-                Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    ViewBag.Title = "MultipieChoiceTest";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
-
 <div class="body__MultiChoice">
     <div class="Content__MultiChoice__section">
         <div id="beforeQuiz" class="goback__MultiChoic__section">
-
         </div>
         @*<div class='data__Content__MultiChoice'>
                 <div class='Answer__form__MultiChoice'>
@@ -72,25 +70,27 @@
             <div class="inform__section">
                 <h2 class="right_wrong__inform"></h2>
                 <h3 class="right_answer__inform">asdfasdf</h3>
+                <audio id="rightAudio" preload="none">
+                    <source src="~/Content/Audio/SuccessAudioMulticheck.wav" />
+                </audio>
+                <audio id="wrongAudio" preload="none">
+                    <source src="~/Content/Audio/FailAudioMulticheck.wav" />
+                </audio>
             </div>
             <div class='checkAnswer__button__div'>
                 <button id='checkMultiC' class='checkAnswer__button'>Check</button>
                 <button id='checkMultiC' class='next__question'>Next</button>
-
             </div>
             <
         </div>
     </div>
 </div>
-
 <script>
     $(function () {
         var point = 0;
         var i = 0;
         var multiQuestionList = @Html.Raw(Json.Encode(Model));
         AddQuestion(i);
-        //LoadAllQuetion();
-        //showthatJSwork();
         $(".checkAnswer__button").click(function () {
             var radioValue = $("input[name='MultiAnswer']:checked").val();
             var myQuesId = $("input[name='MultiAnswer']:checked").attr("id").slice(0, -1); //slice method use to cut char from string
@@ -108,6 +108,7 @@
                     break;
             }
             if (radioValue == myQues.Quiz.Answer) {
+                $("#rightAudio").trigger('play');
                 $(".right_wrong__inform").text("You're Right!");
                 $(".right_wrong__inform").css("visibility", "visible");
                 $(".checkAnswer__button").css("visibility", "hidden");
@@ -120,6 +121,7 @@
                 })
             }
             else {
+                $("#wrongAudio").trigger('play');
                 $(".right_wrong__inform").text("You're wrong!");
                 $(".right_wrong__inform").css("visibility", "visible");
                 $(".right_answer__inform").css("visibility", "visible");
@@ -133,7 +135,6 @@
                     'background-image': 'url(../../Content/Images/FaillureIcon.svg)'
                 })
             }
-
         });
 
         $(".next__question").click(function () {
@@ -147,9 +148,11 @@
             AddQuestion(i);
             $(".next__question").css("visibility", "hidden");
             $(".checkAnswer__button").css("visibility", "visible");
+            $(".checkAnswer__button").addClass("avoid__event");
         });
 
         $(".skip__button").click(function () {
+            $("#wrongAudio").trigger('play');
             var myQues = multiQuestionList[i];
             var showAnswer;
             var Answerindex = myQues.Quiz.Answer;
@@ -180,6 +183,7 @@
         });
 
         function AddQuestion(myi) {
+            $(".checkAnswer__button").addClass("avoid__event");
             if (myi <= multiQuestionList.length) {
                 var ques = multiQuestionList[myi];
                 var quesSection = "<div class='data__Content__MultiChoice'><div class='Answer__form__MultiChoice'><h1 class='quest__title__MultiChoice'>Choose the fucking right answer </h1><div class='Question__content__MultiChoice'>" + ques.Content + "</div><ul class='Potential__Answer__MultiChoice'><li class='MultiChoice__Answer__cover multianswer1'><div class='Answerbox__MultipleChoice'><div class='Answerindex__MultipleChoice'>A.</div><div class='radiodiv__MultipleChoice'><input id='" + ques.QuestionId + "1' class='QuestionQuiz1' type='radio' value='1' name='MultiAnswer' /><label for='" + ques.QuestionId + "1' class='Option__MultipleChoice labelforQ1'>" + ques.Quiz.Quiz1 + "</label></div></div></li> <li class='MultiChoice__Answer__cover multianswer2'><div class='Answerbox__MultipleChoice'><div class='Answerindex__MultipleChoice'>B.</div><div class='radiodiv__MultipleChoice'><input id='" + ques.QuestionId + "2' class='QuestionQuiz2' type='radio' value='2' name='MultiAnswer' /><label for='" + ques.QuestionId + "2' class='Option__MultipleChoice labelforQ2'>" + ques.Quiz.Quiz2 + "</label></div></div></li><li class='MultiChoice__Answer__cover multianswer3'><div class='Answerbox__MultipleChoice'><div class='Answerindex__MultipleChoice'>C.</div><div class='radiodiv__MultipleChoice'><input id='" + ques.QuestionId + "3' class='QuestionQuiz3' type='radio' value='3' name='MultiAnswer' /><label for='" + ques.QuestionId + "3' class='Option__MultipleChoice labelforQ3'>" + ques.Quiz.Quiz3 + "</label></div></div></li><li class='MultiChoice__Answer__cover multianswer4'><div class='Answerbox__MultipleChoice'><div class='Answerindex__MultipleChoice'>D.</div><div class='radiodiv__MultipleChoice'> <input id='" + ques.QuestionId + "4' class='QuestionQuiz4' type='radio' value='4' name='MultiAnswer' /><label for='" + ques.QuestionId + "4' class='Option__MultipleChoice labelforQ4'>" + ques.Quiz.Quiz4 + "</label></div></div></li></ul></div></div>";
@@ -191,15 +195,20 @@
                 });
                 return myi;
             }
-            if (myi > multiQuestionList.length) {
+            else {
                 alert("out of question");
             }
         }
+
+        $(".Content__MultiChoice__section").on("click", ".Option__MultipleChoice", function () {
+           $(".checkAnswer__button").removeClass("avoid__event");
+        })
+
         function RemoveQuestion() {
+
             $(".data__Content__MultiChoice").remove();
             i = i + 1;
             return i;
         }
     });
 </script>
-

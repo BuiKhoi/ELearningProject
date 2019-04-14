@@ -48,6 +48,11 @@ namespace ELearningProject.Models
         }
     }
 
+    public class TeacherTestViewModel
+    {
+
+    }
+
     public class StudentTestViewModel
     {
         public List<string> TestTypes { get; set; }

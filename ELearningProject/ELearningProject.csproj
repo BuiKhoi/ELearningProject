@@ -364,11 +364,15 @@
     <Content Include="Assets\Admin\vendor\wow\animate.css" />
     <Content Include="Assets\Admin\vendor\wow\wow.min.js" />
     <Content Include="Content\all.css" />
+    <Content Include="Content\animate.css" />
     <Content Include="Content\AnswerPuzzelVideo.css" />
+    <Content Include="Content\Audio\FailAudioMulticheck.wav" />
+    <Content Include="Content\Audio\SuccessAudioMulticheck.wav" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\EditProfile.css" />
     <Content Include="Content\Images\22576a9b0b81671.jpg" />
     <Content Include="Content\Images\agenda.svg" />
     <Content Include="Content\Images\avatar.jpg" />
@@ -416,6 +420,7 @@
     <Content Include="Content\Images\vocabulary.svg" />
     <Content Include="Content\Images\words.png" />
     <Content Include="Content\Images\yellow-after-real.png" />
+    <Content Include="Content\IndexStyle.css" />
     <Content Include="Content\loginstyle.css" />
     <Content Include="Content\MultiChoice.css" />
     <Content Include="Content\PuzzleGame.css" />
@@ -537,6 +542,7 @@
     <Content Include="Content\Images\logo2.zip" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Changedivcolor.js" />
+    <Content Include="Scripts\ChangeGamedivAtIndex.js" />
     <Content Include="Scripts\home.js" />
     <Content Include="Scripts\homeindex.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -551,6 +557,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\wow.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -599,6 +606,7 @@
     <Content Include="Views\Student\MultipieChoiceTest.cshtml" />
     <Content Include="Views\Student\Translating.cshtml" />
     <Content Include="Views\Student\TranslatingQuestTest.cshtml" />
+    <Content Include="Views\Student\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

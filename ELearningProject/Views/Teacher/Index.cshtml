@@ -1,8 +1,8 @@
-﻿
+﻿@using ELearningProject.Models
+@model ELearningProject.Models.StudentTestViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Teacher";
     Layout = "~/Views/Shared/_TeacherLayout.cshtml";
-
 }
 <header class="header">
     <div class="header__details mb-5">
@@ -11,6 +11,33 @@
         </h2>
 
     </div>
+    <section class="videos">
+        @foreach (var type in Model.TestTypes)
+        {
+            <h2 class="heading-2 videos__heading">@type</h2>
+            foreach (var t in Model.Tests[Model.TestTypes.IndexOf(type)])
+            {
+                <div class="video__puzzleindex">
+                    <h4 class="heading-4 heading-4--yellow">videopuzzle</h4>
+                    <div class="video__img-box">
+                        <img src="@t.Image" alt="" class="video__img">
+                        <div class="video__layer"></div>
+                        <a href="#popup1" class="btn video__btn buttonpopup">edit</a>
+                    </div>
+                    <div class="video__title">@t.Desc</div>
+                    <div class="video__info">
+                        <div class="video__difficulty video__difficulty--1">
+                            <span class="video__difficutly-point"></span>
+                            <span class="video__difficutly-point"></span>
+                            <span class="video__difficutly-point"></span>
+                        </div>
+                        <img src="~/Content/Images/unitedkingdom.png" alt="" class="video__accent">
+                        <p class="video__phrases">25 phrase</p>
+                    </div>
+                </div>
+            }
+        }
+    </section>
     <div class="header__products">
         <div class="teacher_product">
             <div class="img__testbox">
@@ -170,4 +197,47 @@
         </div>
     </div>
 </section>
-
+<div id="popup1" class="overlay">
+    <div class="popup">
+        <h2>Tests Done!</h2>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+            <button id="showResult">Show Result</button>
+            <script>
+                    $(function () {
+                        var cookie = @try
+                        {
+                            @Request.Cookies["StudentID"].Value;
+                        } catch (NullReferenceException)
+                        {
+                            <text>
+                                window.location.href = "@Url.Action("Index", "Home")";
+                            </text>
+                        };
+                        $("#showResult").click(function (){
+                            $.ajax({
+                                url: '@Url.Action("ShowStuTest","Student")',
+                                dataType: "json",
+                                type: "POST",
+                                cache: false,
+                                data: { StuId: cookie },
+                                success: function (data) {
+                                    data.forEach((item) => {
+                                        console.log(item.Score);
+                                        //Cho nay em viet html de hien ra ava bai test + ten bai test + diem la xong
+                                        document.getElementById("ScoreBoard").innerHTML =
+                                            "<p>" + item.Score + "</p>";
+                                    })
+                                },
+                                error: function () {
+                                    alert("Cant find data");
+                                }
+                            })
+                        })
+                    })
+            </script>
+            <div id="ScoreBoard">
+            </div>
+        </div>
+    </div>
+</div>

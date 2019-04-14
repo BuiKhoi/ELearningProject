@@ -82,6 +82,21 @@ namespace ELearningProject.Controllers
                     {
                         var user = await UserManager.FindAsync(model.Email, model.Password);
                         var roles = (await UserManager.GetRolesAsync(user.Id))[0];
+                        HttpCookie ckname;
+                        if (Response.Cookies["UserName"] != null)
+                        {
+                            Response.Cookies.Remove("UserName");
+                        }
+                        ckname = new HttpCookie("UserName");
+                        using (var db = new ApplicationDbContext())
+                        {
+                            ckname.Value = (from wu in db.Web_Users
+                                            join student in db.Students on wu.id equals student.web_User.id
+                                            where wu.UserID == user.Id
+                                            select wu.Name).FirstOrDefault();
+                        }
+                        Response.Cookies.Add(ckname);
+
                         if (roles == "Admin")
                         {
                             return RedirectToAction("Index", "Admin");
