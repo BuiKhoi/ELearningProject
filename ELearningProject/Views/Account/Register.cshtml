@@ -3,8 +3,10 @@
 @{
     Layout = null;
 }
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,17 +17,21 @@
     <link rel="stylesheet" href="~/Content/loginstyle.css">
     <title>Document</title>
 </head>
+
 <body>
     <div class="container">
+
         <div class="login">
             <img src="~/Content/Images/logo2.svg" alt="" class="login__logo mb-5">
             @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "frmId", @class = "login__form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true);
+                @Html.ValidationSummary(true)
                 @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email" } })
                 @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "login__input", @placeholder = "Password" } })
+                @Html.ValidationMessageFor(m => m.Password)
                 @Html.EditorFor(m => m.ConfirmPassword, new { htmlAttributes = new { @class = "login__input", @placeholder = "Confirm Password" } })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
                 @Html.EditorFor(m => m.Birthday, new { htmlAttributes = new { @class = "login__input", @placeholder = "Birthday" } })
                 @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "login__input", @placeholder = "Your Name" } })
                 @Html.EditorFor(m => m.AsTeacher, new { htmlAttributes = new { @class = "mycheckbox" } })
@@ -49,5 +55,7 @@
             <div class="login__break">&nbsp;</div>
         </div>
     </div>
+
 </body>
+
 </html>

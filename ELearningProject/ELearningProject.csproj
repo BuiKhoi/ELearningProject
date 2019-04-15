@@ -231,6 +231,14 @@
     <Compile Include="Migrations\201904010736338_AddWebUserUserId.Designer.cs">
       <DependentUpon>201904010736338_AddWebUserUserId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904150239529_AddLocked.cs" />
+    <Compile Include="Migrations\201904150239529_AddLocked.Designer.cs">
+      <DependentUpon>201904150239529_AddLocked.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904150430153_AddUserImage.cs" />
+    <Compile Include="Migrations\201904150430153_AddUserImage.Designer.cs">
+      <DependentUpon>201904150430153_AddUserImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -376,36 +384,47 @@
     <Content Include="Content\Images\22576a9b0b81671.jpg" />
     <Content Include="Content\Images\agenda.svg" />
     <Content Include="Content\Images\avatar.jpg" />
+    <Content Include="Content\Images\banner_background_svg.svg" />
     <Content Include="Content\Images\bg-puzzle-sprite.png" />
     <Content Include="Content\Images\bg-puzzle.png" />
     <Content Include="Content\Images\calendar.svg" />
     <Content Include="Content\Images\calendar1.svg" />
     <Content Include="Content\Images\color.jpg" />
+    <Content Include="Content\Images\CreateTestPNG.png" />
     <Content Include="Content\Images\creative.svg" />
     <Content Include="Content\Images\documents-button.svg" />
     <Content Include="Content\Images\FaillureIcon.svg" />
+    <Content Include="Content\Images\gamePlaystationIcon.svg" />
     <Content Include="Content\Images\games.png" />
     <Content Include="Content\Images\header_bg.png" />
     <Content Include="Content\Images\heart.svg" />
     <Content Include="Content\Images\history.svg" />
+    <Content Include="Content\Images\IncomingGames.svg" />
     <Content Include="Content\Images\jigsaw.svg" />
     <Content Include="Content\Images\list.svg" />
     <Content Include="Content\Images\loginImage.jpg" />
     <Content Include="Content\Images\Logo.svg" />
     <Content Include="Content\Images\logo2.svg" />
     <Content Include="Content\Images\lp.png" />
+    <Content Include="Content\Images\nav_background_image.png" />
     <Content Include="Content\Images\neonbrand-426918-unsplash.jpg" />
     <Content Include="Content\Images\New Tab.html" />
     <Content Include="Content\Images\organize.svg" />
     <Content Include="Content\Images\podcasts.png" />
     <Content Include="Content\Images\podcasts.svg" />
+    <Content Include="Content\Images\puzzle-svgrepo-com.svg" />
     <Content Include="Content\Images\puzzle-yellow-light.png" />
+    <Content Include="Content\Images\PuzzlegamePNG.png" />
+    <Content Include="Content\Images\QuizIcon.svg" />
+    <Content Include="Content\Images\QuizQuestionPNG.png" />
+    <Content Include="Content\Images\rankingPicturesvg.svg" />
     <Content Include="Content\Images\redesign-logo_header.svg" />
     <Content Include="Content\Images\search.svg" />
     <Content Include="Content\Images\settings.svg" />
     <Content Include="Content\Images\sprite.svg" />
     <Content Include="Content\Images\SuccessIcon.svg" />
     <Content Include="Content\Images\tasks.png" />
+    <Content Include="Content\Images\teacher_welcome.svg" />
     <Content Include="Content\Images\unitedkingdom.png" />
     <Content Include="Content\Images\usa.png" />
     <Content Include="Content\Images\video.jpg" />
@@ -423,6 +442,9 @@
     <Content Include="Content\IndexStyle.css" />
     <Content Include="Content\loginstyle.css" />
     <Content Include="Content\MultiChoice.css" />
+    <Content Include="Content\ProfileImage\dolphin_hd-wallpaper-1920x1080_asdfasdf123.jpg" />
+    <Content Include="Content\ProfileImage\hi_4-wallpaper-1920x1080_Huynh Ngoc Phuong Trang.jpg" />
+    <Content Include="Content\ProfileImage\kcl4tfy_asdfasdf.jpg" />
     <Content Include="Content\PuzzleGame.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\styleindex.css" />
@@ -607,6 +629,10 @@
     <Content Include="Views\Student\Translating.cshtml" />
     <Content Include="Views\Student\TranslatingQuestTest.cshtml" />
     <Content Include="Views\Student\EditProfile.cshtml" />
+    <Content Include="Views\Account\EditProfile.cshtml" />
+    <Content Include="Views\Shared\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Shared\_EditProfilePartial.cshtml" />
+    <Content Include="Views\Shared\_WrongFileType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -661,6 +687,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904010736338_AddWebUserUserId.resx">
       <DependentUpon>201904010736338_AddWebUserUserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904150239529_AddLocked.resx">
+      <DependentUpon>201904150239529_AddLocked.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904150430153_AddUserImage.resx">
+      <DependentUpon>201904150430153_AddUserImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

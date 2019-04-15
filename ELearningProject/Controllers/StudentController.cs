@@ -20,7 +20,7 @@ namespace IdentityAuthentication.Controllers
         public ActionResult TestRouting(int TestId)
         {
             int route = 0;
-            using(var db = new ApplicationDbContext())
+            using (var db = new ApplicationDbContext())
             {
                 route = (from t in db.Tests
                          join tt in db.TTypes on t.Type.id equals tt.id
@@ -28,7 +28,7 @@ namespace IdentityAuthentication.Controllers
                          select tt.id).First();
             }
 
-            switch(route)
+            switch (route)
             {
                 case 1:
                     {
@@ -67,12 +67,12 @@ namespace IdentityAuthentication.Controllers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 pquests = (from q in db.Questions
-                              join qt in db.TestQuestionDeploys on q.id equals qt.Question.id
-                              join t in db.Tests on qt.Test.id equals t.id
-                              join qc in db.QContents on q.Content.id equals qc.id
-                              join a in db.Answers on q.Answer.id equals a.id
-                              where t.id == TestId
-                              select new PuzzelQuestionViewModel() {id = q.id, Content = qc.Content, Answer = a.Content})
+                           join qt in db.TestQuestionDeploys on q.id equals qt.Question.id
+                           join t in db.Tests on qt.Test.id equals t.id
+                           join qc in db.QContents on q.Content.id equals qc.id
+                           join a in db.Answers on q.Answer.id equals a.id
+                           where t.id == TestId
+                           select new PuzzelQuestionViewModel() { id = q.id, Content = qc.Content, Answer = a.Content })
                               .ToList<PuzzelQuestionViewModel>();
             }
             ptvm.Questions = pquests;
@@ -123,24 +123,25 @@ namespace IdentityAuthentication.Controllers
             if (TestId == null)
             {
                 return View(GetTTVM("Translating"));
-            } else
+            }
+            else
             {
                 //Create a trsQuest list, you should have known what i ment by thi
                 List<TranslateQuestViewModel> trsQuests = new List<TranslateQuestViewModel>();
                 using (var db = new ApplicationDbContext())
                 {
                     trsQuests = (from q in db.Questions
-                                join qt in db.TestQuestionDeploys on q.id equals qt.Question.id
-                                join t in db.Tests on qt.Test.id equals t.id
-                                join qc in db.QContents on q.Content.id equals qc.id
-                                join a in db.Answers on q.Answer.id equals a.id
-                                where t.id == TestId
-                                select new TranslateQuestViewModel()
-                                {
-                                    id = t.id,
-                                    Content = qc.Content,
-                                    Answer = JsonConvert.DeserializeObject<List<string>>(a.Content)
-                                }).ToList<TranslateQuestViewModel>();
+                                 join qt in db.TestQuestionDeploys on q.id equals qt.Question.id
+                                 join t in db.Tests on qt.Test.id equals t.id
+                                 join qc in db.QContents on q.Content.id equals qc.id
+                                 join a in db.Answers on q.Answer.id equals a.id
+                                 where t.id == TestId
+                                 select new TranslateQuestViewModel()
+                                 {
+                                     id = t.id,
+                                     Content = qc.Content,
+                                     Answer = JsonConvert.DeserializeObject<List<string>>(a.Content)
+                                 }).ToList<TranslateQuestViewModel>();
                 }
                 return View("TranslatingQuestTest", trsQuests);
             }
@@ -291,5 +292,7 @@ namespace IdentityAuthentication.Controllers
             }
             return Json(ResultList, JsonRequestBehavior.AllowGet);
         }
+
+
     }
 }

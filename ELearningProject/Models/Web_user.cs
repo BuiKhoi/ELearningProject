@@ -12,5 +12,7 @@ namespace ELearningProject.Models
         public DateTime Birthday { get; set; }
         public string CreditId { get; set; }
         public string UserID { get; set; }
+        public string UserImage { get; set; }
+        public bool Locked { get; set; }
     }
 }

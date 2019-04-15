@@ -264,5 +264,9 @@ input[name="MultiAnswer"]:checked + .Option__MultipleChoice:after {
 .next__question:hover{
     cursor:pointer;
 }
+.avoid__event {
+    pointer-events: none;
+    background-color: #a9a8a8;
+}
 
 

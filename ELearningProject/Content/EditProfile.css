@@ -45,6 +45,7 @@
     justify-content: flex-start;
     align-items: center;
     min-height: 61px;
+    position:relative;
 }
 
 .EP__form__input {
@@ -127,6 +128,7 @@
     width: 80%;
     align-self: center;
     padding-bottom:20px;
+    height:250px;
 }
 .UserImage__EP__setting img{
     width: 100%;
@@ -147,3 +149,56 @@
 .EP__direction__Item:focus{
     background-color:#edf4fa;
 }
+.checkPass__EP__right, .checkPass__EP__wrong {
+    display: flex;
+    width: 25%;
+    justify-content: space-between;
+    padding-left: 13px;
+    position: absolute;
+    left: 58%;
+    opacity :1;
+    transition:all 0.3s;
+}
+.checkPass__EP__right p{
+    color:green;
+    font-size:15px;
+    font-weight:500;
+}
+.checkPass__EP__wrong {
+    color: red;
+    font-size: 15px;
+    font-weight: 500;
+}
+.EP__successCheck {
+    background-image: url(Images/SuccessIcon.svg);
+    content: "";
+    width: 11%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.EP__failCheck {
+    background-image: url('Images/FaillureIcon.svg');
+    content: "";
+    width: 9%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.inviCheckPass_inform{
+    left:65%;
+    opacity:0;
+}
+.ChangePass__inform {
+    border: 1px solid green;
+    font-size: 15px;
+    font-weight: 500;
+    color: green;
+    padding-left: 21px;
+}
+.WrongType {
+    border: 1px solid red;
+    font-size: 15px;
+    font-weight: 500;
+    color: red;
+    padding-left: 21px;
+}
+

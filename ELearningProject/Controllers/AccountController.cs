@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ELearningProject.Models;
+using System.IO;
 
 namespace ELearningProject.Controllers
 {
@@ -97,6 +98,21 @@ namespace ELearningProject.Controllers
                                             select wu.Name).FirstOrDefault();
                         }
                         Response.Cookies.Add(ckname);
+
+                        HttpCookie wuserid;
+                        if (Response.Cookies["WebUserID"] != null)
+                        {
+                            Response.Cookies.Remove("WebUserID");
+                        }
+
+                        wuserid = new HttpCookie("WebUserID");
+                        using (var db = new ApplicationDbContext())
+                        {
+                            wuserid.Value = (from wu in db.Web_Users
+                                             where wu.UserID == user.Id
+                                             select wu.id).FirstOrDefault().ToString();
+                        }
+                        Response.Cookies.Add(wuserid);
 
                         if (roles == "Admin")
                         {
@@ -268,56 +284,6 @@ namespace ELearningProject.Controllers
             return RedirectToAction("About", "Home");
         }
 
-        
-        public async Task<ActionResult> Register1(RegisterViewModel model)
-        {
-            var temp = new RegisterViewModel()
-            {
-                Email = model.Email,
-                Password = model.Password,
-                ConfirmPassword = model.ConfirmPassword
-            };
-            if (true)
-            {
-                var user = new ApplicationUser { UserName = temp.Email, Email = temp.Email };
-                var result = await UserManager.CreateAsync(user, temp.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    using (var db = new ApplicationDbContext())
-                    {
-                        var u = new Web_user()
-                        {
-                            Name = model.Name,
-                            Birthday = model.Birthday,
-                        };
-                        var s = new Student()
-                        {
-                            web_User = u
-                        };
-                        db.Web_Users.Add(u);
-                        db.Students.Add(s);
-                        db.SaveChanges();
-                    }
-
-                    UserManager.AddToRole(user.Id, "Student");
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
-
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -408,6 +374,114 @@ namespace ELearningProject.Controllers
             AddErrors(result);
             return View();
         }
+
+        //Edit Profile Section
+
+        [AllowAnonymous]
+        public ActionResult EditProfile()
+        {
+            var WebUserID = int.Parse(Request.Cookies["WebUserID"].Value);
+            ApplicationDbContext db = new ApplicationDbContext();
+            EditProfileViewModel myProfile = new EditProfileViewModel();
+            myProfile = (from wu in db.Web_Users
+                         where wu.id == WebUserID
+                         select new EditProfileViewModel()
+                         {
+                             UserName = wu.Name,
+                             Id = wu.UserID,
+                             ImagePath = wu.UserImage,
+                         }).First();
+            var IdenUser = UserManager.FindById(myProfile.Id);
+            myProfile.Email = IdenUser.Email;
+
+            return View("EditProfile", myProfile);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public PartialViewResult EditProfile(EditProfileViewModel model)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var allowedExtensions = new[] {
+            ".Jpg", ".png", ".jpg", "jpeg"
+            };
+
+            int webUserID = int.Parse(Request.Cookies["WebUserID"].Value);
+            Web_user webUser = db.Web_Users.Find(webUserID);
+            if (model.AvatarFile != null)
+            {
+                var filename = Path.GetFileName(model.AvatarFile.FileName);
+                var extension = Path.GetExtension(model.AvatarFile.FileName);
+                if (allowedExtensions.Contains(extension))
+                {
+                    if (System.IO.File.Exists(webUser.UserImage))
+                    {
+                        System.IO.File.Delete(webUser.UserImage);
+                    }
+                    string name = Path.GetFileNameWithoutExtension(filename);
+                    string myImage = name + "_" + model.UserName + extension;
+                    var savePath = Path.Combine(Server.MapPath("~/Content/ProfileImage"), myImage);
+                    var imagePath = Path.Combine("/Content/ProfileImage/", myImage);
+                    webUser.UserImage = imagePath;
+                    model.AvatarFile.SaveAs(savePath);
+                    webUser.Name = model.UserName;
+                    db.SaveChanges();
+                    return PartialView("_EditProfilePartial");
+                }
+                return PartialView("_WrongFileType");
+            }
+            else
+            {
+                webUser.Name = model.UserName;
+                db.SaveChanges();
+                return PartialView("_EditProfilePartial");
+            }
+
+            // action when user didnt have a profile image
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<PartialViewResult> EPChangePassword(EditProfileViewModel model)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            int WebUserID = int.Parse(Request.Cookies["WebUserID"].Value);
+            Web_user WebUser = db.Web_Users.Find(WebUserID);
+            var IdenUser = await UserManager.FindByIdAsync(WebUser.UserID);
+            var results = await UserManager.ChangePasswordAsync(IdenUser.Id, model.CurrentPassword, model.NewPassword);
+
+            return PartialView("_ChangePasswordPartial");
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<JsonResult> CheckPasswordEditProfile(string CurrentPassword)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            int webUserID = int.Parse(Request.Cookies["WebUserID"].Value);
+            string UserID = (from wu in db.Web_Users where wu.id == webUserID select wu.UserID).First();
+            var Idenuser = await UserManager.FindByIdAsync(UserID);
+            bool check = await UserManager.CheckPasswordAsync(Idenuser, CurrentPassword);
+            if (check == true)
+            {
+                return Json("right", JsonRequestBehavior.AllowGet);
+            }
+            else if (check == false)
+            {
+                return Json("wrong", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("something happend", JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        [AllowAnonymous]
+        public JsonResult TestPartial(string fuckname)
+        {
+            return Json(fuckname);
+        }
+
+
+        //Edit Profile Section
 
         //
         // GET: /Account/ResetPasswordConfirmation

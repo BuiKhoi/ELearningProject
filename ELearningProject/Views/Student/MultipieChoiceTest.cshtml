@@ -6,9 +6,11 @@
     ViewBag.Title = "MultipieChoiceTest";
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
+
 <div class="body__MultiChoice">
     <div class="Content__MultiChoice__section">
         <div id="beforeQuiz" class="goback__MultiChoic__section">
+
         </div>
         @*<div class='data__Content__MultiChoice'>
                 <div class='Answer__form__MultiChoice'>
@@ -78,13 +80,15 @@
                 </audio>
             </div>
             <div class='checkAnswer__button__div'>
-                <button id='checkMultiC' class='checkAnswer__button'>Check</button>
+                <button id='checkMultiC' class='checkAnswer__button avoid__event'>Check</button>
                 <button id='checkMultiC' class='next__question'>Next</button>
+
             </div>
             <
         </div>
     </div>
 </div>
+
 <script>
     $(function () {
         var point = 0;
@@ -212,3 +216,4 @@
         }
     });
 </script>
+

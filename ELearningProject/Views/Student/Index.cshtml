@@ -45,6 +45,7 @@
                     })
                 </script>
                 <div id="ScoreBoard">
+
                 </div>
             </div>
         </div>
@@ -197,4 +198,18 @@
         }
     }
 </section>
+<script>
+    $(function () {
+        var whatid = @try
+                        {
+                            @Request.Cookies["WebUserID"].Value;
+                        } catch (NullReferenceException)
+                        {
+                            <text>
+                                window.location.href = "@Url.Action("Index", "Home")";
+                            </text>
+                        };
+        //alert(whatid);
+    })
+</script>
 

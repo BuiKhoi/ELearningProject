@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using ELearningProject.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+    int WebUserID = int.Parse(Request.Cookies["WebUserID"].Value);
+    Web_user User = db.Web_Users.Find(WebUserID);
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,14 +16,11 @@
     <link rel="stylesheet" href="~/Content/stylestudent.css">
     <link rel="stylesheet" href="~/Content/AnswerPuzzelVideo.css">
     <link href="~/Content/Teacher.css" rel="stylesheet" />
-    <link href="~/Content/PuzzleGame.css" rel="stylesheet" />
-    <link href="~/Content/Teacher.css" rel="stylesheet" />
-    <link href="~/Content/MultiChoice.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <link href="~/Content/EditProfile.css" rel="stylesheet" />
+    <script src="~/Scripts/HomeRedirect.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -45,12 +48,12 @@
                 <a href="#" class="nav__subject">5</a>
             </div>
             <div class="nav__profile">
-                <img src="~/Content/Images/avatar.jpg" alt="" class="nav__avatar">
+                <img src="@User.UserImage" alt="" class="nav__avatar">
                 <div class="nav__popup">
                     <div class="nav__popup-box-1">
-                        <img src="~/Content/Images/avatar.jpg" alt="" class="nav__avatar-2">
+                        <img src="@User.UserImage" alt="" class="nav__avatar-2">
                         <div class="nav__popup-userinfo">
-                            <p class="nav__popup-username">Teacher Nam Nguyen</p>
+                            <p class="nav__popup-username">@User.Name</p>
                             <img src="~/Content/Images/creative.svg" alt="" class="nav__popup-puzzle">
                             <p class="nav__popup-puzzle-text">x3</p>
                         </div>
@@ -70,7 +73,7 @@
                         </div>
                         <div class="nav__popup-menu">
                             <img src="~/Content/Images/settings.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">settings</a>
+                            <a href="@Url.Action("EditProfile","Account")" class="nav__popup-menu-title">Edit Profile</a>
                         </div>
                     </div>
                     <div class="nav__popup-box-3">
@@ -102,16 +105,12 @@
     <div class="nav__menu">
         <ul class="menubar">
             <li class="menu__title">
-
             </li>
             <li class="menu__title">
-
             </li>
             <li class="menu__title">
-
             </li>
             <li class="menu__title">
-
             </li>
         </ul>
     </div>
