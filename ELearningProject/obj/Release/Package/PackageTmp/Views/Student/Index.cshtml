@@ -1,0 +1,215 @@
+﻿@using ELearningProject.Models
+@model ELearningProject.Models.StudentTestViewModel
+@{
+    ViewBag.Title = "Student";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+<header class="header">
+    <div id="popup1" class="overlay">
+        <div class="popup">
+            <h2>Tests Done!</h2>
+            <a class="close" href="#">&times;</a>
+            <div class="content">
+                <button id="showResult">Show Result</button>
+                <script>
+                    $(function () {
+                        var cookie = @try
+                        {
+                            @Request.Cookies["StudentID"].Value;
+                        } catch (NullReferenceException)
+                        {
+                            <text>
+                                window.location.href = "@Url.Action("Index", "Home")";
+                            </text>
+                        };
+                        $("#showResult").click(function (){
+                            $.ajax({
+                                url: '@Url.Action("ShowStuTest","Student")',
+                                dataType: "json",
+                                type: "POST",
+                                cache: false,
+                                data: { StuId: cookie },
+                                success: function (data) {
+                                    data.forEach((item) => {
+                                        console.log(item.Score);
+                                        //Cho nay em viet html de hien ra ava bai test + ten bai test + diem la xong
+                                        document.getElementById("ScoreBoard").innerHTML =
+                                            "<p>" + item.Score + "</p>";
+                                    })
+                                },
+                                error: function () {
+                                    alert("Cant find data");
+                                }
+                            })
+                        })
+                    })
+                </script>
+                <div id="ScoreBoard">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header__details mb-5">
+        <h2 class="heading-2">
+            Products
+        </h2>
+        <p class="header__text">
+            Select the product that fits your goals best, and start studying for free. To obtain full access, you
+            can
+            purchase
+        </p>
+    </div>
+    <div class="header__products">
+        <div class="product">
+            <div class="product__img-box">
+                <img src="~/Content/Images/tasks.png" alt="" class="product__img">
+            </div>
+            <div class="product__description">
+                <h3 class="heading-3">Task</h3>
+                <p class="product__text">
+                    Exciting exercises for comprehensive studying
+                </p>
+                <ul class="product__list">
+                    <li class="product__item">
+                        <a href="#" class="product__link">Grammar</a>
+                    </li>
+                    <li class="product__item">
+                        <a href="#" class="product__link">Listening</a>
+                    </li>
+                    <li class="product__item">
+                        <a href="#" class="product__link">Writting</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <a href="@Url.Action("PuzzelEnglish", "Student")">
+            <div class="product">
+                <div class="product__img-box">
+                    <img src="~/Content/Images/games.png" alt="" class="product__img">
+                </div>
+                <div class="product__description">
+                    <h3 class="heading-3">Puzzel Games</h3>
+                    <p class="product__text">
+                        Improve your English skills with funny mini-games
+                    </p>
+                    <ul class="product__list">
+                        @*<li class="product__item">
+                                <a href="#" class="product__link">Translating</a>
+                            </li>
+                            <li class="product__item">
+                                <a href="#" class="product__link">Grammar</a>
+                            </li>
+                            <li class="product__item">
+                                <a href="#" class="product__link">Listening</a>
+                            </li>*@
+                    </ul>
+                </div>
+            </div>
+        </a>
+        <div class="product">
+            <a href="#popup1" class="buttonpopup">
+                <div class="product__img-box">
+                    <img src="~/Content/Images/lp.png" alt="" class="product__img">
+                </div>
+                <div class="product__description">
+                    <h3 class="heading-3">Personal Plan</h3>
+                    <p class="product__text">
+                        Personal study plan in accordance with your goals
+                    </p>
+                    <ul class="product__list">
+                        <li class="product__item">
+                            <a href="#" class="product__link">For practising any skills</a>
+                        </li>
+                        <li class="product__item">
+                            <a href="#" class="product__link">Listening</a>
+                        </li>
+                        <li class="product__item">
+                            <a href="#" class="product__link">Writting</a>
+                        </li>
+                    </ul>
+                </div>
+            </a>
+        </div>
+        <div class="product">
+            <div class="product__img-box">
+                <img src="~/Content/Images/words.png" alt="" class="product__img">
+            </div>
+            <div class="product__description">
+                <h3 class="heading-3">Words</h3>
+                <p class="product__text">
+                    A set of practice modes to improve your vocabulary
+                </p>
+                <ul class="product__list">
+                    <li class="product__item">
+                        <a href="#" class="product__link">vocabulary</a>
+                    </li>
+                    <li class="product__item">
+                        <a href="#" class="product__link">Speaking</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="product">
+            <div class="product__img-box">
+                <img src="~/Content/Images/podcasts.png" alt="" class="product__img">
+            </div>
+            <div class="product__description">
+                <h3 class="heading-3">Podcasts</h3>
+                <p class="product__text">
+                    Audio lessons with synchronous subtitles
+                </p>
+                <ul class="product__list">
+                    <li class="product__item">
+                        <a href="#" class="product__link">Listening</a>
+                    </li>
+                    <li class="product__item">
+                        <a href="#" class="product__link">Speaking</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="videos">
+    @foreach (var type in Model.TestTypes)
+    {
+        <h2 class="heading-2 videos__heading">@type</h2>
+        foreach (var t in Model.Tests[Model.TestTypes.IndexOf(type)])
+        {
+            <div class="video__puzzleindex">
+                <h4 class="heading-4 heading-4--yellow">videopuzzle</h4>
+                <div class="video__img-box">
+                    <img src="@t.Image" alt="" class="video__img">
+                    <div class="video__layer"></div>
+                    <a href="~/Student/TestRouting?TestId=@t.id" class="btn video__btn">play</a>
+                </div>
+                <div class="video__title">@t.Desc</div>
+                <div class="video__info">
+                    <div class="video__difficulty video__difficulty--1">
+                        <span class="video__difficutly-point"></span>
+                        <span class="video__difficutly-point"></span>
+                        <span class="video__difficutly-point"></span>
+                    </div>
+                    <img src="~/Content/Images/unitedkingdom.png" alt="" class="video__accent">
+                    <p class="video__phrases">25 phrase</p>
+                </div>
+            </div>
+        }
+    }
+</section>
+<script>
+    $(function () {
+        var whatid = @try
+                        {
+                            @Request.Cookies["WebUserID"].Value;
+                        } catch (NullReferenceException)
+                        {
+                            <text>
+                                window.location.href = "@Url.Action("Index", "Home")";
+                            </text>
+                        };
+        //alert(whatid);
+    })
+</script>
+

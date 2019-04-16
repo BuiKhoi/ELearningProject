@@ -446,10 +446,17 @@ namespace ELearningProject.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             int WebUserID = int.Parse(Request.Cookies["WebUserID"].Value);
             Web_user WebUser = db.Web_Users.Find(WebUserID);
-            var IdenUser = await UserManager.FindByIdAsync(WebUser.UserID);
-            var results = await UserManager.ChangePasswordAsync(IdenUser.Id, model.CurrentPassword, model.NewPassword);
-
-            return PartialView("_ChangePasswordPartial");
+            ApplicationUser IdenUser = await UserManager.FindByIdAsync(WebUser.UserID);
+            if (UserManager.CheckPassword(IdenUser, model.CurrentPassword))
+            {
+                IdenUser.PasswordHash = UserManager.PasswordHasher.HashPassword(model.NewPassword);
+                var result = await UserManager.UpdateAsync(IdenUser);
+                if (result.Succeeded)
+                {
+                    return PartialView("_ChangePasswordPartial");
+                }
+            }
+            return PartialView("_ChangePassFailed", model);
         }
         [AllowAnonymous]
         [HttpPost]
@@ -475,9 +482,10 @@ namespace ELearningProject.Controllers
 
         }
         [AllowAnonymous]
-        public JsonResult TestPartial(string fuckname)
+        public PartialViewResult GeneraeChangePass()
         {
-            return Json(fuckname);
+
+            return PartialView("_ChangePassSection");
         }
 
 
