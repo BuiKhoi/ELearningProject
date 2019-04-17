@@ -132,7 +132,8 @@ namespace ELearningProject.Controllers
                                 Response.Cookies.Add(cookie);
                             }
                             return RedirectToAction("Index", "Student");
-                        } else if (roles == "Teacher")
+                        }
+                        else if (roles == "Teacher")
                         {
                             using (var db = new ApplicationDbContext())
                             {
@@ -236,7 +237,9 @@ namespace ELearningProject.Controllers
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    await UserManager.SendEmailAsync(user.Id, "Welcome to ABC english", 
+                        "This is a confirmation of the email you register to our website");
 
                     var u = new Web_user()
                     {
@@ -259,7 +262,8 @@ namespace ELearningProject.Controllers
                         }
 
                         UserManager.AddToRole(user.Id, "Teacher");
-                    } else
+                    }
+                    else
                     {
                         using (var db = new ApplicationDbContext())
                         {
