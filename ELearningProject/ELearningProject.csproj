@@ -173,8 +173,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StudentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TeacherController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ScoreProcessController.cs" />
@@ -539,6 +542,13 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\sass1.scss" />
+    <Content Include="Content\Images\logo2.zip" />
+    <Content Include="Content - Copy\bootstrap-theme.css.map" />
+    <Content Include="Content - Copy\bootstrap-theme.min.css.map" />
+    <Content Include="Content - Copy\bootstrap.css.map" />
+    <Content Include="Content - Copy\bootstrap.min.css.map" />
+    <Content Include="Content - Copy\Images\logo2.zip" />
+    <Content Include="Content - Copy\sass1.scss" />
     <Content Include="Assets\Admin\fonts\poppins\poppins-v5-latin-100.eot" />
     <Content Include="Assets\Admin\fonts\poppins\poppins-v5-latin-100.ttf" />
     <Content Include="Assets\Admin\fonts\poppins\poppins-v5-latin-100.woff" />
@@ -642,13 +652,11 @@
     <Content Include="Assets\Admin\vendor\slick\slick-theme.scss" />
     <Content Include="Assets\Admin\vendor\slick\slick.less" />
     <Content Include="Assets\Admin\vendor\slick\slick.scss" />
-    <Content Include="Content\Images\logo2.zip" />
-    <Content Include="Content - Copy\bootstrap-theme.css.map" />
-    <Content Include="Content - Copy\bootstrap-theme.min.css.map" />
-    <Content Include="Content - Copy\bootstrap.css.map" />
-    <Content Include="Content - Copy\bootstrap.min.css.map" />
-    <Content Include="Content - Copy\Images\logo2.zip" />
-    <Content Include="Content - Copy\sass1.scss" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Layout_admin.cshtml" />
+    <Content Include="Areas\Admin\Views\Student\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Teacher\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Properties\PublishProfiles\ELearningProject20190416044828 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Changedivcolor.js" />
@@ -702,7 +710,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_shared_admin.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\PuzzelEnglishTest.cshtml" />
@@ -724,6 +731,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Views\ScoreProcess\" />
   </ItemGroup>
   <ItemGroup>

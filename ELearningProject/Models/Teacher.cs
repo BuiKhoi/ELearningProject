@@ -76,4 +76,29 @@ namespace ELearningProject.Models
         public string Image { get; set; }
         public string Tags { get; set; }
     }
+
+    public class TeacherUserModel
+    {
+        public int id { get; set; }
+
+        public string name { get; set; }
+
+        public DateTime birthday { get; set; }
+        public string creditid { get; set; }
+        public bool status { get; set; }
+
+
+    }
+
+    public class TeacherUserViewModel
+    {
+
+        public List<TeacherUserModel> users { get; set; }
+
+        public TeacherUserViewModel()
+        {
+
+            users = new List<TeacherUserModel>();
+        }
+    }
 }

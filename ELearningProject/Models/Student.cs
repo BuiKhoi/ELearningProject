@@ -17,4 +17,30 @@ namespace ELearningProject.Models
 
         public Web_user web_User { get; set; }
     }
+
+    public class StudentUserModel
+    {
+        public int id { get; set; }
+
+        public string name { get; set; }
+
+        public DateTime birthday { get; set; }
+        public string creditid { get; set; }
+        public bool status { get; set; }
+
+
+    }
+
+
+    public class StudentUserViewModel
+    {
+
+        public List<StudentUserModel> users { get; set; }
+
+        public StudentUserViewModel()
+        {
+
+            users = new List<StudentUserModel>();
+        }
+    }
 }
