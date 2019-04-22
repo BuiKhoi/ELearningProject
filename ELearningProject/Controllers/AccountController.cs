@@ -82,73 +82,8 @@ namespace ELearningProject.Controllers
                 case SignInStatus.Success:
                     {
                         var user = await UserManager.FindAsync(model.Email, model.Password);
-                        var roles = (await UserManager.GetRolesAsync(user.Id))[0];
-                        HttpCookie ckname;
-                        if (Response.Cookies["UserName"] != null)
-                        {
-                            Response.Cookies.Remove("UserName");
-                        }
-
-                        ckname = new HttpCookie("UserName");
-                        using (var db = new ApplicationDbContext())
-                        {
-                            ckname.Value = (from wu in db.Web_Users
-                                            join student in db.Students on wu.id equals student.web_User.id
-                                            where wu.UserID == user.Id
-                                            select wu.Name).FirstOrDefault();
-                        }
-                        Response.Cookies.Add(ckname);
-
-                        HttpCookie wuserid;
-                        if (Response.Cookies["WebUserID"] != null)
-                        {
-                            Response.Cookies.Remove("WebUserID");
-                        }
-
-                        wuserid = new HttpCookie("WebUserID");
-                        using (var db = new ApplicationDbContext())
-                        {
-                            wuserid.Value = (from wu in db.Web_Users
-                                             where wu.UserID == user.Id
-                                             select wu.id).FirstOrDefault().ToString();
-                        }
-                        Response.Cookies.Add(wuserid);
-
-                        if (roles == "Admin")
-                        {
-                            return RedirectToAction("Index", "Admin");
-                        }
-                        else if (roles == "Student")
-                        {
-                            using (var db = new ApplicationDbContext())
-                            {
-                                int StudentID = (from wu in db.Web_Users
-                                                 join student in db.Students on wu.id equals student.web_User.id
-                                                 where wu.UserID == user.Id
-                                                 select student.id).FirstOrDefault();
-                                var cookie = new HttpCookie("StudentID");
-                                Response.Cookies.Remove("StudentID");
-                                cookie.Value = StudentID.ToString();
-                                Response.Cookies.Add(cookie);
-                            }
-                            return RedirectToAction("Index", "Student");
-                        }
-                        else if (roles == "Teacher")
-                        {
-                            using (var db = new ApplicationDbContext())
-                            {
-                                int TeacherId = (from wu in db.Web_Users
-                                                 join teacher in db.Teachers on wu.id equals teacher.User.id
-                                                 where wu.UserID == user.Id
-                                                 select teacher.id).FirstOrDefault();
-                                var cookie = new HttpCookie("TeacherId");
-                                Response.Cookies.Remove("TeacherId");
-                                cookie.Value = TeacherId.ToString();
-                                Response.Cookies.Add(cookie);
-                            }
-                            return RedirectToAction("Index", "Teacher");
-                        }
-                        return RedirectToLocal(returnUrl);
+                        var x = await SignInAsync(user, returnUrl);
+                        return x;
                     }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -159,6 +94,77 @@ namespace ELearningProject.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
+        }
+        
+        async Task<ActionResult> SignInAsync(ApplicationUser user, string returnUrl)
+        {
+            var roles = (await UserManager.GetRolesAsync(user.Id))[0];
+            HttpCookie ckname;
+            if (Response.Cookies["UserName"] != null)
+            {
+                Response.Cookies.Remove("UserName");
+            }
+
+            ckname = new HttpCookie("UserName");
+            using (var db = new ApplicationDbContext())
+            {
+                ckname.Value = (from wu in db.Web_Users
+                                join student in db.Students on wu.id equals student.web_User.id
+                                where wu.UserID == user.Id
+                                select wu.Name).FirstOrDefault();
+            }
+            Response.Cookies.Add(ckname);
+
+            HttpCookie wuserid;
+            if (Response.Cookies["WebUserID"] != null)
+            {
+                Response.Cookies.Remove("WebUserID");
+            }
+
+            wuserid = new HttpCookie("WebUserID");
+            using (var db = new ApplicationDbContext())
+            {
+                wuserid.Value = (from wu in db.Web_Users
+                                 where wu.UserID == user.Id
+                                 select wu.id).FirstOrDefault().ToString();
+            }
+            Response.Cookies.Add(wuserid);
+
+            if (roles == "Admin")
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            else if (roles == "Student")
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    int StudentID = (from wu in db.Web_Users
+                                     join student in db.Students on wu.id equals student.web_User.id
+                                     where wu.UserID == user.Id
+                                     select student.id).FirstOrDefault();
+                    var cookie = new HttpCookie("StudentID");
+                    Response.Cookies.Remove("StudentID");
+                    cookie.Value = StudentID.ToString();
+                    Response.Cookies.Add(cookie);
+                }
+                return RedirectToAction("Index", "Student");
+            }
+            else if (roles == "Teacher")
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    int TeacherId = (from wu in db.Web_Users
+                                     join teacher in db.Teachers on wu.id equals teacher.User.id
+                                     where wu.UserID == user.Id
+                                     select teacher.id).FirstOrDefault();
+                    var cookie = new HttpCookie("TeacherId");
+                    Response.Cookies.Remove("TeacherId");
+                    cookie.Value = TeacherId.ToString();
+                    Response.Cookies.Add(cookie);
+                }
+                return RedirectToAction("Index", "Teacher");
+            }
+            return RedirectToLocal(returnUrl);
         }
 
         //
@@ -565,7 +571,8 @@ namespace ELearningProject.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    var user = await UserManager.FindByEmailAsync(loginInfo.Email);
+                    return await SignInAsync(user, returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -603,6 +610,43 @@ namespace ELearningProject.Controllers
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    var u = new Web_user()
+                    {
+                        Name = info.ExternalIdentity.Name,
+                        Birthday = new DateTime(1970, 1, 1),
+                        UserID = user.Id
+                    };
+
+                    if (model.AsTeacher)
+                    {
+                        using (var db = new ApplicationDbContext())
+                        {
+                            var t = new Teacher()
+                            {
+                                User = u
+                            };
+                            db.Web_Users.Add(u);
+                            db.Teachers.Add(t);
+                            db.SaveChanges();
+                        }
+
+                        UserManager.AddToRole(user.Id, "Teacher");
+                    }
+                    else
+                    {
+                        using (var db = new ApplicationDbContext())
+                        {
+                            var s = new Student()
+                            {
+                                web_User = u
+                            };
+                            db.Web_Users.Add(u);
+                            db.Students.Add(s);
+                            db.SaveChanges();
+                        }
+
+                        UserManager.AddToRole(user.Id, "Student");
+                    }
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
