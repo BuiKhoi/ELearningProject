@@ -1,7 +1,7 @@
 ﻿@using ELearningProject.Models
 @model ELearningProject.Models.MultipieChoiceViewModel
 
-<div class='data__Content__MultiChoice_create'>
+<div class='data__Content__MultiChoice_creating'>
     @using (Ajax.BeginForm("CreateQuizQues", "Teacher", "", new AjaxOptions { HttpMethod = "POST",UpdateTargetId= "myresponse", OnSuccess = "AddToTest" }, new { @class = "Answer__form__MultiChoice_create" }))
     {
         @Html.AntiForgeryToken()

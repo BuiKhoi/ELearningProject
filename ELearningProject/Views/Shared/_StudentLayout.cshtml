@@ -1,17 +1,7 @@
 ﻿@using ELearningProject.Models
-@{
+@{ 
     ApplicationDbContext db = new ApplicationDbContext();
-    int WebUserID = 0;
-    try
-    {
-        WebUserID = int.Parse(Request.Cookies["WebUserID"].Value);
-    }
-    catch (NullReferenceException)
-    {
-        <text>
-            window.location.href = @Url.Action("Index", "Home");
-        </text>
-    }
+    int WebUserID = int.Parse(Request.Cookies["WebUserID"].Value);
     Web_user User = db.Web_Users.Find(WebUserID);
 }
 <!DOCTYPE html>
@@ -28,11 +18,11 @@
     <link href="~/Content/PuzzleGame.css" rel="stylesheet" />
     <link href="~/Content/Teacher.css" rel="stylesheet" />
     <link href="~/Content/MultiChoice.css" rel="stylesheet" />
+    <link href="~/Content/EditProfile.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <link href="~/Content/EditProfile.css" rel="stylesheet" />
     <script src="~/Scripts/HomeRedirect.js"></script>
     <title>Document</title>
 </head>

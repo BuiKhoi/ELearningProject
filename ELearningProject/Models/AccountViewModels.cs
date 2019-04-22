@@ -158,29 +158,4 @@ namespace ELearningProject.Models
 
         }
     }
-
-    //public class LoginRegisterViewModel
-    //{
-    //    [Required]
-    //    [Display(Name = "Email")]
-    //    [EmailAddress]
-    //    public string Email { get; set; }
-
-    //    [Required]
-    //    [DataType(DataType.Password)]
-    //    [Display(Name = "Password")]
-    //    public string Password { get; set; }
-
-    //    [DataType(DataType.Password)]
-    //    [Display(Name = "Confirm password")]
-    //    [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-    //    public string ConfirmPassword { get; set; }
-
-    //    [DataType(DataType.Date)]
-    //    [Display(Name = "Birthday")]
-    //    public DateTime Birthday { get; set; }
-
-    //    [Display(Name = "Name")]
-    //    public string Name { get; set; }
-    //}
 }

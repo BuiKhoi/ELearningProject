@@ -4,17 +4,29 @@
 <section class="CreateTest__BigContainer">
     <div class="Test__EditSection">
         <div id="Test_Contain" class="Test">
-            <h3>
-                Choose Ques to display :
-            </h3>
             <div id="myTest" class="quesDirection">
+                <h3 id="Choose__Ques" class="invi__test__title">
+                    Choose Ques:
+                </h3>
 
             </div>
             <div class="Test__title__div invi__test__title">
                 <input id="Test__title__input" class="effect_2_create" placeholder="Please inpu your test title" />
-                <span class="focus-border"></span>  
+                <span class="focus-border"></span>
             </div>
             <h1 class="Please__insert__ques">Please insert the question to your test</h1>
+            <div class="upload__test__imageSection">
+                <div class="TestImage__preview">
+                    <img id="Test__image" />
+                    @*<img src="~/Content/Images/avatar.jpg" />*@
+                </div>
+                <input id="Test__image__upload" type="file" value="Upload" />
+            </div>
+            <div class="Post__createTest__section invi__test__title">
+                <button id="Create__myTest" class="test__button__create__Test btnPush edit__test">
+                    Create Test
+                </button>
+            </div>
         </div>
         <div id="QuizType__Create__contain" class="QuizType__Create__contain">
 
@@ -62,7 +74,12 @@
                     setTimeout(function () {
                         $(".Test__title__div").removeClass("invi__test__title");
                     }, 500);
-                    
+                    setTimeout(function () {
+                        $("#Choose__Ques").removeClass("invi__test__title");
+                    }, 500);
+                    setTimeout(function () {
+                        $(".Post__createTest__section").removeClass("invi__test__title");
+                    }, 500);
                     $("#Test_Contain").animate({
                         left: '-13%',
                         opacity: '0'
@@ -107,7 +124,7 @@
                 }, 500);
                 //setid to navigate the question
                 var navId = $("#getAllQuesId").parent().attr("id") + i;
-                var newQues = `<a id="${navId}" href="#" class="ques__created__item">${displayi}</a>`;
+                var newQues = `<a id="${navId}" class="ques__created__item">${displayi}</a>`;
                 $("#myTest").append(newQues);
                 displayi = displayi + 1;
                 //setid to navigate the question
@@ -176,3 +193,22 @@
     </button>*@
 
 @*Ajax call with token*@
+
+@*Preview Test Image*@
+<script>
+    $(function () {
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#Test__image').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#Test__image__upload").change(function () {
+            readURL(this);
+        });
+    })
+</script>
+@*Preview Test Image*@
