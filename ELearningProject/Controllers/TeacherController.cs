@@ -106,46 +106,174 @@ namespace ELearningProject.Controllers
                 return Json("SucAdd");
             }
         }
+        //Create Test Section
 
-        public ActionResult CreateTest()
+        public ActionResult Test1()
         {
-            //int TeacherId = int.Parse(HttpContext.Response.Cookies["UserID"].Value);
-            List<PuzzelQuestionViewModel> PuzzQuestions = new List<PuzzelQuestionViewModel>();
-            List<MultipieChoiceViewModel> MultQuestions = new List<MultipieChoiceViewModel>();
-            List<QType> Types = new List<QType>();
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                PuzzQuestions = (from q in db.Questions
-                                 join qc in db.QContents on q.Content.id equals qc.id
-                                 join a in db.Answers on q.Answer.id equals a.id
-                                 join qt in db.QTypes on q.Type.id equals qt.id
-                                 where q.Type.Name == "Puzzel Game"
-                                 select new PuzzelQuestionViewModel() { id = q.id, Content = qc.Content, Answer = a.Content })
-                             .ToList<PuzzelQuestionViewModel>();
-
-                MultQuestions = (from q in db.Questions
-                                 join qc in db.QContents on q.Content.id equals qc.id
-                                 join a in db.Answers on q.Answer.id equals a.id
-                                 join qt in db.QTypes on q.Type.id equals qt.id
-                                 where q.Type.Name == "Multipie Choice"
-                                 select new MultipieChoiceViewModel()
-                                 {
-                                     id = q.id,
-                                     Content = qc.Content,
-                                     Quiz = new QuizMultichoice(),
-                                     fuckingdata = a.Content,
-                                     QuestionId = q.id
-                                 }).ToList<MultipieChoiceViewModel>();
-                foreach (var t in MultQuestions)
-                {
-                    t.Quiz = JsonConvert.DeserializeObject<QuizMultichoice>(t.fuckingdata);
-                }
-
-                Types = (from tt in db.QTypes
-                         select tt).ToList<QType>();
-            }
-            return View(new CreateTestViewModel(PuzzQuestions, MultQuestions, Types, 1));
+            return RedirectToAction("TestAjaxForm");
         }
+        public JsonResult TestAjaxForm()
+        {
+            string Myname = "Nguyen Nam";
+
+            return Json(Myname, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult RealCreateTest()
+        {
+            return View();
+        }
+
+        //đây là action đc gọi khi người dùng click create button trong form tạo câu hỏi kiểu Quiz
+        [HttpPost]
+        public PartialViewResult CreateQuizQues(MultipieChoiceViewModel TheQuiz)
+        {
+
+            int TeacherID = int.Parse(Request.Cookies["TeacherID"].Value);
+            ApplicationDbContext db = new ApplicationDbContext();
+            string myAnswerContent;
+            if (TheQuiz.Content != null && TheQuiz.Quiz.Quiz1 != null && TheQuiz.Quiz.Quiz2 != null && TheQuiz.Quiz.Quiz3 != null && TheQuiz.Quiz.Quiz4 != null)
+            {
+                try
+                {
+                    try
+                    {
+                        QContent qcontent = new QContent();
+                        Answer qAnswer = new Answer();
+                        qcontent.Content = TheQuiz.Content;
+                        switch (TheQuiz.EAnswer)
+                        {
+                            case Answer_input.A:
+                                TheQuiz.Quiz.Answer = 1;
+                                break;
+                            case Answer_input.B:
+                                TheQuiz.Quiz.Answer = 2;
+                                break;
+                            case Answer_input.C:
+                                TheQuiz.Quiz.Answer = 3;
+                                break;
+                            case Answer_input.D:
+                                TheQuiz.Quiz.Answer = 4;
+                                break;
+                        }
+                        qAnswer.Content = JsonConvert.SerializeObject(TheQuiz.Quiz);
+                        myAnswerContent = JsonConvert.SerializeObject(TheQuiz.Quiz);
+                        db.Answers.Add(qAnswer);
+                        db.QContents.Add(qcontent);
+                        db.SaveChanges();
+                    }
+                    catch
+                    {
+                        return PartialView("_CreateQuesFailed");
+                    }
+                    Question QuizQues = new Question
+                    {
+                        Level = 2,
+                        Type = (from t in db.QTypes where t.id == 2 select t).First(),
+                        Content = (from ct in db.QContents where ct.Content == TheQuiz.Content select ct).First(),
+                        Answer = (from a in db.Answers where a.Content == myAnswerContent select a).First(),
+                        Creator = (from tea in db.Teachers where tea.id == TeacherID select tea).First()
+                    };
+                    db.Questions.Add(QuizQues);
+                    db.SaveChanges();
+                    //đưa object về partial view để JS lấy đc id của object, từ đó gọi ajax về 1 action khác
+                    return PartialView("_QuizCreateSuccess", QuizQues);
+                    //đưa object về partial view để JS lấy đc id của object, từ đó gọi ajax về 1 action khác
+
+                }
+                catch
+                {
+                    return PartialView("_CreateQuesFailed");
+                }
+            }
+            else
+            {
+                return PartialView("_CreateQuesFailed");
+            }
+
+        }
+        //đây là action đc gọi khi người dùng click create button trong form tạo câu hỏi kiểu Quiz
+
+
+        //Action sẽ chạy khi người dùng click vào tạo kiểu quiz question, nó sẽ trả về 1 cái form với object rỗng để người dùng nhập thông tin
+        [HttpPost]
+        public PartialViewResult SendFormQuizQues()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            MultipieChoiceViewModel QuizQues = new MultipieChoiceViewModel();
+
+            return PartialView("_QuizTypeCreate", QuizQues);
+        }
+        //Action sẽ chạy khi người dùng click vào tạo kiểu quiz question, nó sẽ trả về 1 cái form với object rỗng để người dùng nhập thông tin
+
+
+        //đây là action xác định loại câu hỏi tương ứng để trả về phần view test create của người dùng
+        //mỗi loại câu hỏi sẽ render ra 1 partialview khác nhau
+        [HttpGet]
+        public ActionResult RedirectQues(string QuesId)
+        {
+            int myQuesId = int.Parse(QuesId);
+            ApplicationDbContext db = new ApplicationDbContext();
+            Question Ques = (from q in db.Questions where q.id == myQuesId select q).First();
+            QType QuesT = (from q in db.Questions
+                           join qt in db.QTypes on q.Type.id equals qt.id
+                           where q.id == myQuesId
+                           select qt).First();
+            switch (QuesT.id)
+            {
+                case 1:
+                    return RedirectToAction("ReturnPuzzle", "Teacher", Ques);
+                case 2:
+                    return ReturnQuiz(Ques);
+                case 3:
+                    return RedirectToAction("ReturnTranslate", "Teacher", Ques);
+            }
+            return RedirectToAction("RedirectFailed", "Teacher");
+        }
+        //mỗi loại câu hỏi sẽ render ra 1 partialview khác nhau
+        //đây là action xác định loại câu hỏi tương ứng để trả về phần view test create của người dùng
+
+        public PartialViewResult RedirectFailed()
+        {
+
+            return PartialView("_RedirectFailed");
+        }
+
+        //đây là action trả về khi loại câu hỏi là Quiz (TypeID =2) 
+        public PartialViewResult ReturnQuiz(Question Ques)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            MultipieChoiceViewModel MulQues = (from q in db.Questions
+                                               join qc in db.QContents on q.Content.id equals qc.id
+                                               join qt in db.QTypes on q.Type.id equals qt.id
+                                               join qa in db.Answers on q.Answer.id equals qa.id
+                                               where q.id == Ques.id
+                                               select new MultipieChoiceViewModel()
+                                               {
+                                                   id = q.id,
+                                                   Content = qc.Content,
+                                                   fuckingdata = qa.Content,
+                                               }).First();
+            MulQues.Quiz = JsonConvert.DeserializeObject<QuizMultichoice>(MulQues.fuckingdata);
+            return PartialView("_QuizType", MulQues);
+        }
+        //đây là action trả về khi loại câu hỏi là Quiz (TypeID =2) 
+
+        //[HttpPost]
+        //public PartialViewResult CreateTestF(string )
+        //{
+
+        //}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Testing(string someValue)
+        {
+            string Mystring = "fuckyou";
+            return Json(someValue);
+        }
+
+        //Create Test Section
 
         public JsonResult FilterQuestions(int? TestType)
         {
@@ -156,61 +284,6 @@ namespace ELearningProject.Controllers
             }
             return Json(questions);
         }
-
-        private StudentTestViewModel GetStvm()
-        {
-            //Get a list of tests and add it to viewbag since we use many object here
-            List<TestTypeView> ttests = new List<TestTypeView>();
-            using (var db = new ApplicationDbContext())
-            {
-                ttests = (from t in db.Tests
-                          join tt in db.TTypes on t.Type.id equals tt.id
-                          select new TestTypeView() { test = t, type = tt }).ToList<TestTypeView>();
-            }
-
-            //Create new list with our tests
-            List<Test> tests = new List<Test>();
-            foreach (var ttest in ttests)
-            {
-                var test = new Test()
-                {
-                    id = ttest.test.id,
-                    Desc = ttest.test.Desc,
-                    Image = ttest.test.Image,
-                    Rating = ttest.test.Rating,
-                    Tags = ttest.test.Tags,
-                    Type = ttest.type
-                };
-                tests.Add(test);
-            }
-
-            //Shift through the list and cast them to TestViewModels, then add to the array divided by type
-            var stvm = new StudentTestViewModel();
-            foreach (var test in tests)
-            {
-                //Create a list of tags for each test
-                List<string> tags = JsonConvert.DeserializeObject<List<string>>(test.Tags);
-                var t = new TestViewModel()
-                {
-                    id = test.id,
-                    Desc = test.Desc,
-                    Image = test.Image,
-                    Rating = test.Rating,
-                    Tags = tags
-                };
-
-                //Check if this type is in the list or not, and add it to
-                if (stvm.TestTypes.IndexOf(test.Type.name) == -1)
-                {
-                    stvm.TestTypes.Add(test.Type.name);
-                    stvm.Tests.Add(new List<TestViewModel>());
-                }
-
-                stvm.Tests[stvm.TestTypes.IndexOf(test.Type.name)].Add(t);
-            }
-            return stvm;
-        }
-
         public List<QuestionViewModel> GetQuestionsByType(int? TypeId)
         {
             List<QuestionViewModel> questions = new List<QuestionViewModel>();
@@ -270,5 +343,61 @@ namespace ELearningProject.Controllers
             }
             return questions;
         }
+
+        private StudentTestViewModel GetStvm()
+        {
+            //Get a list of tests and add it to viewbag since we use many object here
+            List<TestTypeView> ttests = new List<TestTypeView>();
+            using (var db = new ApplicationDbContext())
+            {
+                ttests = (from t in db.Tests
+                          join tt in db.TTypes on t.Type.id equals tt.id
+                          select new TestTypeView() { test = t, type = tt }).ToList<TestTypeView>();
+            }
+
+            //Create new list with our tests
+            List<Test> tests = new List<Test>();
+            foreach (var ttest in ttests)
+            {
+                var test = new Test()
+                {
+                    id = ttest.test.id,
+                    Desc = ttest.test.Desc,
+                    Image = ttest.test.Image,
+                    Rating = ttest.test.Rating,
+                    Tags = ttest.test.Tags,
+                    Type = ttest.type
+                };
+                tests.Add(test);
+            }
+
+            //Shift through the list and cast them to TestViewModels, then add to the array divided by type
+            var stvm = new StudentTestViewModel();
+            foreach (var test in tests)
+            {
+                //Create a list of tags for each test
+                List<string> tags = JsonConvert.DeserializeObject<List<string>>(test.Tags);
+                var t = new TestViewModel()
+                {
+                    id = test.id,
+                    Desc = test.Desc,
+                    Image = test.Image,
+                    Rating = test.Rating,
+                    Tags = tags
+                };
+
+                //Check if this type is in the list or not, and add it to
+                if (stvm.TestTypes.IndexOf(test.Type.name) == -1)
+                {
+                    stvm.TestTypes.Add(test.Type.name);
+                    stvm.Tests.Add(new List<TestViewModel>());
+                }
+
+                stvm.Tests[stvm.TestTypes.IndexOf(test.Type.name)].Add(t);
+            }
+            return stvm;
+        }
+
+
     }
 }

@@ -292,7 +292,5 @@ namespace IdentityAuthentication.Controllers
             }
             return Json(ResultList, JsonRequestBehavior.AllowGet);
         }
-
-
     }
 }

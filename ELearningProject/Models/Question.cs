@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -28,7 +29,7 @@ namespace ELearningProject.Models
         public string Answer { get; set; }
 
         public PuzzelQuestionViewModel()
-        {}
+        { }
 
         public PuzzelQuestionViewModel(Question question)
         {
@@ -48,18 +49,31 @@ namespace ELearningProject.Models
     public class MultipieChoiceViewModel : QuestionViewModel
     {
         public int id { get; set; }
+        [Required]
         public string Content { get; set; }
         public QuizMultichoice Quiz { get; set; }
         public string fuckingdata { get; set; }
         public int QuestionId { get; set; }
+        public Answer_input EAnswer { get; set; }
 
         public MultipieChoiceViewModel() { }
     }
+    public enum Answer_input
+    {
+        A,
+        B,
+        C,
+        D
+    }
     public class QuizMultichoice
     {
+        [Required]
         public string Quiz1 { get; set; }
+        [Required]
         public string Quiz2 { get; set; }
+        [Required]
         public string Quiz3 { get; set; }
+        [Required]
         public string Quiz4 { get; set; }
         public int Answer { get; set; }
         public QuizMultichoice()

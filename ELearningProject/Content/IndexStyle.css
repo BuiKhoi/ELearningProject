@@ -127,7 +127,6 @@
 }
 .myindex__body__container {
     display: block;
-    width: 100vw;
     min-height: 445px;
     grid-column: full-start/end-full;
 }
