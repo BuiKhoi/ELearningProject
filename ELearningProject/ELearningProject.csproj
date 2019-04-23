@@ -418,6 +418,7 @@
     <Content Include="Content\Images\color.jpg" />
     <Content Include="Content\Images\CreateTestPNG.png" />
     <Content Include="Content\Images\creative.svg" />
+    <Content Include="Content\Images\default.jpg" />
     <Content Include="Content\Images\documents-button.svg" />
     <Content Include="Content\Images\FaillureIcon.svg" />
     <Content Include="Content\Images\gamePlaystationIcon.svg" />

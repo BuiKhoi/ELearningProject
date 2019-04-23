@@ -95,7 +95,7 @@ namespace ELearningProject.Controllers
                     return View(model);
             }
         }
-        
+
         async Task<ActionResult> SignInAsync(ApplicationUser user, string returnUrl)
         {
             var roles = (await UserManager.GetRolesAsync(user.Id))[0];
@@ -244,14 +244,15 @@ namespace ELearningProject.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    await UserManager.SendEmailAsync(user.Id, "Welcome to ABC english", 
+                    await UserManager.SendEmailAsync(user.Id, "Welcome to ABC english",
                         "This is a confirmation of the email you register to our website");
 
                     var u = new Web_user()
                     {
                         Name = model.Name,
                         Birthday = model.Birthday,
-                        UserID = user.Id
+                        UserID = user.Id,
+                        UserImage = @"\Content\Images\default.jpg"
                     };
 
                     if (model.AsTeacher)
@@ -284,8 +285,8 @@ namespace ELearningProject.Controllers
 
                         UserManager.AddToRole(user.Id, "Student");
                     }
-
-                    return RedirectToAction("Index", "Home");
+                    
+                    return await SignInAsync(user, "~/Home/Index");
                 }
                 AddErrors(result);
 
@@ -614,7 +615,8 @@ namespace ELearningProject.Controllers
                     {
                         Name = info.ExternalIdentity.Name,
                         Birthday = new DateTime(1970, 1, 1),
-                        UserID = user.Id
+                        UserID = user.Id,
+                        UserImage = @"\Content\Images\default.jpg"
                     };
 
                     if (model.AsTeacher)

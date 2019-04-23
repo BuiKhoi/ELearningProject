@@ -17,7 +17,7 @@ namespace ELearningProject.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Error registering";
             /*
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
