@@ -1,5 +1,3 @@
-C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csprojAssemblyReference.cache
-C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csproj.CoreCompileInputs.cache
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\bin\ELearningProject.dll.config
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\bin\ELearningProject.dll
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\bin\ELearningProject.pdb
@@ -104,11 +102,8 @@ C:\Users\khoib\source\repos\ELearningProject\ELearningProject\bin\Microsoft.Owin
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csproj.CopyComplete
-C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.dll
-C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.pdb
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csprojAssemblyReference.cache
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.identity.resources
-C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csproj.GenerateResource.cache
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.add_users.resources
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.mod_users.resources
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.add_student.resources
@@ -123,3 +118,8 @@ C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearnin
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.AddLocked.resources
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.AddUserImage.resources
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.AddNews.resources
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csproj.GenerateResource.cache
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csproj.CoreCompileInputs.cache
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csproj.CopyComplete
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.dll
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.pdb

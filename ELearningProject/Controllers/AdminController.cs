@@ -9,13 +9,14 @@ namespace ELearningProject.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         // GET: Admin/Admin
-        public ActionResult Index()
+        public ActionResult AdminIndex()
         {
             ViewBag.Online = "";
             try
             {
                 ViewBag.Online = HttpContext.Application["Online"].ToString(); //Số người online
-            } catch (NullReferenceException)
+            }
+            catch (NullReferenceException)
             {
                 ViewBag.Online = "1";
             }
@@ -24,7 +25,8 @@ namespace ELearningProject.Areas.Admin.Controllers
             try
             {
                 ViewBag.PageView = HttpContext.Application["PageView"].ToString(); //Số lượng người truy cập
-            } catch (NullReferenceException)
+            }
+            catch (NullReferenceException)
             {
                 ViewBag.PageView = "1";
             }

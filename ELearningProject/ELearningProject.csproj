@@ -710,6 +710,7 @@
     <Content Include="Assets\Admin\vendor\slick\slick-theme.scss" />
     <Content Include="Assets\Admin\vendor\slick\slick.less" />
     <Content Include="Assets\Admin\vendor\slick\slick.scss" />
+    <Content Include="stylenews.css" />
     <Content Include="stylesnewssingle\about.css" />
     <Content Include="stylesnewssingle\about_responsive.css" />
     <Content Include="stylesnewssingle\bootstrap-4.1.2\bootstrap.min.css" />
@@ -725,7 +726,6 @@
     <Content Include="stylesnewssingle\responsive.css" />
     <Content Include="stylesnewssingle\single.css" />
     <Content Include="stylesnewssingle\single_responsive.css" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Layout_admin.cshtml" />
     <Content Include="Areas\Admin\Views\Student\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Teacher\Index.cshtml" />
@@ -860,6 +860,11 @@
     <Content Include="Views\Shared\_ChangePassSection.cshtml" />
     <Content Include="Views\Student\NewsIndex.cshtml" />
     <Content Include="Views\Shared\_News.cshtml" />
+    <Content Include="Views\Admin\AdminIndex.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_NewsLayout.cshtml" />
+    <Content Include="style.css.map" />
+    <Content Include="stylenews.css.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
