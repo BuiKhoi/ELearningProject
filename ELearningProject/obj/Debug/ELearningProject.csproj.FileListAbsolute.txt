@@ -122,3 +122,4 @@ C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearnin
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.AddWebUserUserId.resources
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.AddLocked.resources
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.AddUserImage.resources
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.AddNews.resources

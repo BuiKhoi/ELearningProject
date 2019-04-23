@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,6 +15,17 @@ namespace IdentityAuthentication.Controllers
         public ActionResult Index()
         {
             return View(GetStvm());
+        }
+
+        public ActionResult NewsIndex()
+        {
+            return View(GetNews());
+        }
+
+        public PartialViewResult PNews(string pn)
+        {
+
+            return PartialView("_News");
         }
 
         [HttpGet]
@@ -104,12 +116,12 @@ namespace IdentityAuthentication.Controllers
                                     id = t.id,
                                     Content = qc.Content,
                                     Quiz = new QuizMultichoice(),
-                                    fuckingdata = a.Content,
+                                    data = a.Content,
                                     QuestionId = q.id
                                 }).ToList<MultipieChoiceViewModel>();
                     foreach (var t in mcquests)
                     {
-                        t.Quiz = JsonConvert.DeserializeObject<QuizMultichoice>(t.fuckingdata);
+                        t.Quiz = JsonConvert.DeserializeObject<QuizMultichoice>(t.data);
                     }
                 }
                 //And return them to the controller as usual
@@ -291,6 +303,20 @@ namespace IdentityAuthentication.Controllers
                               }).ToList<StudentScoreViewModel>();
             }
             return Json(ResultList, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetNews()
+        {
+            News news = new News();
+            using (var db = new ApplicationDbContext())
+            {
+                news = (from n in db.News
+                        where n.Id == 1
+                        select n).First();
+
+                ;
+            }
+            return View("NewsIndex", news);
         }
     }
 }

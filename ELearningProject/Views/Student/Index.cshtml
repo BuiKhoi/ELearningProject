@@ -45,7 +45,6 @@
                     })
                 </script>
                 <div id="ScoreBoard">
-
                 </div>
             </div>
         </div>
@@ -170,6 +169,16 @@
             </div>
         </div>
     </div>
+    <br />
+    <h2 class="heading-2">
+        News
+    </h2>
+    <p class="header__text">
+        News on ABC
+    </p>
+    @{
+        Html.RenderAction("PNews");
+    }
 </header>
 <section class="videos">
     @foreach (var type in Model.TestTypes)
@@ -198,18 +207,3 @@
         }
     }
 </section>
-<script>
-    $(function () {
-        var whatid = @try
-                        {
-                            @Request.Cookies["WebUserID"].Value;
-                        } catch (NullReferenceException)
-                        {
-                            <text>
-                                window.location.href = "@Url.Action("Index", "Home")";
-                            </text>
-                        };
-        //alert(whatid);
-    })
-</script>
-

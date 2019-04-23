@@ -24,7 +24,7 @@ namespace ELearningProject.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-
+        public DbSet<News> News { get; set; }
         public DbSet<Web_user> Web_Users { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Question> Questions { get; set; }

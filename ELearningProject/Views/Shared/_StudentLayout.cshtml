@@ -1,5 +1,5 @@
 ﻿@using ELearningProject.Models
-@{ 
+@{
     ApplicationDbContext db = new ApplicationDbContext();
     int WebUserID = int.Parse(Request.Cookies["WebUserID"].Value);
     Web_user User = db.Web_Users.Find(WebUserID);
@@ -13,6 +13,16 @@
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
     <!-- CSS -->
+
+    <link href="~/Content/NewsStyle.css" rel="stylesheet" />
+    <link href="~/stylenews.css" rel="stylesheet" />
+    <link href="~/cssnews/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/cssnews/classy-nav.css" rel="stylesheet" />
+    <link href="~/cssnews/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/cssnews/nice-select.css" rel="stylesheet" />
+    <link href="~/cssnews/nice-select.css" rel="stylesheet" />
+    <link href="~/cssnews/owl.carousel.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="~/Content/stylestudent.css">
     <link rel="stylesheet" href="~/Content/AnswerPuzzelVideo.css">
     <link href="~/Content/PuzzleGame.css" rel="stylesheet" />
@@ -24,6 +34,7 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/HomeRedirect.js"></script>
+
     <title>Document</title>
 </head>
 <body>

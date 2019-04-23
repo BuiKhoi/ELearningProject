@@ -89,7 +89,7 @@
                     }, 500);
                 },
                 error: function () {
-                    alert("ajax fucking failed");
+                    alert("ajax failed");
                 }
             })
         })
@@ -101,7 +101,7 @@
     var i = 1;
     var displayi = 1;
     function AddToTest() {
-        var myQuesID = $("#myfuckingID").text();
+        var myQuesID = $("#myID").text();
         $.ajax({
             type: "GET",
             url: "@Url.Action("RedirectQues", "Teacher")",

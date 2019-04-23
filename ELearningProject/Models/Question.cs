@@ -52,7 +52,7 @@ namespace ELearningProject.Models
         [Required]
         public string Content { get; set; }
         public QuizMultichoice Quiz { get; set; }
-        public string fuckingdata { get; set; }
+        public string data { get; set; }
         public int QuestionId { get; set; }
         public Answer_input EAnswer { get; set; }
 

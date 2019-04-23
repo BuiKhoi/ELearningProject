@@ -146,7 +146,7 @@
                 <script>
                     function okdone(data) {
                         alert(data);
-                        alert("fuckyou");
+                        alert("Uh oh");
                     }
                 </script>
 
@@ -267,17 +267,17 @@
              })
         })
         $("#testnoob").click(function () {
-            var mydata = "fuck you too";
+            var mydata = "Mah gad";
             $.ajax({
                 type: "POST",
                 url: "@Url.Action("TestPartial", "Account")",
                 cache: false,
-                data: { fucknam: mydata },
+                data: { fnam: mydata },
                  success: function (data) {
                      alert(data)
                  },
                  error: function (data) {
-                     alert("Ajaxfucking failed")
+                     alert("Ajax failed")
                  }
             })
         })

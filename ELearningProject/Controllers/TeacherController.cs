@@ -252,9 +252,9 @@ namespace ELearningProject.Controllers
                                                {
                                                    id = q.id,
                                                    Content = qc.Content,
-                                                   fuckingdata = qa.Content,
+                                                   data = qa.Content,
                                                }).First();
-            MulQues.Quiz = JsonConvert.DeserializeObject<QuizMultichoice>(MulQues.fuckingdata);
+            MulQues.Quiz = JsonConvert.DeserializeObject<QuizMultichoice>(MulQues.data);
             return PartialView("_QuizType", MulQues);
         }
         //đây là action trả về khi loại câu hỏi là Quiz (TypeID =2) 
@@ -269,7 +269,7 @@ namespace ELearningProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Testing(string someValue)
         {
-            string Mystring = "fuckyou";
+            string Mystring = "Hello";
             return Json(someValue);
         }
 
@@ -318,7 +318,7 @@ namespace ELearningProject.Controllers
                                                 {
                                                     id = q.id,
                                                     Content = qc.Content,
-                                                    fuckingdata = a.Content
+                                                    data = a.Content
                                                 })
                              .ToList<MultipieChoiceViewModel>());
                             break;
