@@ -69,6 +69,7 @@ namespace ELearningProject.Models
     {
         public Test Test  { get; set; }
         public float Score { get; set; }
+        public Web_user Student { get; set; }
         public StudentTestResultViewModel()
         {
 

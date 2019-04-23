@@ -41,7 +41,8 @@ namespace ELearningProject.Models
 
     public class TeacherIndexViewModel
     {
-        public List<TType> types { get; set; }
+        public StudentTestViewModel stvm { get; set; }
+        public List<int> OwnTests { get; set; }
     }
 
     public class CreateTestViewModel

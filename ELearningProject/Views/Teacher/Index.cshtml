@@ -1,5 +1,5 @@
 ﻿@using ELearningProject.Models
-@model ELearningProject.Models.StudentTestViewModel
+@model ELearningProject.Models.TeacherIndexViewModel
 @{
     ViewBag.Title = "Teacher";
     Layout = "~/Views/Shared/_TeacherLayout.cshtml";
@@ -8,14 +8,65 @@
     <div class="header__details mb-5">
         <h2 class="heading-2">
             Your Tests
+            @foreach (var tt in Model.stvm.Tests)
+            {
+                foreach (var test in tt)
+                {
+                    if (Model.OwnTests.Contains(test.id))
+                    {
+                        @*<div class="video__puzzleindex">
+                                <h4 class="heading-4 heading-4--yellow">videopuzzle</h4>
+                                <div class="video__img-box">
+                                    <img src="@test.Image" alt="" class="video__img">
+                                    <div class="video__layer"></div>
+                                    <a href="#popup1" class="btn video__btn buttonpopup">Edit</a>
+                                    <a href="#popup1" class="btn video__btn buttonpopup">Results</a>
+                                </div>
+                                <div class="video__title">@test.Desc</div>
+                                <div class="video__info">
+                                    <div class="video__difficulty video__difficulty--1">
+                                        <span class="video__difficutly-point"></span>
+                                        <span class="video__difficutly-point"></span>
+                                        <span class="video__difficutly-point"></span>
+                                    </div>
+                                    <img src="~/Content/Images/unitedkingdom.png" alt="" class="video__accent">
+                                    <p class="video__phrases">25 phrase</p>
+                                </div>
+                            </div>*@
+                        <button onclick="GetMarks(@test.id)" value="Results">Results</button>
+                    }
+                }
+            }
         </h2>
 
     </div>
+
+    <script>
+        function GetMarks(id) {
+            console.log("Requesting test results at id: " + id);
+            $.ajax({
+                url: '@Url.Action("GetTestResult", "Teacher")',
+                dataType: "json",
+                type: "POST",
+                cache: false,
+                data: { testid: id },
+                success: function (data) {
+                    data.forEach((item) => {
+                        
+                    })
+                },
+                error: function () {
+                    alert("Cant find data");
+                }
+            })
+        }
+    </script>
+
     <section class="videos">
-        @foreach (var type in Model.TestTypes)
+        @foreach (var type in Model.stvm.TestTypes)
         {
             <h2 class="heading-2 videos__heading">@type</h2>
-            foreach (var t in Model.Tests[Model.TestTypes.IndexOf(type)])
+            foreach (var t in Model.stvm.Tests[Model.stvm.TestTypes.IndexOf(type)])
             {
                 <div class="video__puzzleindex">
                     <h4 class="heading-4 heading-4--yellow">videopuzzle</h4>

@@ -14,7 +14,12 @@ namespace ELearningProject.Controllers
         private static List<int> AddingTeachers = new List<int>();
         public ActionResult Index()
         {
-            return View(GetStvm());
+            var tivm = new TeacherIndexViewModel();
+            tivm.OwnTests = new List<int>();
+            tivm.OwnTests.Add(9);
+            tivm.OwnTests.Add(10);
+            tivm.stvm = GetStvm();
+            return View(tivm);
         }
 
         public JsonResult SubmitTest(SingleQuestionAddViewModel model)
@@ -424,6 +429,31 @@ namespace ELearningProject.Controllers
 
             return suvm;
 
+        }
+
+        public JsonResult GetTestResult(int testid)
+        {
+            var testlist = new List<StudentTestResultViewModel>();
+            using (var db = new ApplicationDbContext())
+            {
+                StudentTestResultViewModel test_result = new StudentTestResultViewModel();
+                try
+                {
+                    test_result = (from test in db.Tests
+                                   join str in db.StudentTestResults on test.id equals str.Test.id
+                                   join student in db.Students on str.Student.id equals student.id
+                                   join wu in db.Web_Users on student.web_User.id equals wu.id
+                                   where test.id == testid
+                                   select new StudentTestResultViewModel()
+                                   {
+                                       Student = wu,
+                                       Score = str.Score
+                                   }).First();
+
+                    testlist.Add(test_result);
+                } catch (InvalidOperationException) { }
+            }
+            return Json(testlist);
         }
     }
 }
