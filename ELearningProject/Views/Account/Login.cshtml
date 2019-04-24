@@ -4,6 +4,12 @@
 @{
     Layout = null;
 }
+<style>
+    .btnfb {
+        border:none;
+        background:none
+    }
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,38 +36,33 @@
                 @Html.ValidationMessageFor(m => m.Password)
                 <button type="submit" formmethod="post" class="login__submit" value="Sign in">Sign in</button>
             }
-            @{
-                var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-                if (loginProviders.Count() != 0)
-                {
-                    using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <div id="socialLoginList">
-                            <p>
-                                @foreach (AuthenticationDescription p in loginProviders)
-                                {
-                                    <button type="submit" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
-                                    <a href="#">
-                                        <svg class="login__icon login__icon--1">
-                                            <use xlink:href="~/Content/Images/sprite.svg#icon-facebook2"></use>
-                                        </svg>
-                                    </a>
+                <div class="login__options">
+                    <p>Or sign in with</p>
+                    @{
+                        var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+                        if (loginProviders.Count() != 0)
+                        {
+                            using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div id="socialLoginList">
+                                    <p>
+                                        @foreach (AuthenticationDescription p in loginProviders)
+                                        {
+                                            <button type="submit" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType"
+                                                    title="Log in using your @p.Caption account" class="btnfb">
+                                                <svg class="login__icon login__icon--1">
+                                                    <use xlink:href="~/Content/Images/sprite.svg#icon-facebook2">@p.AuthenticationType</use>
+                                                </svg>
+                                            </button>
 
-                                }
-                            </p>
-                        </div>
+                                        }
+                                    </p>
+                                </div>
+                            }
+                        }
                     }
-                }
-            }
-            <div class="login__options">
-                <p>Or sign in with</p>
-                <a href="#">
-                    <svg class="login__icon login__icon--2">
-                        <use xlink:href="~/Content/Images/sprite.svg#icon-google2"></use>
-                    </svg>
-                </a>
-            </div>
+                </div>
             <div class="login__break">&nbsp;</div>
             <p class="login__signup">Don't have an account - <a href="@Url.Action("Register", "Account" )" class="login__link">Sign up</a></p>
         </div>

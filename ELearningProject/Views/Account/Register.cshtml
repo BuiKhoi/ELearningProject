@@ -3,7 +3,17 @@
 @{
     Layout = null;
 }
+<style>
+    .label {
+        font-size: 1.6rem;
+    }
 
+    .checkmark {
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+    }
+</style>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,8 +45,12 @@
                 @Html.ValidationMessageFor(m => m.ConfirmPassword)
                 @Html.EditorFor(m => m.Birthday, new { htmlAttributes = new { @class = "login__input", @placeholder = "Birthday" } })
                 @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "login__input", @placeholder = "Your Name" } })
-                @Html.EditorFor(m => m.AsTeacher, new { htmlAttributes = new { @class = "mycheckbox" } })
-                <label class="real_chbox" for="AsTeacher">Login as Teacher</label>
+                <div>
+                    @Html.LabelFor(m => m.AsTeacher, new { @class = "label" })
+                    <span>&nbsp;</span>
+                    <span>@Html.EditorFor(m => m.AsTeacher, new { htmlAttributes = new { @class = "checkmark" } })</span>
+                    @Html.ValidationMessageFor(m => m.AsTeacher, "", new { @class = "text-danger" })
+                </div>
                 <button type="submit" value="Create" class="login__submit">Sign up</button>
                 @*<a onclick="this.form.submit()" class="login__submit" value="Sign in">Sign up</a>*@
             }
