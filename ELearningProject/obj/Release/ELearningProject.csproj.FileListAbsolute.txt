@@ -122,3 +122,5 @@ C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Release\ELearn
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Release\ELearningProject.csproj.CopyComplete
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Release\ELearningProject.dll
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Release\ELearningProject.pdb
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Release\ELearningProject.Migrations.AddNews.resources
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Release\ELearningProject.Migrations.AddTestTitle.resources

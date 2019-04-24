@@ -312,9 +312,7 @@ namespace IdentityAuthentication.Controllers
             {
                 news = (from n in db.News
                         where n.Id == 1
-                        select n).First();
-
-                ;
+                        select n).FirstOrDefault();
             }
             return View("NewsIndex", news);
         }

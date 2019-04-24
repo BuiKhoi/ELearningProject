@@ -60,7 +60,7 @@ namespace ELearningProject.Controllers
                     };
                     db.Tests.Add(t);
 
-                    //Shift throug all questions to be added and add them to TestQuestionDeploy
+                    //Shift throught all questions to be added and add them to TestQuestionDeploy
                     int count = 0;
                     foreach (var quest in AddingQuestions[AddingTeachers.IndexOf(model.TeacherId)])
                     {

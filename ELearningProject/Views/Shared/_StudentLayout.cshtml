@@ -39,10 +39,10 @@
 </head>
 <body>
     <div class="nav">
-        <a href="~/Home/Index" class="nav__left">
+        <a href="@Url.Action("Index")" class="nav__left">
             <img id="ABCLogo" src="~/Content/Images/logo2.svg" alt="" class="nav__logo">
             <div class="nav__details">
-                <div href="#" class="nav__name heading-1">ABC English</div>
+                <div href="@Url.Action("Index")" class="nav__name heading-1">ABC English</div>
                 <div class="nav__text">The best way to improve your listening skills</div>
             </div>
         </a>
@@ -284,18 +284,43 @@
                         </div>
                     </div>
                     <div class="nav__popup-box-2">
-                        <div class="nav__popup-menu">
-                            <img src="~/Content/Images/heart.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">favorite</a>
-                        </div>
-                        <div class="nav__popup-menu">
-                            <img src="~/Content/Images/agenda.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">My dictionary</a>
-                        </div>
-                        <div class="nav__popup-menu">
-                            <img src="~/Content/Images/history.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">history</a>
-                        </div>
+                        <a href="#popup1" class="buttonpopup" id="showResult" onclick="GetResults()">
+                            <script>
+                    function GetResults() {
+                        var cookie = @try
+                        {
+                            @Request.Cookies["StudentID"].Value;
+                        } catch (NullReferenceException)
+                        {
+                            <text>
+                                window.location.href = "@Url.Action("Index", "Home")";
+                            </text>
+                        };
+                            $.ajax({
+                                url: '@Url.Action("ShowStuTest","Student")',
+                                dataType: "json",
+                                type: "POST",
+                                cache: false,
+                                data: { StuId: cookie },
+                                success: function (data) {
+                                    var str = "<table border = \"2\"><tr><th>" + "Test Name" + "</th><th>" + "Score" + "</th></tr>";
+                                    data.forEach((item) => {
+                                        str += "<tr><td>" + item.test.Desc + "</td><td>" + item.Score + "</td></tr>";
+                                    });
+                                    str += "</table>";
+                                    document.getElementById("ScoreBoard").innerHTML = str;
+                                },
+                                error: function () {
+                                    alert("Cant find data");
+                                }
+                            })
+                        }
+                            </script>
+                            <div class="nav__popup-menu">
+                                <img src="~/Content/Images/history.svg" alt="" class="nav__popup-menu-icon">
+                                <p class="nav__popup-menu-title">History</p>
+                            </div>
+                        </a>
                         <div class="nav__popup-menu">
                             <img src="~/Content/Images/settings.svg" alt="" class="nav__popup-menu-icon">
                             <a href="@Url.Action("EditProfile","Account")" class="nav__popup-menu-title">Edit Profile</a>
@@ -303,46 +328,14 @@
                     </div>
                     <div class="nav__popup-box-3">
                         <div class="nav__popup-menu">
-                            <img src="~/Content/Images/list.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">buy tasks</a>
-                        </div>
-                        <div class="nav__popup-menu">
-                            <img src="~/Content/Images/vocabulary.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">buy words</a>
-                        </div>
-                        <div class="nav__popup-menu">
-                            <img src="~/Content/Images/calendar1.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">buy personal plan</a>
-                        </div>
-                        <div class="nav__popup-menu">
-                            <img src="~/Content/Images/podcasts.png" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">buy podcast</a>
-                        </div>
-                        <div class="nav__popup-menu">
-                            <img src="~/Content/Images/jigsaw.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">buy games</a>
+                            <img src="~/Content/Images/logout.png" alt="" class="nav__popup-menu-icon">
+                            <a href="@Url.Action("Index", "Home")" class="nav__popup-menu-title">Logout</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @*<div class="nav__menu">
-            <ul class="menubar">
-                <li class="menu__title">
-
-                </li>
-                <li class="menu__title">
-
-                </li>
-                <li class="menu__title">
-
-                </li>
-                <li class="menu__title">
-
-                </li>
-            </ul>
-        </div>*@
     @RenderBody()
     <footer class="footer" id="contact">
         <a href="#" class="nav__name heading-1 footer__logo">ABC English</a>

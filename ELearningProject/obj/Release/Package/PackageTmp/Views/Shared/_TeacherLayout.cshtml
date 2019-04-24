@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="~/Content/stylestudent.css">
     <link rel="stylesheet" href="~/Content/AnswerPuzzelVideo.css">
     <link href="~/Content/Teacher.css" rel="stylesheet" />
+    <link href="~/Content/MultiChoice.css" rel="stylesheet" />
+    <link href="~/Content/CreateTest.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
@@ -79,7 +81,7 @@
                     <div class="nav__popup-box-3">
                         <div class="nav__popup-menu">
                             <img src="~/Content/Images/list.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="@Url.Action("CreateTest", "Teacher")" class="nav__popup-menu-title">add test</a>
+                            <a href="@Url.Action("RealCreateTest", "Teacher")" class="nav__popup-menu-title">add test</a>
                         </div>
                         <div class="nav__popup-menu">
                             <img src="~/Content/Images/vocabulary.svg" alt="" class="nav__popup-menu-icon">
@@ -101,18 +103,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="nav__menu">
-        <ul class="menubar">
-            <li class="menu__title">
-            </li>
-            <li class="menu__title">
-            </li>
-            <li class="menu__title">
-            </li>
-            <li class="menu__title">
-            </li>
-        </ul>
     </div>
     @RenderBody()
     <footer class="footer" id="contact">

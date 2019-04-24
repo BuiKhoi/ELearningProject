@@ -268,5 +268,83 @@ input[name="MultiAnswer"]:checked + .Option__MultipleChoice:after {
     pointer-events: none;
     background-color: #a9a8a8;
 }
-
+/*css form partial to create Multichoice type*/
+.effect-2 {
+    border: 0;
+    padding: 7px 0;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    position: relative;
+    font-size: 16px;
+}
+.effect-2:focus{
+    outline:none;
+}
+.effect-2 ~ .focus-border {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;               
+    height: 2px;
+    background-color: #3399FF;
+    transition: 0.4s;
+}
+.effect-2:focus ~ .focus-border {
+    width: 100%;
+    transition: 0.4s;
+    left: 0;
+}
+.Option__MultipleChoice__create {
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 38px;
+    position: relative;
+}
+.Answerbox__MultipleChoice__Create {
+    display: inline-block;
+    position: relative;
+    border-radius: 34px;
+    border-width: 3px;
+    border-color: #dadada;
+    color: black;
+    width: 73%;
+    height: 52px;
+    border-style: solid;
+    font-size: 20px;
+    padding: 7px;
+    margin-top: -16px;
+    font-family: Palatino, "Palatino LT STD", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+}
+.Question__content__MultiChoice__Create {
+    font-size: 30px;
+    color: black;
+    font-family: Palatino, "Palatino LT STD", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    width: 59%;
+    margin-top: 30px;
+    position: relative;
+}
+.input__instruction {
+    background-color: #eaeaea;
+    color: #827f7f;
+    font-size: 12px;
+    padding: 4px;
+    border-radius: 4px;
+}
+.Quiz__Answer__input {
+    width: 15%;
+    position: relative;
+}
+.Quiz__Answer__input input{
+    text-align:center;
+}
+.Quiz__Answer__confirm {
+    display: flex;
+    justify-content: space-between;
+    width: 42%;
+}
+.Quiz__Answer__confirm h3{
+    font-size: 21px;
+    font-weight: 400;
+}
+/*css form partial to create Multichoice type*/
 

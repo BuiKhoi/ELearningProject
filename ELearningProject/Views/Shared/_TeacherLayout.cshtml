@@ -27,13 +27,15 @@
 </head>
 <body>
     <div class="nav">
-        <div class="nav__left">
-            <img src="~/Content/Images/logo2.svg" alt="" class="nav__logo">
-            <div class="nav__details">
-                <a href="#" class="nav__name heading-1">ABC English</a>
-                <div class="nav__text">The best way to improve your listening skills</div>
+        <a href="@Url.Action("Index")">
+            <div class="nav__left">
+                <img src="~/Content/Images/logo2.svg" alt="" class="nav__logo">
+                <div class="nav__details">
+                    <a href="@Url.Action("Index")" class="nav__name heading-1">ABC English</a>
+                    <div class="nav__text">The best way to improve your listening skills</div>
+                </div>
             </div>
-        </div>
+        </a>
         <div class="nav__right">
             <div class="nav__search-box">
                 <input type="text" placeholder="Search" class="nav__search">
@@ -62,18 +64,6 @@
                     </div>
                     <div class="nav__popup-box-2">
                         <div class="nav__popup-menu">
-                            <img src="~/Content/Images/heart.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">favorite</a>
-                        </div>
-                        <div class="nav__popup-menu">
-                            <img src="~/Content/Images/agenda.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">My dictionary</a>
-                        </div>
-                        <div class="nav__popup-menu">
-                            <img src="~/Content/Images/history.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">history</a>
-                        </div>
-                        <div class="nav__popup-menu">
                             <img src="~/Content/Images/settings.svg" alt="" class="nav__popup-menu-icon">
                             <a href="@Url.Action("EditProfile","Account")" class="nav__popup-menu-title">Edit Profile</a>
                         </div>
@@ -84,20 +74,8 @@
                             <a href="@Url.Action("RealCreateTest", "Teacher")" class="nav__popup-menu-title">add test</a>
                         </div>
                         <div class="nav__popup-menu">
-                            <img src="~/Content/Images/vocabulary.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">buy words</a>
-                        </div>
-                        <div class="nav__popup-menu">
-                            <img src="~/Content/Images/calendar1.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">buy personal plan</a>
-                        </div>
-                        <div class="nav__popup-menu">
-                            <img src="~/Content/Images/podcasts.png" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">buy podcast</a>
-                        </div>
-                        <div class="nav__popup-menu">
-                            <img src="~/Content/Images/jigsaw.svg" alt="" class="nav__popup-menu-icon">
-                            <a href="#" class="nav__popup-menu-title">buy games</a>
+                            <img src="~/Content/Images/logout.png" alt="" class="nav__popup-menu-icon">
+                            <a href="@Url.Action("Index", "Home")" class="nav__popup-menu-title">Logout</a>
                         </div>
                     </div>
                 </div>

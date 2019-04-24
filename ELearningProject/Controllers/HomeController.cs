@@ -12,6 +12,15 @@ namespace ELearningProject.Controllers
     {
         public ActionResult Index()
         {
+            string[] cknames = { "WebUserID", "UserName", "StudentID", "TeacherId" };
+            Session.Abandon();
+            foreach(var item in cknames)
+            {
+                if (Request.Cookies[item] != null)
+                {
+                    Response.Cookies[item].Expires = DateTime.Now.AddDays(-1);
+                }
+            }
             return View(GetStvm());
         }
 
