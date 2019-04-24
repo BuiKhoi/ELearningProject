@@ -9,6 +9,7 @@ namespace ELearningProject.Models
     public class Test
     {
         public int id { get; set; }
+        public string Title { get; set; }
         public Teacher Creator { get; set; }
         public float Rating { get; set; }
         public string Desc { get; set; }
@@ -71,6 +72,17 @@ namespace ELearningProject.Models
         public float Score { get; set; }
         public Web_user Student { get; set; }
         public StudentTestResultViewModel()
+        {
+
+        }
+    }
+
+    public class CreateMixTestViewModel
+    {
+        public HttpPostedFileBase File { get; set; }
+        public string Test_title { get; set; }
+        public string Test_desc { get; set; }
+        public CreateMixTestViewModel()
         {
 
         }

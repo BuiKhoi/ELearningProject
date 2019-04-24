@@ -244,6 +244,10 @@
     <Compile Include="Migrations\201904230239446_AddNews.Designer.cs">
       <DependentUpon>201904230239446_AddNews.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904232125280_AddTestTitle.cs" />
+    <Compile Include="Migrations\201904232125280_AddTestTitle.Designer.cs">
+      <DependentUpon>201904232125280_AddTestTitle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -479,6 +483,7 @@
     <Content Include="Content\stylestudent.css" />
     <Content Include="Content\StyleTeacher.css" />
     <Content Include="Content\Teacher.css" />
+    <Content Include="Content\TestImage\CreateTestPNG_1.png" />
     <Content Include="cssnews\animatenews.css" />
     <Content Include="cssnews\bootstrap.min.css" />
     <Content Include="cssnews\classy-nav.css" />
@@ -799,7 +804,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\wow.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -856,7 +863,6 @@
     <Content Include="Views\Shared\_QuizType.cshtml" />
     <Content Include="Views\Shared\_QuizTypeCreate.cshtml" />
     <Content Include="Views\Shared\_RedirectFailed.cshtml" />
-    <Content Include="Views\Teacher\RealCreateTest.cshtml" />
     <Content Include="Views\Shared\_ChangePassFailed.cshtml" />
     <Content Include="Views\Shared\_ChangePassSection.cshtml" />
     <Content Include="Views\Student\NewsIndex.cshtml" />
@@ -866,6 +872,7 @@
     <Content Include="Views\Shared\_NewsLayout.cshtml" />
     <Content Include="style.css.map" />
     <Content Include="stylenews.css.map" />
+    <Content Include="Views\Teacher\RealCreateTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -927,6 +934,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904230239446_AddNews.resx">
       <DependentUpon>201904230239446_AddNews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904232125280_AddTestTitle.resx">
+      <DependentUpon>201904232125280_AddTestTitle.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

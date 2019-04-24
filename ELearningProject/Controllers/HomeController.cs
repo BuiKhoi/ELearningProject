@@ -18,45 +18,7 @@ namespace ELearningProject.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Error registering";
-            /*
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                var qcons = db.QContents.ToList<QContent>();
-                var ans = db.Answers.ToList<Answer>();
-                var type = db.QTypes.ToList<QType>()[0];
-                foreach (QContent content in qcons)
-                {
-                    var idx = db.QContents.Local.IndexOf(content);
-                    var quest = new Question()
-                    {
-                        Name = "Arnold falling in the elevator No." + idx.ToString(),
-                        Content = content,
-                        Answer = ans[idx],
-                        Type = type,
-                        Level = 2
-                    };
-                    db.Questions.Add(quest);
-                }
-                db.SaveChanges();
-            }*/
-
-            /*using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                var test = db.Tests.ToList<Test>()[0];
-                var quests = db.Questions.ToList<Question>();
-                var count = 1;
-                foreach (Question q in quests)
-                {
-                    var dpl = new TestQuestionDeploy()
-                    {
-                        Question = q,
-                        Test = test,
-                        Order = count++
-                    };
-                    db.TestQuestionDeploys.Add(dpl);
-                }
-                db.SaveChanges();
-            }*/
+            
 
             return View();
         }

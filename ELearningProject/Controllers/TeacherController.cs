@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -454,6 +455,74 @@ namespace ELearningProject.Controllers
                 } catch (InvalidOperationException) { }
             }
             return Json(testlist);
+        }
+        //đây là action trả về khi loại câu hỏi là Quiz (TypeID =2) 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public PartialViewResult CreateMixTest(CreateMixTestViewModel model, ICollection<string> ListQuesId)
+        {
+            try
+            {
+                ApplicationDbContext db = new ApplicationDbContext();
+                int TeacherId = int.Parse(Request.Cookies["TeacherID"].Value);
+                var allowedExtensions = new[] {
+                    ".Jpg", ".png", ".jpg", "jpeg"
+                };
+                try
+                {
+                    Test myTest = new Test();
+                    myTest.Title = model.Test_title;
+                    myTest.Desc = model.Test_desc;
+                    myTest.Creator = (from t in db.Teachers where t.id == TeacherId select t).First();
+                    myTest.Type = (from tt in db.TTypes where tt.id == 1 select tt).First();
+                    if (model.File != null)
+                    {
+                        var filename = Path.GetFileName(model.File.FileName);
+                        var extension = Path.GetExtension(model.File.FileName);
+                        if (allowedExtensions.Contains(extension))
+                        {
+                            string name = Path.GetFileNameWithoutExtension(filename);
+                            string myTestImage = name + "_" + TeacherId + extension;
+                            var savePath = Path.Combine(Server.MapPath("~/Content/TestImage"), myTestImage);
+                            var imagePath = Path.Combine("/Content/TestImage/", myTestImage);
+                            myTest.Image = imagePath;
+                            model.File.SaveAs(savePath);
+                            db.Tests.Add(myTest);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            return PartialView("_WrongFileType");
+                        }
+                    }
+                    else
+                    {
+                        db.Tests.Add(myTest);
+                        db.SaveChanges();
+                    }
+                    foreach (string id in ListQuesId)
+                    {
+                        int qid = int.Parse(id);
+                        TestQuestionDeploy TQdeploy = new TestQuestionDeploy();
+                        TQdeploy.Test = (from t in db.Tests where t.id == myTest.id select t).First();
+                        TQdeploy.Question = (from q in db.Questions where q.id == qid select q).First();
+                        db.TestQuestionDeploys.Add(TQdeploy);
+                    }
+                    db.SaveChanges();
+                    return PartialView("_CreateTestSuccessful");
+                }
+                catch
+                {
+                    return PartialView("_CreateTestFailed");
+                }
+            }
+            catch
+            {
+                return PartialView("_CreateTesttooFailed");
+
+            }
         }
     }
 }

@@ -4,46 +4,32 @@
     ViewBag.Title = "Student";
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
+<style>
+    table {
+        text-align: center;
+        font-family: Arial;
+        font-size: 20px;
+        border-collapse: collapse;
+        width: 100%;
+        border: groove;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
 <header class="header">
     <div id="popup1" class="overlay">
         <div class="popup">
             <h2>Tests Done!</h2>
             <a class="close" href="#">&times;</a>
             <div class="content">
-                <button id="showResult">Show Result</button>
-                <script>
-                    $(function () {
-                        var cookie = @try
-                        {
-                            @Request.Cookies["StudentID"].Value;
-                        } catch (NullReferenceException)
-                        {
-                            <text>
-                                window.location.href = "@Url.Action("Index", "Home")";
-                            </text>
-                        };
-                        $("#showResult").click(function (){
-                            $.ajax({
-                                url: '@Url.Action("ShowStuTest","Student")',
-                                dataType: "json",
-                                type: "POST",
-                                cache: false,
-                                data: { StuId: cookie },
-                                success: function (data) {
-                                    data.forEach((item) => {
-                                        console.log(item.Score);
-                                        //Cho nay em viet html de hien ra ava bai test + ten bai test + diem la xong
-                                        document.getElementById("ScoreBoard").innerHTML =
-                                            "<p>" + item.Score + "</p>";
-                                    })
-                                },
-                                error: function () {
-                                    alert("Cant find data");
-                                }
-                            })
-                        })
-                    })
-                </script>
                 <div id="ScoreBoard">
                 </div>
             </div>
@@ -107,12 +93,46 @@
             </div>
         </a>
         <div class="product">
-            <a href="#popup1" class="buttonpopup">
+            <a href="#popup1" class="buttonpopup" id="showResult" onclick="GetResults()">
+                <script>
+                    function GetResults() {
+                        var cookie = @try
+                        {
+                            @Request.Cookies["StudentID"].Value;
+                        } catch (NullReferenceException)
+                        {
+                            <text>
+                                window.location.href = "@Url.Action("Index", "Home")";
+                            </text>
+                        };
+                            $.ajax({
+                                url: '@Url.Action("ShowStuTest","Student")',
+                                dataType: "json",
+                                type: "POST",
+                                cache: false,
+                                data: { StuId: cookie },
+                                success: function (data) {
+                                    var str = "<table border = \"2\"><tr><th>" + "Test Name" + "</th><th>" + "Score" + "</th></tr>";
+                                    console.log(str);
+                                    data.forEach((item) => {
+                                        console.log(item.Score);
+                                        str += "<tr><td>" + item.test.Desc + "</td><td>" + item.Score + "</td></tr>";
+                                    });
+                                    str += "</table>";
+                                    document.getElementById("ScoreBoard").innerHTML = str;
+                                    console.log(str);
+                                },
+                                error: function () {
+                                    alert("Cant find data");
+                                }
+                            })
+                        }
+                </script>
                 <div class="product__img-box">
                     <img src="~/Content/Images/lp.png" alt="" class="product__img">
                 </div>
                 <div class="product__description">
-                    <h3 class="heading-3">Personal Plan</h3>
+                    <h3 class="heading-3">Personal Results</h3>
                     <p class="product__text">
                         Personal study plan in accordance with your goals
                     </p>

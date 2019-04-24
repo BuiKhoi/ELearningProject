@@ -123,3 +123,4 @@ C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearnin
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.csproj.CopyComplete
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.dll
 C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.pdb
+C:\Users\khoib\source\repos\ELearningProject\ELearningProject\obj\Debug\ELearningProject.Migrations.AddTestTitle.resources

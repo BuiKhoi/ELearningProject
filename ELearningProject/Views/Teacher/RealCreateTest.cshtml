@@ -1,32 +1,46 @@
-﻿@{
+﻿@model ELearningProject.Models.CreateMixTestViewModel
+@{
     Layout = "~/Views/Shared/_TeacherLayout.cshtml";
 }
 <section class="CreateTest__BigContainer">
     <div class="Test__EditSection">
-        <div id="Test_Contain" class="Test">
+        @using (Ajax.BeginForm("CreateMixTest", "Teacher", "", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "response" }, new { id = "Test_Contain", @class = "Test", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
             <div id="myTest" class="quesDirection">
                 <h3 id="Choose__Ques" class="invi__test__title">
                     Choose Ques:
                 </h3>
-
             </div>
             <div class="Test__title__div invi__test__title">
-                <input id="Test__title__input" class="effect_2_create" placeholder="Please inpu your test title" />
+                @Html.EditorFor(m => m.Test_title, new { htmlAttributes = new { id = "Test__title__input", @class = "effect_2_create", @placeholder = "Please inpu your test title" } })
+                @*<input id="Test__title__input" class="effect_2_create" placeholder="Please inpu your test title" />*@
                 <span class="focus-border"></span>
             </div>
             <h1 class="Please__insert__ques">Please insert the question to your test</h1>
-            <div class="upload__test__imageSection">
+            <div id="appendmyQuesid" class="upload__test__imageSection invi__test__title">
                 <div class="TestImage__preview">
                     <img id="Test__image" />
                     @*<img src="~/Content/Images/avatar.jpg" />*@
                 </div>
-                <input id="Test__image__upload" type="file" value="Upload" />
+                @Html.TextBoxFor(m => m.File, new { id = "Test__image__upload", type = "file", placeholder = Html.DisplayNameFor(m => m.File) })
+                @*<input id="Test__image__upload" name="Test__image__upload" type="file" />*@
+                <div class="Test_descriptionDiv">
+                    @Html.TextAreaFor(m => m.Test_desc, new { @class = "Test__desc", @placeholder = "Input your Test Description", id = "myTest__desc" })
+                    @*<textarea id="myTest__desc" class="Test__desc" placeholder="Input your Test Description"></textarea>*@
+                </div>
             </div>
             <div class="Post__createTest__section invi__test__title">
-                <button id="Create__myTest" class="test__button__create__Test btnPush edit__test">
+                <button id="Create__myTest" type="submit" class="test__button__create__Test btnPush edit__test">
                     Create Test
                 </button>
             </div>
+        }
+        @*<div id="Test_Contain" class="Test">
+
+            </div>*@
+        <div id="response">
+
         </div>
         <div id="QuizType__Create__contain" class="QuizType__Create__contain">
 
@@ -48,11 +62,10 @@
             <img src="~/Content/Images/gamePlaystationIcon.svg" />
             <p>Game Incoming</p>
         </div>
-        <div>
-            <button class="test__button__create btnPush edit__test" id="imTest">I'm testing</button>
-        </div>
     </div>
 </section>
+
+@*function được triggered khi click vào muốn tạo loại Quiz, thực hiện công việc gọi 1 action ở TeacherC để render ra 1 cái partial view*@
 <script>
     $(function () {
         $("#QuizQues__create").click(function () {
@@ -80,6 +93,9 @@
                     setTimeout(function () {
                         $(".Post__createTest__section").removeClass("invi__test__title");
                     }, 500);
+                    setTimeout(function () {
+                        $(".upload__test__imageSection").removeClass("invi__test__title");
+                    }, 500);
                     $("#Test_Contain").animate({
                         left: '-13%',
                         opacity: '0'
@@ -89,19 +105,21 @@
                     }, 500);
                 },
                 error: function () {
-                    alert("ajax failed");
+                    alert("ajax fucking failed");
                 }
             })
         })
     })
 </script>
+@*function được triggered khi click vào muốn tạo loại Quiz, thực hiện công việc gọi 1 action ở TeacherC để render ra 1 cái partial view*@
 
-@*bên cái QuizType.cshtml có 1 cái Ajaxform đây là cái function được triggered sau khi Ajaxform đó submit thành công*@
+
+@*bên cái QuizTypeCreate.cshtml có 1 cái Ajaxform đây là cái function được triggered sau khi Ajaxform đó submit thành công*@
 <script>
     var i = 1;
     var displayi = 1;
     function AddToTest() {
-        var myQuesID = $("#myID").text();
+        var myQuesID = $("#myfuckingID").text();
         $.ajax({
             type: "GET",
             url: "@Url.Action("RedirectQues", "Teacher")",
@@ -136,7 +154,7 @@
         })
     }
 </script>
-@*bên cái QuizType.cshtml có 1 cái Ajaxform đây là cái function được trigger sau khi Ajaxform đó submit thành công*@
+@*bên cái QuizTypeCreate.cshtml có 1 cái Ajaxform đây là cái function được trigger sau khi Ajaxform đó submit thành công*@
 
 @*đây là function khi click vào số câu hỏi để hiển thị câu tương ứng*@
 <script>
@@ -187,11 +205,6 @@
 
                 })
 </script>
-@*<button id="testingisreal" style="font-size:15px">
-        @Html.AntiForgeryToken()
-        click me to test
-    </button>*@
-
 @*Ajax call with token*@
 
 @*Preview Test Image*@
@@ -212,3 +225,62 @@
     })
 </script>
 @*Preview Test Image*@
+
+<script>
+    $(function () {
+        $("#Create__myTest").click(function () {
+            $(".data__Content__MultiChoice_create").each(function (i, obj) {
+                var quesid = $(this).attr("id");
+                var quesElement = `<input type="text" name="ListQuesId" class="invi__test__title" value="${quesid}" />`
+                $("#appendmyQuesid").after(quesElement);
+            })
+        })
+    })
+</script>
+
+
+
+@*Create Test Ajax call with Token*@
+
+@* EXAMPLE OF AJAX USING FORM DATA *@
+@*$("#Create__myTest").click(function () {
+
+        var files = $("#Test__image__upload").get(0).files;
+        var Test_title = $("#Test__title__input").val();
+        var Test_desc = $("#myTest__desc").val();
+        var listQuesId = new Array();
+        $(".data__Content__MultiChoice_create").each(function (i, obj) {
+            listQuesId.push($(this).attr("id"))
+        })
+        var token = $('input[name="__RequestVerificationToken"]').val();
+        var myForm = new FormData();
+        myForm.append("__RequestVerificationToken", token);
+        myForm.append("files", files[0],);
+        myForm.append("Test_title", Test_title);
+        myForm.append("Test_desc", Test_desc);
+        myForm.append("listQuesId", listQuesId);
+        console.log(files[0]);
+        $.ajax({
+            url: "@Url.Action("CreateMixTest","Teacher")",
+            cache: false,
+            contentType: false,
+            data: {
+                __RequestVerificationToken: token,
+                files: files[0],
+                Test_title: Test_title,
+                Test_desc: Test_desc,
+                listQuesId: listQuesId
+            },
+            //data: myForm,
+            type: "POST",
+            success: function (res) {
+                $(".Ques__choose__seciton").append(res);
+            },
+            error: function () {
+                alert("Ajax Failed")
+            }
+        })
+    })*@
+@* EXAMPLE OF AJAX USING FORM DATA *@
+
+@*Create Test Ajax call with Token*@
