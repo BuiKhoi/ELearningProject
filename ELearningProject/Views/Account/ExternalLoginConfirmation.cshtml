@@ -1,7 +1,9 @@
 ﻿@model ELearningProject.Models.ExternalLoginConfirmationViewModel
 @{
-    ViewBag.Title = "Confirm your login information";
-    Layout = null;
+                /**/
+
+                ViewBag.Title = "Confirm your login information";
+                Layout = null;
 }
 <style>
     .label {
@@ -14,8 +16,9 @@
         width: 25px;
         background-color: #eee;
     }
+
     .confirm__form {
-        left:40%;
+        left: 40%;
     }
 </style>
 <!DOCTYPE html>
@@ -43,29 +46,29 @@
             @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-            <div>
-                @Html.ValidationSummary(true, "", new { @class = "label" })
-                <br />
-                <div>
-                    @Html.LabelFor(m => m.Email, new { @class = "label" })
-                    <span>&nbsp;&nbsp;&nbsp;</span>
-                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email" } })
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "label" })
-                </div>
-                <br>
-                <div>
-                    @Html.LabelFor(m => m.AsTeacher, new { @class = "label" })
-                    <span>&nbsp;&nbsp;&nbsp;</span>
-                    <span>@Html.EditorFor(m => m.AsTeacher, new { htmlAttributes = new { @class = "checkmark" } })</span>
-                    @Html.ValidationMessageFor(m => m.AsTeacher, "", new { @class = "label" })
-                </div>
-                <br />
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" class="login__submit" value="Register" />
+                <div id="something">
+                    @Html.ValidationSummary(true, "", new { @class = "label" })
+                    <br />
+                    <div>
+                        @Html.LabelFor(m => m.Email, new { @class = "label" })
+                        <span>&nbsp;&nbsp;&nbsp;</span>
+                        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email" } })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "label" })
+                    </div>
+                    <br>
+                    <div>
+                        @Html.LabelFor(m => m.AsTeacher, new { @class = "label" })
+                        <span>&nbsp;&nbsp;&nbsp;</span>
+                        <span>@Html.EditorFor(m => m.AsTeacher, new { htmlAttributes = new { @class = "checkmark" } })</span>
+                        @Html.ValidationMessageFor(m => m.AsTeacher, "", new { @class = "label" })
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" class="login__submit" value="Register" />
+                        </div>
                     </div>
                 </div>
-            </div>
             }
             <div class="login__break">&nbsp;</div>
 

@@ -12,6 +12,7 @@
         height: 25px;
         width: 25px;
         background-color: #eee;
+        display: inline;
     }
 </style>
 <!DOCTYPE html>
@@ -46,27 +47,14 @@
                 @Html.EditorFor(m => m.Birthday, new { htmlAttributes = new { @class = "login__input", @placeholder = "Birthday" } })
                 @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "login__input", @placeholder = "Your Name" } })
                 <div>
-                    @Html.LabelFor(m => m.AsTeacher, new { @class = "label" })
-                    <span>&nbsp;</span>
-                    <span>@Html.EditorFor(m => m.AsTeacher, new { htmlAttributes = new { @class = "checkmark" } })</span>
+                    @Html.EditorFor(m => m.AsTeacher, new { htmlAttributes = new { @class = "checkmark" } })
                     @Html.ValidationMessageFor(m => m.AsTeacher, "", new { @class = "text-danger" })
+                    <span>&nbsp;</span>
+                    <p class="label" style="display:inline">Login as a teacher</p>
                 </div>
                 <button type="submit" value="Create" class="login__submit">Sign up</button>
                 @*<a onclick="this.form.submit()" class="login__submit" value="Sign in">Sign up</a>*@
             }
-            <div class="login__options">
-                <p>Or sign in with</p>
-                <a href="#">
-                    <svg class="login__icon login__icon--1">
-                        <use xlink:href="~/Content/Images/sprite.svg#icon-facebook2"></use>
-                    </svg>
-                </a>
-                <a href="#">
-                    <svg class="login__icon login__icon--2">
-                        <use xlink:href="~/Content/Images/sprite.svg#icon-google2"></use>
-                    </svg>
-                </a>
-            </div>
             <div class="login__break">&nbsp;</div>
         </div>
     </div>
