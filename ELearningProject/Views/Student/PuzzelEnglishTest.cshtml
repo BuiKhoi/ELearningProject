@@ -1,16 +1,14 @@
 ﻿@using ELearningProject.Models
 @model ELearningProject.Models.PuzzelTestViewModel
 @{
-    /**/
-
-    /**/
-
-    /**/
 
     ViewBag.Title = "Puzzel English";
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
-
+<script>
+    <link href="~/Content/NewPuzzleGame.css" rel="stylesheet" />
+        <link rel="stylesheet" href="~/Content/NewPuzzleGame.css">
+</script>
 <div class="containerPuzzlegame">
     <div class="wrapper">
         <div class="content">
@@ -48,6 +46,11 @@
 </div>
 
 
+<script>
+    $(function () {
+        alert("abc");
+    })
+</script>
 <script>
     var listText = @Html.Raw(Json.Encode(Model.Questions));
 console.log(listText);

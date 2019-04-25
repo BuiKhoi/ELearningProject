@@ -424,6 +424,7 @@
     <Content Include="Content\Images\creative.svg" />
     <Content Include="Content\Images\default.jpg" />
     <Content Include="Content\Images\documents-button.svg" />
+    <Content Include="Content\Images\icon_back_dark.png" />
     <Content Include="Content\Images\logout.png" />
     <Content Include="Content\Images\FaillureIcon.svg" />
     <Content Include="Content\Images\gamePlaystationIcon.svg" />
@@ -437,6 +438,7 @@
     <Content Include="Content\Images\loginImage.jpg" />
     <Content Include="Content\Images\Logo.svg" />
     <Content Include="Content\Images\logo2.svg" />
+    <Content Include="Content\Images\loopicon.svg" />
     <Content Include="Content\Images\lp.png" />
     <Content Include="Content\Images\nav_background_image.png" />
     <Content Include="Content\Images\neonbrand-426918-unsplash.jpg" />
@@ -453,6 +455,7 @@
     <Content Include="Content\Images\redesign-logo_header.svg" />
     <Content Include="Content\Images\search.svg" />
     <Content Include="Content\Images\settings.svg" />
+    <Content Include="Content\Images\slow_icon.svg" />
     <Content Include="Content\Images\sprite.svg" />
     <Content Include="Content\Images\SuccessIcon.svg" />
     <Content Include="Content\Images\tasks.png" />
@@ -474,6 +477,7 @@
     <Content Include="Content\IndexStyle.css" />
     <Content Include="Content\loginstyle.css" />
     <Content Include="Content\MultiChoice.css" />
+    <Content Include="Content\NewPuzzleGame.css" />
     <Content Include="Content\NewsStyle.css" />
     <Content Include="Content\ProfileImage\dolphin_hd-wallpaper-1920x1080_asdfasdf123.jpg" />
     <Content Include="Content\ProfileImage\hi_4-wallpaper-1920x1080_Huynh Ngoc Phuong Trang.jpg" />
@@ -717,6 +721,7 @@
     <Content Include="Assets\Admin\vendor\slick\slick-theme.scss" />
     <Content Include="Assets\Admin\vendor\slick\slick.less" />
     <Content Include="Assets\Admin\vendor\slick\slick.scss" />
+    <Content Include="Scripts\circle-progress.min.js" />
     <Content Include="stylenews.css" />
     <Content Include="stylesnewssingle\about.css" />
     <Content Include="stylesnewssingle\about_responsive.css" />
@@ -874,6 +879,7 @@
     <Content Include="style.css.map" />
     <Content Include="stylenews.css.map" />
     <Content Include="Views\Teacher\RealCreateTest.cshtml" />
+    <Content Include="Views\Student\NewPuzzleEnglishTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

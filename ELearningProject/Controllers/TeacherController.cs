@@ -17,8 +17,20 @@ namespace ELearningProject.Controllers
         {
             var tivm = new TeacherIndexViewModel();
             tivm.OwnTests = new List<int>();
-            tivm.OwnTests.Add(9);
-            tivm.OwnTests.Add(10);
+            using (var db = new ApplicationDbContext())
+            {
+                int teacherid = 0;
+                try
+                {
+                    teacherid = int.Parse(Request.Cookies["TeacherId"].Value);
+                } catch (NullReferenceException)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                tivm.OwnTests = (from t in db.Tests
+                                 where t.Creator.id == teacherid
+                                 select t.id).ToList<int>();
+            }
             tivm.stvm = GetStvm();
             return View(tivm);
         }

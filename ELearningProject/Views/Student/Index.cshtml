@@ -107,7 +107,7 @@
                                     console.log(str);
                                     data.forEach((item) => {
                                         console.log(item.Score);
-                                        str += "<tr><td>" + item.test.Desc + "</td><td>" + item.Score + "</td></tr>";
+                                        str += "<tr><td>" + item.test.Desc + "</td><td>" + item.Score + " / 100" + "</td></tr>";
                                     });
                                     str += "</table>";
                                     document.getElementById("ScoreBoard").innerHTML = str;

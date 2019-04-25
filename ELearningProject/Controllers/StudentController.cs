@@ -22,7 +22,7 @@ namespace IdentityAuthentication.Controllers
             return View(GetNews());
         }
 
-        public PartialViewResult PNews(string pn)
+        public PartialViewResult PNews( )
         {
 
             return PartialView("_News");
@@ -89,7 +89,7 @@ namespace IdentityAuthentication.Controllers
             }
             ptvm.Questions = pquests;
             //And return them to the list
-            return View("PuzzelEnglishTest", ptvm);
+            return View("NewPuzzleEnglishTest", ptvm);
         }
 
         [HttpGet]
@@ -182,7 +182,7 @@ namespace IdentityAuthentication.Controllers
                 {
                     Test = test,
                     Student = student,
-                    Score = result.Score / count * 100
+                    Score = result.Score
                 };
 
                 db.StudentTestResults.Add(TestResult);
@@ -342,19 +342,25 @@ namespace IdentityAuthentication.Controllers
 
 
             return suvm;
-            //if (!string.IsNullOrEmpty(searchText))
-            //{
-            //    search = searchText;
-            //    page = 1;
-            //}
-            //int pageNumber = page ?? 1;
-            //var user_list = db.Web_Users.OrderBy(x => x.id);
-            //if (!String.IsNullOrEmpty(search))
-            //{
-            //    user_list = user_list.Where(p =>p.Name.Contains(search) || p.Name.Contains(search)).OrderBy(x => x.id);
-            //}
-            //ViewBag.Search = search;
-            //return View(user_list.ToList().ToPagedList(pageNumber,pageSize));
+        }
+
+        [HttpGet]
+        public JsonResult SendObjectPuzzleTest(string TestId)
+        {
+            int T_Id = int.Parse(TestId);
+            List<PuzzelQuestionViewModel> pquests = new List<PuzzelQuestionViewModel>();
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                pquests = (from q in db.Questions
+                           join qt in db.TestQuestionDeploys on q.id equals qt.Question.id
+                           join t in db.Tests on qt.Test.id equals t.id
+                           join qc in db.QContents on q.Content.id equals qc.id
+                           join a in db.Answers on q.Answer.id equals a.id
+                           where t.id == T_Id
+                           select new PuzzelQuestionViewModel() { id = q.id, Content = qc.Content, Answer = a.Content })
+                              .ToList<PuzzelQuestionViewModel>();
+            }
+            return Json(pquests, JsonRequestBehavior.AllowGet);
         }
     }
 }

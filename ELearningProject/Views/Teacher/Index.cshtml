@@ -88,7 +88,7 @@
                     var str = "<table border = \"2\"><tr><th>" + "Student Name" + "</th><th>" + "Score" + "</th></tr>";
                     data.forEach((item) => {
                         console.log(item.Score);
-                        str += "<tr><td>" + item.Student.Name + "</td><td>" + item.Score + "</td></tr>";
+                        str += "<tr><td>" + item.Student.Name + "</td><td>" + item.Score + " / 100" + "</td></tr>";
                     })
                     str += "</table>";
                     document.getElementById("ScoreBoard").innerHTML = str;
